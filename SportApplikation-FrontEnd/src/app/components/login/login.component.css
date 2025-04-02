@@ -1,0 +1,27 @@
+body {
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+label{
+  display: block;
+  text-align: left;
+}
+
+.login-container {
+  background: white;
+  padding: 20px;
+  border-bottom-right-radius: 20px ;
+  border-bottom-left-radius: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.hover-underline:hover{
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
