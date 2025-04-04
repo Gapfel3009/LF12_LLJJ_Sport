@@ -1,17 +1,6 @@
 body {
-  background-color: whitesmoke;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-label{
-  display: block;
-  text-align: left;
-}
-body {
-  background-color: whitesmoke;
+  background: url('../../../assets/images/login-background.jpg') no-repeat center fixed;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +19,10 @@ label{
   text-align: center;
 }
 .tab-content{
-  padding: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+
 }
 
 .hover-underline:hover{
@@ -41,13 +33,15 @@ label{
 
 .nav-tabs{
   display: flex;
-  border:none
+  border:none;
 }
 
 .nav-link{
   color: black;
   border-radius: 0;
   border: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
 
 }
 .nav-tabs .nav-link:not(.active){
