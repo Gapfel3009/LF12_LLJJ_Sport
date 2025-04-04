@@ -10,18 +10,55 @@ label{
   display: block;
   text-align: left;
 }
+body {
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+label{
+  display: block;
+  text-align: left;
+}
 
 .login-container {
   background: white;
-  padding: 20px;
-  border-bottom-right-radius: 20px ;
-  border-bottom-left-radius: 20px;
+  border-radius: 20px;
   width: 300px;
   text-align: center;
+}
+.tab-content{
+  padding: 20px;
 }
 
 .hover-underline:hover{
   text-decoration: underline;
   font-weight: bold;
   cursor: pointer;
+}
+
+.nav-tabs{
+  display: flex;
+  border:none
+}
+
+.nav-link{
+  color: black;
+  border-radius: 0;
+  border: none;
+
+}
+.nav-tabs .nav-link:not(.active){
+  background-color: whitesmoke;
+  border: 1px solid black;
+}
+
+.anmelden{
+  border-top-left-radius: 20px;
+}
+
+.register{
+  border-top-right-radius: 20px;
 }
