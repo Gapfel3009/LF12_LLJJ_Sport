@@ -1,14 +1,26 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {LoginComponent} from './components/login/login.component';
+import {Component, OnInit} from '@angular/core';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
+import {filter} from 'rxjs';
+import {HeaderComponent} from './components/header/header.component';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent, NgIf],
   templateUrl: './app.component.html',
   standalone: true,
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'SportApplikation-FrontEnd';
+  showHeader = true;
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      const noHeaderRoutes = ['/'];
+      this.showHeader = !noHeaderRoutes.includes(this.router.url);
+    })
+  }
 }
