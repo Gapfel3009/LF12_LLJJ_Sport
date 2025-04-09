@@ -1,0 +1,18 @@
+version: "3.9"
+
+volumes:
+  sport_application_postgres_data:
+    driver: local
+
+services:
+  postgres_for_sport_application:
+    container_name: sport_application_postgres_container
+    image: postgres
+    volumes:
+      - sport_application_postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: sport_application_db
+      POSTGRES_USER: sport_application
+      POSTGRES_PASSWORD: never
+    ports:
+      - "5432:5432"
