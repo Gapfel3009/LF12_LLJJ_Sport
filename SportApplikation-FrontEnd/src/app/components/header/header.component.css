@@ -6,6 +6,13 @@
   cursor: pointer;
 }
 
+.nav-link:hover{
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+
 
 
 
