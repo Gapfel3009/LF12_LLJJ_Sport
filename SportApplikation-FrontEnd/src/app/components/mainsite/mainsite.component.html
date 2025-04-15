@@ -22,6 +22,7 @@
           </tr>
         </tbody>
       </table>
+      <i class="bi bi-info-circle" (click)="showSummaryInfo = !showSummaryInfo"></i>
     </div>
 
     <div class="section" style="text-align: center;">
@@ -50,6 +51,7 @@
         </tr>
         </tbody>
       </table>
+      <i class="bi bi-info-circle"></i>
     </div>
   </div>
 
@@ -73,4 +75,10 @@
     </div>
   </div>
 
+  <div class="overlay" *ngIf="showSummaryInfo">
+    <div class="confirmation-box button">
+      <i class="bi bi-x-circle" (click)="showSummaryInfo = !showSummaryInfo"></i>
+      <p class="info-text">Test</p>
+    </div>
+  </div>
 </div>

@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
-import {NgOptimizedImage} from "@angular/common";
+import {NgIf, NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-mainsite',
-    imports: [
-        NgOptimizedImage
-    ],
+  imports: [
+    NgOptimizedImage,
+    NgIf
+  ],
   templateUrl: './mainsite.component.html',
   standalone: true,
   styleUrl: './mainsite.component.css'
 })
 export class MainsiteComponent {
+
+  showSummaryInfo:boolean = false;
 
 }
