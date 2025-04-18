@@ -51,7 +51,7 @@
         </tr>
         </tbody>
       </table>
-      <i class="bi bi-info-circle"></i>
+      <i class="bi bi-info-circle" (click)="showStatsInfo = !showStatsInfo"></i>
     </div>
   </div>
 
@@ -69,7 +69,7 @@
       <h3>Workout starten</h3>
       <p>Starte dein Training mit einem Klick.</p>
     </div>
-    <div class="card">
+    <div class="card" (click)="WorkoutErstellenRedirect()">
       <h3>Workout erstellen</h3>
       <p>Erstelle eigene Trainingspläne und Ziele.</p>
     </div>
@@ -78,6 +78,12 @@
   <div class="overlay" *ngIf="showSummaryInfo">
     <div class="confirmation-box button">
       <i class="bi bi-x-circle" (click)="showSummaryInfo = !showSummaryInfo"></i>
+      <p class="info-text">Test</p>
+    </div>
+  </div>
+  <div class="overlay" *ngIf="showStatsInfo">
+    <div class="confirmation-box button">
+      <i class="bi bi-x-circle" (click)="showStatsInfo = !showStatsInfo"></i>
       <p class="info-text">Test</p>
     </div>
   </div>
