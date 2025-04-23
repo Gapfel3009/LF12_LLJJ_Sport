@@ -1,0 +1,60 @@
+.section-title{
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+.card {
+  flex: 1;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  width: 1000px;
+  overflow: hidden;
+  margin-bottom: 5px;
+
+}
+
+.card:hover {
+  cursor: pointer;
+  border: 3px solid lightskyblue;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.card-image img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.card-text {
+  flex: 1;
+}
+
+.container1{
+  display: flex;
+  padding: 40px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+  overflow: hidden;
+}
+
+*{
+  overflow: hidden;
+}
+.selected-exercises{
+  border-left: darkgray 1px solid;
+  height: 100vh ;
+  padding-left: 20px;
+}
