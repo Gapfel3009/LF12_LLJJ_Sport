@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import {NgOptimizedImage} from '@angular/common';
+import {NgIf, NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-workout-erstellen',
-  imports: [
-    NgOptimizedImage
-  ],
+    imports: [
+        NgOptimizedImage,
+        NgIf
+    ],
   templateUrl: './workout-erstellen.component.html',
   styleUrl: './workout-erstellen.component.css'
 })
 export class WorkoutErstellenComponent {
 
+  ExerciseOverlay:boolean = true;
 }
