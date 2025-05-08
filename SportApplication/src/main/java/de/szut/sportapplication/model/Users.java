@@ -35,7 +35,7 @@ public class Users {
     private Integer xpBiceps = 0;
     private Integer xpFlexibility = 0;
 
-  //  @ManyToOne
-    //@JoinColumn(name = "avatarID")
-    //private Integer avatarID;
+    @ManyToOne
+  @JoinColumn(name = "avatarID")
+    private Avatar avatarID;
 }
