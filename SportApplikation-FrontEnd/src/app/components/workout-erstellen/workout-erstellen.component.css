@@ -4,22 +4,38 @@
   font-weight: bold;
 }
 
-.card {
+.card.select-list {
   flex: 1;
   background: #fff;
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   margin-right: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   width: 1000px;
   overflow: hidden;
   margin-bottom: 5px;
-
 }
 
-.card:hover {
+.card.select-list:hover {
   cursor: pointer;
   border: 3px solid lightskyblue;
+}
+
+.card.workout-list {
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  margin-top: 5px;
+  padding: 5px;
+}
+
+[cdkDrag] {
+  cursor: grab;
+}
+
+.cdk-drag-dragging{
+  cursor: grabbing;
 }
 
 .card-content {
@@ -59,7 +75,8 @@
 .selected-exercises{
   border-left: darkgray 1px solid;
   height: 83vh ;
-  padding-left: 20px;
+  padding: 0 20px 0 20px;
+  width: 515px;
 }
 
 .scrollable-list {
@@ -72,7 +89,7 @@
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 428px;
+  width: 100%;
   horiz-align: center;
 }
 
@@ -92,7 +109,6 @@
   background: white;
   padding: 25px;
   border-radius: 25px;
-  text-align: center;
   width: 1200px;
   height: 650px;
   display: flex;
@@ -108,4 +124,39 @@
   font-size: 25px;
   padding-top: 8px;
   margin-top: 20px;
+}
+.button {
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.button-removeExercise{
+  padding: 6px 12px;
+  float: right;
+  margin-right: 5px;
+}
+.xp-wrapper {
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.xp-label {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.xp-value {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.nav-button {
+  margin-bottom: 30px;
 }
