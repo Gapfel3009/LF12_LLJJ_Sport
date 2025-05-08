@@ -203,3 +203,8 @@
   align-items: center;
   justify-content: center;
 }
+
+#Searchbar{
+  border: 1px solid black;
+  border-radius: 10px;
+}

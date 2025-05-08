@@ -3,8 +3,9 @@
     <h2 class="section-title">Übungen</h2>
     <!--TODO: Searchbar bauen-->
     <p>Hier kannst du aus einer Liste von Übungen dir ein eigenes Training zusammenstellen</p>
+    <input id="Searchbar" type="text" [(ngModel)]="searchText" (keyup)="filterExercises(searchText)" placeholder="Suche nach Übungen...">
     <div class="scrollable-list">
-      <div *ngFor="let exercise of ExerciseList" class="card select-list" (click)="openOverlay(exercise)">
+      <div *ngFor="let exercise of FilteredExercises" class="card select-list" (click)="openOverlay(exercise)">
         <div class="card-content">
           <div class="card-image">
             <img ngSrc="{{exercise.gifLink}}" alt="Gif" width="100" height="100" style="max-height: 100%; height: auto">

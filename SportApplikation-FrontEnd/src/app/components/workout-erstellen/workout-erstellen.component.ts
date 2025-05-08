@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component,OnInit} from '@angular/core';
 import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {Exercise} from '../../../models/exercise';
 import {ExpansionCase} from '@angular/compiler';
@@ -19,8 +19,9 @@ import {FormsModule} from '@angular/forms';
   templateUrl: './workout-erstellen.component.html',
   styleUrl: './workout-erstellen.component.css'
 })
-export class WorkoutErstellenComponent {
-
+export class WorkoutErstellenComponent implements OnInit {
+  FilteredExercises: Exercise[] = [];
+  searchText: string= "";
   ExerciseOverlay:boolean = false;
   showConfirmation:boolean = false;
   selectedExercise:Exercise = new Exercise();
@@ -36,6 +37,15 @@ export class WorkoutErstellenComponent {
 
   constructor(private route:Router) {
 
+  }
+  ngOnInit() {
+    this.FilteredExercises = this.ExerciseList
+  }
+
+  filterExercises(SearchString: string){
+    const lowersearch = SearchString.toLowerCase().trim();
+    this.FilteredExercises = this.ExerciseList.filter(exe =>
+    exe.Name.toLowerCase().includes(lowersearch) || exe.Description.toLowerCase().includes(lowersearch));
   }
 
   openOverlay(selectedExercise:Exercise):void{
