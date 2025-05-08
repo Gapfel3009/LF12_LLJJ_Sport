@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,7 @@ public class User {
     private Integer xpBiceps = 0;
     private Integer xpFlexibility = 0;
 
-    @ManyToOne
-    @JoinColumn(name = "avatarID")
-    private Avatar avatar;
+  //  @ManyToOne
+    //@JoinColumn(name = "avatarID")
+    //private Integer avatarID;
 }
