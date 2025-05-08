@@ -76,7 +76,7 @@
   border-left: darkgray 1px solid;
   height: 83vh ;
   padding: 0 20px 0 20px;
-  width: 515px;
+  width: 480px;
 }
 
 .scrollable-list {
@@ -105,13 +105,33 @@
   align-items: center;
 }
 
-.confirmation-box{
+.overlay-box{
   background: white;
   padding: 25px;
   border-radius: 25px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.exercise-box{
   width: 1200px;
   height: 650px;
   display: flex;
+}
+
+.confirmation-box{
+  width: 500px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 
 .ExcerciseBox{
@@ -125,15 +145,16 @@
   padding-top: 8px;
   margin-top: 20px;
 }
+
 .button {
   background-color: #1a1a1a;
   color: white;
-  border: none;
   border-radius: 10px;
   padding: 12px 24px;
   font-size: 16px;
   cursor: pointer;
   margin-top: 20px;
+  border: solid 1px black;
 }
 
 .button-removeExercise{
@@ -157,6 +178,28 @@
   font-weight: bold;
 }
 
-.nav-button {
-  margin-bottom: 30px;
+.workout-box {
+  height:auto;
+  max-height: 605px;
+}
+
+.nav-buttons{
+  display: flex;
+  float: right;
+  gap: 10px;
+}
+
+.button:hover {
+  border: solid 1px black;
+  background-color: whitesmoke;
+  color: black;
+}
+
+
+.confirmation-box p {
+  margin: 0 auto;
+  flex-grow: 1; /* Damit Text mittig bleibt */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

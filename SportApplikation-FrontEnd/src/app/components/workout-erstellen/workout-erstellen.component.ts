@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {Exercise} from '../../../models/exercise';
 import {ExpansionCase} from '@angular/compiler';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import {Router} from '@angular/router';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-workout-erstellen',
@@ -11,7 +13,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
     NgOptimizedImage,
     NgIf,
     NgForOf,
-    DragDropModule
+    DragDropModule,
+    FormsModule
   ],
   templateUrl: './workout-erstellen.component.html',
   styleUrl: './workout-erstellen.component.css'
@@ -19,6 +22,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class WorkoutErstellenComponent {
 
   ExerciseOverlay:boolean = false;
+  showConfirmation:boolean = false;
   selectedExercise:Exercise = new Exercise();
   workout:Exercise[] = [];
   ExerciseList:Exercise[] = [new Exercise(1,"Push-Up","The push-up is one of the most effective bodyweight exercises for building upper body strength, endurance, and stability. It engages multiple muscle groups, including the chest, shoulders, triceps, and core. Suitable for all fitness levels, push-ups can be modified or progressed to match individual goals. It requires no equipment and is a fundamental movement used in calisthenic, strength training, sports conditioning, and rehabilitation programs.","https://fitnessprogramer.com/wp-content/uploads/2021/02/Push-Up.gif"),
@@ -29,6 +33,10 @@ export class WorkoutErstellenComponent {
                           new Exercise(6,"Lean Planche","The Lean Planche is a bodyweight exercise where the body is held at a forward lean while balancing on the hands. This movement builds strength in the shoulders, core, and arms, and is often used as a precursor to the more difficult Straddle and Full Planche. By leaning your body forward while maintaining support on your hands, the Lean Planche provides a foundation to build strength and control for mastering more advanced calisthenic moves.","https://fitnessprogramer.com/wp-content/uploads/2025/04/lean-planche.png"),];
   protected readonly Exercise = Exercise;
   protected readonly ExpansionCase = ExpansionCase;
+
+  constructor(private route:Router) {
+
+  }
 
   openOverlay(selectedExercise:Exercise):void{
     this.selectedExercise = selectedExercise;
@@ -43,10 +51,23 @@ export class WorkoutErstellenComponent {
   removeExerciseFromWorkout(index:number):void{
     this.workout.splice(index, 1);
   }
+
   drop(event: CdkDragDrop<any[]>) {
     console.log(this.workout)
     moveItemInArray(this.workout, event.previousIndex, event.currentIndex);
     console.log(this.workout)
+  }
+
+  backToMainsite(workoutTitle:string):void{
+    if(this.workout.length == 0 && workoutTitle == ""){
+      this.MainRedirect()
+    }else{
+      this.showConfirmation = true;
+    }
+  }
+
+  MainRedirect(){
+    this.route.navigate(['/Mainsite']);
   }
 }
 

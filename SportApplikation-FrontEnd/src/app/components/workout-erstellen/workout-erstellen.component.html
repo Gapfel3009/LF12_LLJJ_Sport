@@ -1,6 +1,7 @@
 <div class="container1">
   <div>
     <h2 class="section-title">Übungen</h2>
+    <!--TODO: Searchbar bauen-->
     <p>Hier kannst du aus einer Liste von Übungen dir ein eigenes Training zusammenstellen</p>
     <div class="scrollable-list">
       <div *ngFor="let exercise of ExerciseList" class="card select-list" (click)="openOverlay(exercise)">
@@ -17,8 +18,8 @@
     </div>
   </div>
   <div class="selected-exercises">
-    <input class="input" type="text" placeholder="Name des Workouts" name="workout-title">
-    <div cdkDropList [cdkDropListData]="ExerciseList" (cdkDropListDropped)="drop($event)" class="scrollable-list">
+    <input #workoutTitle class="input" type="text" placeholder="Name des Workouts" id="workout-title">
+    <div cdkDropList [cdkDropListData]="ExerciseList" (cdkDropListDropped)="drop($event)" class="workout-box scrollable-list">
       <div *ngFor="let exercise of workout, let i = index" cdkDrag class="card workout-list">
         <div class="card-content">
           <div class="card-image">
@@ -32,13 +33,13 @@
       </div>
     </div>
     <div class="nav-buttons">
-      <button class="button">Abbrechen</button>
+      <button class="button" (click)="backToMainsite(workoutTitle.value)">Abbrechen</button>
       <button class="button">Speichern</button>
     </div>
   </div>
 
   <div class="overlay " *ngIf="ExerciseOverlay">
-    <div class="confirmation-box">
+    <div class="overlay-box exercise-box">
       <img ngSrc="{{selectedExercise?.gifLink}}" alt="Gif" width="600" height="600">
       <div class="ExcerciseBox">
         <h1 class="ExcerciseTitle">{{selectedExercise?.Name}}</h1>
@@ -46,7 +47,7 @@
         <div class="xp-wrapper">
           <span class="xp-label">XP</span>
           <span class="xp-value">50</span>
-        <div>
+        </div>
         <div style="margin-top: 20px;">
           <label class="label" for="exercise-reps">Wiederholungen</label>
           <input class="input" type="number" placeholder="Wiederholungen" id="exercise-reps" name="exercise-reps">
@@ -56,8 +57,16 @@
         <button class="button button-cancel" (click)="ExerciseOverlay = !ExerciseOverlay">Abbrechen</button>
         <button class="button button-add" (click)="addExerciseToWorkout(selectedExercise)">Hinzufügen</button>
       </div>
-
     </div>
   </div>
 
+  <div class="overlay " *ngIf="showConfirmation">
+    <div class="overlay-box confirmation-box">
+      <p>Es gibt Änderungen die nicht gespeichert sind, bist du sicher, dass du abbrechen willst?</p>
+      <div class="button-group">
+        <button class="button" (click)="MainRedirect()">Trotzdem Abbrechen</button>
+        <button class="button" (click)="showConfirmation = !showConfirmation">Weiter Workout erstellen</button>
+      </div>
+    </div>
+  </div>
 </div>
