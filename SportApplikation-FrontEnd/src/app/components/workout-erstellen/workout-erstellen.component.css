@@ -80,7 +80,7 @@
 }
 
 .scrollable-list {
-  height: 74.6vh;
+  height: 70.6vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -184,7 +184,7 @@ input:focus {
 
 .workout-box {
   height:auto;
-  max-height: 605px;
+  max-height: 85.9%;
 }
 
 .nav-buttons{
