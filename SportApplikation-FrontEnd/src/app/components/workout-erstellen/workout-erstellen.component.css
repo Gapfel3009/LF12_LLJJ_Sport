@@ -11,7 +11,7 @@
   padding: 10px;
   margin-right: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  width: 1000px;
+  width: 100%;
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -76,7 +76,7 @@
   border-left: darkgray 1px solid;
   height: 83vh ;
   padding: 0 20px 0 20px;
-  width: 480px;
+  width: 30%;
 }
 
 .scrollable-list {
@@ -85,7 +85,7 @@
   overflow-x: hidden;
 }
 
-.input{
+input{
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -93,6 +93,10 @@
   horiz-align: center;
 }
 
+input:focus {
+  outline: none;
+  border: 1px solid #ccc;
+}
 .overlay{
   position: fixed;
   top: 0;
@@ -198,13 +202,38 @@
 
 .confirmation-box p {
   margin: 0 auto;
-  flex-grow: 1; /* Damit Text mittig bleibt */
+  flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 #Searchbar{
-  border: 1px solid black;
+  padding: 8px;
+  border: 1px solid #ccc;
   border-radius: 10px;
+  margin-bottom: 5px;
+  width: 30%;
+}
+
+#exercise-list{
+  width: 70%;
+}
+
+.set-reps-box{
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.set-reps-box>div{
+  flex:1;
+}
+
+#exercise-title-and-description{
+  max-height: 63%;
+}
+
+label{
+  font-weight: bold;
 }
