@@ -183,7 +183,7 @@ input:focus {
 
 .workout-box {
   height:auto;
-  max-height: 85.9%;
+  max-height: 64%;
 }
 
 .nav-buttons{
@@ -239,4 +239,14 @@ label{
 
 .exercise-scrollable-list{
   height: 69.4vh;
+}
+
+#workout-description{
+  margin-top: 5px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  horiz-align: center;
+  resize: none;
 }

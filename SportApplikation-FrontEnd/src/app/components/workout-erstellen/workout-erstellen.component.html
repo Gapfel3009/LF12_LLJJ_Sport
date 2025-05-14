@@ -19,6 +19,7 @@
   </div>
   <div class="selected-exercises">
     <input #workoutTitle class="input" type="text" placeholder="Name des Workouts" id="workout-title">
+    <textarea #workoutDescription rows="5" class ="input" type="text" placeholder="Beschreibung" id="workout-description"></textarea>
     <div cdkDropList [cdkDropListData]="ExerciseList" (cdkDropListDropped)="drop($event)"  class="workout-box scrollable-list">
       <div *ngFor="let exercise of workout, let i = index" cdkDrag (click)="openOverlay(exercise, false, i)" (mousedown)="wasdragged = false;"  (dragstart)="wasdragged=true;" class="card workout-list">
         <div class="card-content">
@@ -33,7 +34,7 @@
       </div>
     </div>
     <div class="nav-buttons">
-      <button class="button" (click)="backToMainsite(workoutTitle.value)">Abbrechen</button>
+      <button class="button" (click)="backToMainsite(workoutTitle.value, workoutDescription.value)">Abbrechen</button>
       <button class="button">Speichern</button>
     </div>
   </div>
