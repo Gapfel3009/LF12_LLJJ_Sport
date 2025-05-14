@@ -11,7 +11,7 @@
   padding: 10px;
   margin-right: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  width: 1000px;
+  width: 100%;
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -76,16 +76,16 @@
   border-left: darkgray 1px solid;
   height: 83vh ;
   padding: 0 20px 0 20px;
-  width: 515px;
+  width: 30%;
 }
 
 .scrollable-list {
-  height: 74.6vh;
+  height: 70.6vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-.input{
+input{
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -93,6 +93,10 @@
   horiz-align: center;
 }
 
+input:focus {
+  outline: none;
+  border: 1px solid #ccc;
+}
 .overlay{
   position: fixed;
   top: 0;
@@ -105,13 +109,33 @@
   align-items: center;
 }
 
-.confirmation-box{
+.overlay-box{
   background: white;
   padding: 25px;
   border-radius: 25px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.exercise-box{
   width: 1200px;
   height: 650px;
   display: flex;
+}
+
+.confirmation-box{
+  width: 500px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 
 .ExcerciseBox{
@@ -125,15 +149,16 @@
   padding-top: 8px;
   margin-top: 20px;
 }
+
 .button {
   background-color: #1a1a1a;
   color: white;
-  border: none;
   border-radius: 10px;
   padding: 12px 24px;
   font-size: 16px;
   cursor: pointer;
   margin-top: 20px;
+  border: solid 1px black;
 }
 
 .button-removeExercise{
@@ -157,6 +182,58 @@
   font-weight: bold;
 }
 
-.nav-button {
-  margin-bottom: 30px;
+.workout-box {
+  height:auto;
+  max-height: 85.9%;
+}
+
+.nav-buttons{
+  display: flex;
+  float: right;
+  gap: 10px;
+}
+
+.button:hover {
+  border: solid 1px black;
+  background-color: whitesmoke;
+  color: black;
+}
+
+
+.confirmation-box p {
+  margin: 0 auto;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#Searchbar{
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  width: 30%;
+}
+
+#exercise-list{
+  width: 70%;
+}
+
+.set-reps-box{
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.set-reps-box>div{
+  flex:1;
+}
+
+#exercise-title-and-description{
+  max-height: 63%;
+}
+
+label{
+  font-weight: bold;
 }

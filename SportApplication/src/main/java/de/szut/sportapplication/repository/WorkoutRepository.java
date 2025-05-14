@@ -1,4 +1,7 @@
 package de.szut.sportapplication.repository;
 
-public class WorkoutRepository {
+import de.szut.sportapplication.model.Workout;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface WorkoutRepository extends JpaRepository<Workout, Integer> {
 }
