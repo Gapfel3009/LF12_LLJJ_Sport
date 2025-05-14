@@ -80,7 +80,6 @@
 }
 
 .scrollable-list {
-  height: 70.6vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -236,4 +235,8 @@ input:focus {
 
 label{
   font-weight: bold;
+}
+
+.exercise-scrollable-list{
+  height: 69.4vh;
 }

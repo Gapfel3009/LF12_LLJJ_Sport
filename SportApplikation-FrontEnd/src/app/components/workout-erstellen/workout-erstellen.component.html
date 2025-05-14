@@ -3,7 +3,7 @@
     <h2 class="section-title">Übungen</h2>
     <p>Hier kannst du aus einer Liste von Übungen dir ein eigenes Training zusammenstellen</p>
     <input id="Searchbar" type="text" [(ngModel)]="searchText" (keyup)="filterExercises(searchText)" placeholder="Suche nach Übungen...">
-    <div class="scrollable-list">
+    <div class="scrollable-list exercise-scrollable-list">
       <div *ngFor="let exercise of FilteredExercises" class="card select-list" (click)="openOverlay(exercise, true, null)">
         <div class="card-content">
           <div class="card-image">
