@@ -26,4 +26,7 @@ export class MainsiteComponent {
     this.route.navigate(['/Workouts'])
   }
 
+  ProfileRedirect(){
+    this.route.navigate(['/Profile'])
+  }
 }
