@@ -41,11 +41,11 @@
 
   <div class="overlay" *ngIf="ExerciseOverlay">
     <div class="overlay-box exercise-box">
-      <img ngSrc="{{selectedExercise?.gifLink}}" alt="Gif" width="600" height="600">
+      <img ngSrc="{{selectedExercise.gifLink}}" alt="Gif" width="600" height="600">
       <div class="ExcerciseBox">
         <div id="exercise-title-and-description">
-          <h1 class="ExcerciseTitle">{{selectedExercise?.Name}}</h1>
-          <p align="justify">{{selectedExercise?.Description}}</p>
+          <h1 class="ExcerciseTitle">{{selectedExercise.Name}}</h1>
+          <p align="justify">{{selectedExercise.Description}}</p>
         </div>
         <div class="xp-wrapper">
           <span class="xp-label">XP</span>

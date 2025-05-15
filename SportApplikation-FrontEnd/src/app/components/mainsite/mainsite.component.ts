@@ -22,4 +22,8 @@ export class MainsiteComponent {
     this.route.navigate(['/Workout-erstellen']);
   }
 
+  WorkoutsRedirect(){
+    this.route.navigate(['/Workouts'])
+  }
+
 }
