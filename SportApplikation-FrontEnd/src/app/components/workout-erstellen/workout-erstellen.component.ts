@@ -87,8 +87,8 @@ export class WorkoutErstellenComponent implements OnInit {
     console.log(this.workout)
   }
 
-  backToMainsite(workoutTitle:string):void{
-    if(this.workout.length == 0 && workoutTitle == ""){
+  backToMainsite(workoutTitle:string, workoutDescription: string):void{
+    if(this.workout.length == 0 && workoutTitle == "" && workoutDescription == ""){
       this.MainRedirect()
     }else{
       this.showConfirmation = true;
