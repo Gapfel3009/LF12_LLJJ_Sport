@@ -1,61 +1,66 @@
-CREATE TABLE Avatar (
-                        AvatarID SERIAL PRIMARY KEY,
-                        FileName VARCHAR(255),
-                        FullPath TEXT
+CREATE TABLE avatar
+(
+    avatar_id SERIAL PRIMARY KEY,
+    filename  VARCHAR(255),
+    full_path TEXT
 );
-CREATE TABLE Users (
-                       UserID SERIAL PRIMARY KEY,
-                       Email VARCHAR(255) NOT NULL UNIQUE,
-                       PasswordHash VARCHAR(255) NOT NULL,
-                       Username VARCHAR(100),
-                       Streak INTEGER,
-                       XP_Total INTEGER DEFAULT 0,
-                       XP_Chest INTEGER DEFAULT 0,
-                       XP_Back INTEGER DEFAULT 0,
-                       XP_Shoulders INTEGER DEFAULT 0,
-                       XP_Legs INTEGER DEFAULT 0,
-                       XP_Triceps INTEGER DEFAULT 0,
-                       XP_Abs INTEGER DEFAULT 0,
-                       XP_Glutes INTEGER DEFAULT 0,
-                       XP_Biceps INTEGER DEFAULT 0,
-                       XP_Flexibility INTEGER DEFAULT 0,
-                       AvatarID INTEGER,
-                       FOREIGN KEY (AvatarID) REFERENCES Avatar(AvatarID)
+CREATE TABLE app_user
+(
+    user_id        SERIAL PRIMARY KEY,
+    email_address  VARCHAR(255) NOT NULL,
+    password_hash  VARCHAR(255) NOT NULL,
+    username       VARCHAR(100),
+    avatar_id      INTEGER REFERENCES avatar (avatar_id),
+    last_workout   TIMESTAMP,
+    streak         INTEGER,
+    xp_total       INTEGER,
+    xp_chest       INTEGER,
+    xp_back        INTEGER,
+    xp_shoulders   INTEGER,
+    xp_legs        INTEGER,
+    xp_triceps     INTEGER,
+    xp_abs         INTEGER,
+    xp_glutes      INTEGER,
+    xp_biceps      INTEGER,
+    xp_flexibility INTEGER
 );
-CREATE TABLE Workout (
-                         WorkoutID SERIAL PRIMARY KEY,
-                         Title VARCHAR(255),
-                         Creator INTEGER,
-                         FOREIGN KEY (Creator) REFERENCES Users(UserID)
+CREATE TABLE workout
+(
+    workout_id SERIAL PRIMARY KEY,
+    title      VARCHAR(255),
+    creator    VARCHAR(100)
 );
-CREATE TABLE Exercise (
-                          ExerciseID SERIAL PRIMARY KEY,
-                          Name VARCHAR(255),
-                          XP_Total INTEGER DEFAULT 0,
-                          XP_Chest INTEGER DEFAULT 0,
-                          XP_Back INTEGER DEFAULT 0,
-                          XP_Shoulders INTEGER DEFAULT 0,
-                          XP_Legs INTEGER DEFAULT 0,
-                          XP_Triceps INTEGER DEFAULT 0,
-                          XP_Abs INTEGER DEFAULT 0,
-                          XP_Glutes INTEGER DEFAULT 0,
-                          XP_Biceps INTEGER DEFAULT 0,
-                          XP_Flexibility INTEGER DEFAULT 0
+CREATE TABLE exercise
+(
+    exercise_id    SERIAL PRIMARY KEY,
+    name           VARCHAR(255),
+    description    TEXT,
+    gif_link       TEXT,
+    has_weights    BOOLEAN,
+    xp_total       INTEGER,
+    xp_chest       INTEGER,
+    xp_back        INTEGER,
+    xp_shoulders   INTEGER,
+    xp_legs        INTEGER,
+    xp_triceps     INTEGER,
+    xp_abs         INTEGER,
+    xp_glutes      INTEGER,
+    xp_biceps      INTEGER,
+    xp_flexibility INTEGER
 );
-CREATE TABLE User_Workout (
-                              UserID INTEGER,
-                              WorkoutID INTEGER,
-                              PRIMARY KEY (UserID, WorkoutID),
-                              FOREIGN KEY (UserID) REFERENCES Users(UserID),
-                              FOREIGN KEY (WorkoutID) REFERENCES Workout(WorkoutID)
+CREATE TABLE user_workout
+(
+    user_workout_id SERIAL PRIMARY KEY,
+    user_id      INTEGER NOT NULL REFERENCES app_user (user_id),
+    workout_id   INTEGER NOT NULL REFERENCES workout (workout_id)
 );
-CREATE TABLE Workout_Exercise (
-                                  WorkoutID INTEGER,
-                                  ExerciseID INTEGER,
-                                  Sequence INTEGER,
-                                  Num_Sets INTEGER,
-                                  Num_Reps INTEGER,
-                                  PRIMARY KEY (WorkoutID, ExerciseID),
-                                  FOREIGN KEY (WorkoutID) REFERENCES Workout(WorkoutID),
-                                  FOREIGN KEY (ExerciseID) REFERENCES Exercise(ExerciseID)
+CREATE TABLE workout_exercise
+(
+    workout_exercise_id SERIAL PRIMARY KEY,
+    workout_id     INTEGER NOT NULL REFERENCES workout (workout_id),
+    exercise_id    INTEGER NOT NULL REFERENCES exercise (exercise_id),
+    exercise_order INTEGER,
+    number_of_sets INTEGER,
+    number_of_reps INTEGER,
+    weight_amount  INTEGER
 );
