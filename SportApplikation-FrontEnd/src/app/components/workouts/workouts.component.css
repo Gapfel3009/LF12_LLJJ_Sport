@@ -1,1 +1,16 @@
+.page-container{
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
 
+.standard-workouts-box{
+  height:50%;
+  width: 100%;
+}
+
+h4{
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+}
