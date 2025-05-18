@@ -6,17 +6,21 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "user_workout")
-@IdClass(UserWorkoutId.class)
 @Getter
 @Setter
 public class UserWorkout {
 
     @Id
-    @JoinColumn(name = "userid")
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_workout_id")
+    private int userWorkoutId;
 
-    @Id
-    @JoinColumn(name = "workoutid")
-    private Integer workoutId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private AppUser userId;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "workout_id", nullable = false)
+    private Workout workoutId;
 
 }
