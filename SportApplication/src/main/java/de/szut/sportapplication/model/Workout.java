@@ -9,15 +9,20 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@Table(name = "workout")
 public class Workout {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "workout_id")
     private Long workoutID;
 
     private String title;
 
+    private String creator;
+
+    /*
     @ManyToOne
     @JoinColumn(name = "creator")
-    private Users creator;
+    private AppUser creator;*/
 }
