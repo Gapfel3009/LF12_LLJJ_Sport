@@ -7,14 +7,18 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@IdClass(WorkoutExerciseId.class)
+//@IdClass(WorkoutExerciseId.class)
 public class WorkoutExercise {
-
     @Id
-    private Long workoutID;
+    @JoinColumn(name = "workout_exercise_id", insertable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int workoutExerciseId;
 
-    @Id
-    private Long exerciseID;
+    @ManyToOne
+    private Workout workoutID;
+
+    @ManyToOne
+    private Exercise exerciseID;
 
     private Integer sequence;
     private Integer numSets;

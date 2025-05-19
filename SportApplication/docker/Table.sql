@@ -1,10 +1,10 @@
-CREATE TABLE avatar
+CREATE TABLE if not exists avatar
 (
     avatar_id SERIAL PRIMARY KEY,
     filename  VARCHAR(255),
     full_path TEXT
 );
-CREATE TABLE app_user
+CREATE TABLE if not exists app_user
 (
     user_id        SERIAL PRIMARY KEY,
     email_address  VARCHAR(255) NOT NULL,
@@ -24,14 +24,14 @@ CREATE TABLE app_user
     xp_biceps      INTEGER,
     xp_flexibility INTEGER
 );
-CREATE TABLE workout
+CREATE TABLE if not exists workout
 (
     workout_id SERIAL PRIMARY KEY,
     title      VARCHAR(100),
     creator    VARCHAR(100),
     description VARCHAR(255)
 );
-CREATE TABLE exercise
+CREATE TABLE if not exists  exercise
 (
     exercise_id    SERIAL PRIMARY KEY,
     name           VARCHAR(255),
@@ -49,13 +49,13 @@ CREATE TABLE exercise
     xp_biceps      INTEGER,
     xp_flexibility INTEGER
 );
-CREATE TABLE user_workout
+CREATE TABLE if not exists user_workout
 (
     user_workout_id SERIAL PRIMARY KEY,
     user_id      INTEGER NOT NULL REFERENCES app_user (user_id),
     workout_id   INTEGER NOT NULL REFERENCES workout (workout_id)
 );
-CREATE TABLE workout_exercise
+CREATE TABLE if not exists workout_exercise
 (
     workout_exercise_id SERIAL PRIMARY KEY,
     workout_id     INTEGER NOT NULL REFERENCES workout (workout_id),

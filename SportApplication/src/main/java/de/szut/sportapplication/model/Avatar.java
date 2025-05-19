@@ -13,6 +13,7 @@ public class Avatar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "avatar_id")
     private Long avatarID;
 
     private String fileName;

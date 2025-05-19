@@ -6,6 +6,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "user_workout")
+//@IdClass(UserWorkoutId.class)
 @Getter
 @Setter
 public class UserWorkout {
@@ -17,7 +18,7 @@ public class UserWorkout {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private AppUser userId;
+    private AppUser appUserId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "workout_id", nullable = false)

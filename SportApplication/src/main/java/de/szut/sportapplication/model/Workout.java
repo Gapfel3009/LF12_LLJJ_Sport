@@ -24,5 +24,5 @@ public class Workout {
     /*
     @ManyToOne
     @JoinColumn(name = "creator")
-    private AppUser creator;*/
+    private Users creator;*/
 }

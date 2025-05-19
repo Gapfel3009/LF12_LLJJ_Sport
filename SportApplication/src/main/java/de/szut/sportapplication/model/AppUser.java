@@ -25,8 +25,8 @@ public class AppUser {
 
     private String username;
 
-    @Column(name = "avatar_id")
-    private Integer avatarId;
+ //   @Column(name = "avatar_id")
+  //  private Integer avatarId;
 
     private Integer streak;
 

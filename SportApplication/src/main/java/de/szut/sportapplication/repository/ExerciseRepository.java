@@ -1,4 +1,7 @@
 package de.szut.sportapplication.repository;
 
-public class ExerciseRepository {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ExerciseRepository {
 }
