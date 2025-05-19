@@ -27,8 +27,9 @@ CREATE TABLE app_user
 CREATE TABLE workout
 (
     workout_id SERIAL PRIMARY KEY,
-    title      VARCHAR(255),
-    creator    VARCHAR(100)
+    title      VARCHAR(100),
+    creator    VARCHAR(100),
+    description VARCHAR(255)
 );
 CREATE TABLE exercise
 (
