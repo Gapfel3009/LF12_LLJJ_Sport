@@ -21,8 +21,6 @@ public class Workout {
 
     private String creator;
 
-    /*
-    @ManyToOne
-    @JoinColumn(name = "creator")
-    private Users creator;*/
+    private String descripton;
+
 }
