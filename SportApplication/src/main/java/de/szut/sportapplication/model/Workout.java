@@ -3,13 +3,12 @@ package de.szut.sportapplication.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Table(name = "workout")
+@Entity
+@Data
 public class Workout {
 
     @Id
@@ -21,6 +20,36 @@ public class Workout {
 
     private String creator;
 
-    private String descripton;
+    private String description;
+    public Long getWorkoutId() {
+        return workoutID;
+    }
 
+    public void setWorkoutId(Long workoutId) {
+        this.workoutID = workoutId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
