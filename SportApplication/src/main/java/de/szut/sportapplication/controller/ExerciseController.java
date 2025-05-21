@@ -12,5 +12,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/exercise")
 public class ExerciseController {
+private final ExerciseRepository exerciseRepository;
+@Autowired
+    public ExerciseController(ExerciseRepository exerciseRepository) {this.exerciseRepository = exerciseRepository;}
+  @GetMapping
+  public ResponseEntity<List<Exercise>> getAll() {
+        List<Exercise> exercises = exerciseRepository.findAll();
+        return ResponseEntity.ok(exercises);
+  }
 
 }

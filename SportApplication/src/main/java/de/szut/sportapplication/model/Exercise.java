@@ -1,9 +1,6 @@
 package de.szut.sportapplication.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +13,7 @@ public class Exercise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "exercise_id")
     private Long exerciseID;
 
     private String name;
@@ -30,5 +28,36 @@ public class Exercise {
     private Integer xpGlutes = 0;
     private Integer xpBiceps = 0;
     private Integer xpFlexibility = 0;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {this.name = name;}
+    public Integer getXpTotal() {return xpTotal;}
+    public void setXpTotal(Integer xpTotal) {this.xpTotal = xpTotal;}
+    public Integer getXpChest() {return xpChest;}
+
+    public void setXpChest(Integer xpChest) {
+        this.xpChest = xpChest;
+    }
+    public Integer getXpBack() {return xpBack;}
+    public void setXpBack(Integer xpBack) {this.xpBack = xpBack;}
+    public Integer getXpShoulders() {return xpShoulders;}
+    public void setXpShoulders(Integer xpShoulders) {this.xpShoulders = xpShoulders;}
+    public Integer getXpLegs() {return xpLegs;}
+    public void setXpLegs(Integer xpLegs) {this.xpLegs = xpLegs;}
+    public Integer getXpTriceps() {return xpTriceps;}
+    public void setXpTriceps(Integer xpTriceps) {this.xpTriceps = xpTriceps;}
+    public Integer getXpAbs() {return xpAbs;}
+
+    public void setXpAbs(Integer xpAbs) {
+        this.xpAbs = xpAbs;
+    }
+    public Integer getXpGlutes() {return xpGlutes;}
+    public void setXpGlutes(Integer xpGlutes) {this.xpGlutes = xpGlutes;}
+    public Integer getXpBiceps() {return xpBiceps;}
+    public void setXpBiceps(Integer xpBiceps) {this.xpBiceps = xpBiceps;}
+    public Integer getXpFlexibility() {return xpFlexibility;}
+    public void setXpFlexibility(Integer xpFlexibility) {this.xpFlexibility = xpFlexibility;}
+    public Long getExerciseID() {return exerciseID;}
 }
 
