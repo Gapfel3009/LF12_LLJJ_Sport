@@ -10,7 +10,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/workouts")
-
+@RequestMapping("/api/avatars")
 public class AvatarController {
+    private final AvatarRepository avatarRepository;
+
+    @Autowired
+    public AvatarController(AvatarRepository avatarRepository) {
+        this.avatarRepository = avatarRepository;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Avatar>> getAllAvatars() {
+        List<Avatar> avatars = avatarRepository.findAll();
+        return ResponseEntity.ok(avatars);
+    }
 }

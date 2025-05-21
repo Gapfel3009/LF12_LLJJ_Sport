@@ -23,6 +23,10 @@ public class Workout {
     private String creator;
 
     private String description;
+    public Long getWorkoutId() {
+        return workoutID;
+    }
+
 
     public String getTitle() {
         return title;
