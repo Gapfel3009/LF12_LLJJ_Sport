@@ -61,6 +61,130 @@ public class AppUser {
     private Integer xpFlexibility = 0;
 
     @ManyToOne
-  @JoinColumn(name = "avatarID")
+  @JoinColumn(name = "avatar_id")
     private Avatar avatarID;
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Integer getStreak() {
+        return streak;
+    }
+
+    public void setStreak(Integer streak) {
+        this.streak = streak;
+    }
+
+    public Integer getXpTotal() {
+        return xpTotal;
+    }
+
+    public void setXpTotal(Integer xpTotal) {
+        this.xpTotal = xpTotal;
+    }
+
+    public Integer getXpChest() {
+        return xpChest;
+    }
+
+    public void setXpChest(Integer xpChest) {
+        this.xpChest = xpChest;
+    }
+
+    public Integer getXpBack() {
+        return xpBack;
+    }
+
+    public void setXpBack(Integer xpBack) {
+        this.xpBack = xpBack;
+    }
+
+    public Integer getXpShoulders() {
+        return xpShoulders;
+    }
+
+    public void setXpShoulders(Integer xpShoulders) {
+        this.xpShoulders = xpShoulders;
+    }
+
+    public Integer getXpLegs() {
+        return xpLegs;
+    }
+
+    public void setXpLegs(Integer xpLegs) {
+        this.xpLegs = xpLegs;
+    }
+
+    public Integer getXpTriceps() {
+        return xpTriceps;
+    }
+
+    public void setXpTriceps(Integer xpTriceps) {
+        this.xpTriceps = xpTriceps;
+    }
+
+    public Integer getXpAbs() {
+        return xpAbs;
+    }
+
+    public void setXpAbs(Integer xpAbs) {
+        this.xpAbs = xpAbs;
+    }
+
+    public Integer getXpGlutes() {
+        return xpGlutes;
+    }
+
+    public void setXpGlutes(Integer xpGlutes) {
+        this.xpGlutes = xpGlutes;
+    }
+
+    public Integer getXpBiceps() {
+        return xpBiceps;
+    }
+
+    public void setXpBiceps(Integer xpBiceps) {
+        this.xpBiceps = xpBiceps;
+    }
+
+    public Integer getXpFlexibility() {
+        return xpFlexibility;
+    }
+
+    public void setXpFlexibility(Integer xpFlexibility) {
+        this.xpFlexibility = xpFlexibility;
+    }
+
+    public Avatar getAvatarID() {
+        return avatarID;
+    }
+
+    public void setAvatarID(Avatar avatarID) {
+        this.avatarID = avatarID;
+    }
 }

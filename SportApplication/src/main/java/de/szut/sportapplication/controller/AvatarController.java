@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/avatars")
 public class AvatarController {
-    private final AvatarRepository avatarRepository;
+    private AvatarRepository avatarRepository;
 
     @Autowired
     public AvatarController(AvatarRepository avatarRepository) {
