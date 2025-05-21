@@ -4,7 +4,7 @@ import {Exercise} from '../../../models/exercise';
 import {ExpansionCase} from '@angular/compiler';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -29,6 +29,7 @@ export class WorkoutErstellenComponent implements OnInit {
   selectedExerciseID:number | null = null;
   workout:Exercise[] = [];
   wasdragged:boolean = false;
+  returnTo: string = '/Mainsite';
   ExerciseList:Exercise[] = [new Exercise(1,"Push-Up","The push-up is one of the most effective bodyweight exercises for building upper body strength, endurance, and stability. It engages multiple muscle groups, including the chest, shoulders, triceps, and core. Suitable for all fitness levels, push-ups can be modified or progressed to match individual goals. It requires no equipment and is a fundamental movement used in calisthenic, strength training, sports conditioning, and rehabilitation programs.","https://fitnessprogramer.com/wp-content/uploads/2021/02/Push-Up.gif", true),
                           new Exercise(2,"Straddle Planche", "The Straddle Planche is an advanced bodyweight exercise that demonstrates extreme core strength, shoulder stability, and total body control. It involves suspending your body parallel to the ground, supported only by your hands, while your legs are spread wide apart in a straddle position. It is popular in calisthenics, gymnastics, and street workout routines, requiring months or years of consistent training to achieve.", "https://fitnessprogramer.com/wp-content/uploads/2021/02/Straddle-Planche.gif", true),
                           new Exercise(3,"Single Arm Raise Push-up", "The Single Arm Raise Push-Up is a push-up variation in which one arm briefly leaves the ground at the top of the movement. This brief one-arm support increases load on the working side and challenges your balance and rotational control. It is often used to improve unilateral strength, coordination, and postural integrity.", "https://fitnessprogramer.com/wp-content/uploads/2022/08/Single-Arm-Raise-Push-up.gif", false),
@@ -38,8 +39,10 @@ export class WorkoutErstellenComponent implements OnInit {
   protected readonly Exercise = Exercise;
   protected readonly ExpansionCase = ExpansionCase;
 
-  constructor(private route:Router) {
-
+  constructor(private route: ActivatedRoute,private router:Router) {
+    this.route.queryParams.subscribe(params => {
+      this.returnTo = params['returnTo'] || '/'; // Fallback
+    });
   }
   ngOnInit() {
     this.FilteredExercises = this.ExerciseList
@@ -87,16 +90,16 @@ export class WorkoutErstellenComponent implements OnInit {
     console.log(this.workout)
   }
 
-  backToMainsite(workoutTitle:string, workoutDescription: string):void{
+  CancelButton(workoutTitle:string, workoutDescription: string):void{
     if(this.workout.length == 0 && workoutTitle == "" && workoutDescription == ""){
-      this.MainRedirect()
+      this.CancelButtonRedirect()
     }else{
       this.showConfirmation = true;
     }
   }
 
-  MainRedirect(){
-    this.route.navigate(['/Mainsite']);
+  CancelButtonRedirect(){
+    this.router.navigateByUrl(this.returnTo);
   }
 }
 

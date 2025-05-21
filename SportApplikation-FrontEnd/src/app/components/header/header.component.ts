@@ -18,7 +18,7 @@ export class HeaderComponent {
   }
 
   WorkoutsRedirect(){
-    this.route.navigate(['/Workouts'])
+    this.route.navigate(['/Workout-list'])
   }
 
 }

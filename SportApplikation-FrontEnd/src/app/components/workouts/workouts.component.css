@@ -1,5 +1,4 @@
 .page-container{
-  height: 100%;
   width: 100%;
   padding: 20px;
 }
@@ -13,4 +12,120 @@ h4{
   width: 100%;
   font-weight: bold;
   text-align: center;
+}
+
+.card{
+  flex: 0 0 auto;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  overflow: hidden;
+  justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.big-card{
+  height: 280px;
+  width: 300px;
+}
+
+.card-box{
+  display:flex;
+  overflow-x: auto;
+  gap:1rem;
+  padding:1rem;
+  scroll-behavior: smooth;
+}
+
+.card.hover-true:hover{
+  cursor: pointer;
+  border: 3px solid lightskyblue;
+  transform: translateY(-10px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#workout-header{
+  display: flex;
+  gap: 1rem;
+}
+
+#workout-body{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+#detail-box{
+  width: 1200px;
+  height: 150px;
+}
+
+#button-box{
+  width: 280px;
+  height: 150px;
+  gap: 1rem;
+}
+
+#exercise-box{
+  flex: 0 0 calc(50% - 1rem);
+
+}
+
+.set-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.set-number {
+  width: 32px;
+  height: 32px;
+  background-color: #d1c4e9;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+}
+
+.set-info {
+  flex-grow: 1;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  gap: 8px;
+}
+
+.set-time {
+  color: #777;
+  font-size: 14px;
+  margin-right: 16px;
+  white-space: nowrap;
+}
+
+.set-done input[type="checkbox"] {
+  accent-color: #5e35b1;
+  width: 18px;
+  height: 18px;
+}
+
+.button {
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border: solid 1px black;
+}
+
+.button:hover {
+  border: solid 1px black;
+  background-color: whitesmoke;
+  color: black;
 }

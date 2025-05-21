@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/workouts")
-public class WorkoutController {
+public class WorkoutController{
 
     @Autowired
     private WorkoutRepository workoutRepository;

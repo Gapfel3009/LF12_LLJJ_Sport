@@ -11,7 +11,7 @@
           </div>
           <div class="card-text">
             <h3 class="section-title">{{exercise.Name}}</h3>
-            <p>{{exercise.Description}}</p>
+            <p align="justify">{{exercise.Description}}</p>
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="nav-buttons">
-      <button class="button" (click)="backToMainsite(workoutTitle.value, workoutDescription.value)">Abbrechen</button>
+      <button class="button" (click)="CancelButton(workoutTitle.value, workoutDescription.value)">Abbrechen</button>
       <button class="button">Speichern</button>
     </div>
   </div>
@@ -78,7 +78,7 @@
     <div class="overlay-box confirmation-box">
       <p>Es gibt Änderungen die nicht gespeichert sind, bist du sicher, dass du abbrechen willst?</p>
       <div class="button-group">
-        <button class="button" (click)="MainRedirect()">Trotzdem Abbrechen</button>
+        <button class="button" (click)="CancelButtonRedirect()">Trotzdem Abbrechen</button>
         <button class="button" (click)="showConfirmation = !showConfirmation">Weiter Workout erstellen</button>
       </div>
     </div>

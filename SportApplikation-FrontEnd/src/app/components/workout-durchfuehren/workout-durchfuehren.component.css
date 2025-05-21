@@ -1,0 +1,19 @@
+.page-container{
+  width: 100%;
+  padding: 20px;
+}
+#workout-header{
+  display: flex;
+  gap: 1rem;
+}
+
+#detail-box{
+  width: 1200px;
+  height: 150px;
+}
+
+#timer-box{
+  width: 280px;
+  height: 150px;
+  gap: 1rem;
+}

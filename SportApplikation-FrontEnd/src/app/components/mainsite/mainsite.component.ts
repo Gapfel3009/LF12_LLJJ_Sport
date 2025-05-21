@@ -19,11 +19,13 @@ export class MainsiteComponent {
 
   constructor(private route: Router){}
   WorkoutErstellenRedirect(){
-    this.route.navigate(['/Workout-erstellen']);
+    this.route.navigate(['/Workout-erstellen'], {
+      queryParams: {returnTo: this.route.url}
+    });
   }
 
   WorkoutsRedirect(){
-    this.route.navigate(['/Workouts'])
+    this.route.navigate(['/Workout-list'])
   }
 
   ProfileRedirect(){

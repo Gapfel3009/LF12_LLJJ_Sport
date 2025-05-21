@@ -18,6 +18,7 @@ export class Exercise {
   XP_shoulder: number;
 
   //TODO: Constructor anpassen, erstmal für Testzwecke nur halb
+  constructor(ExerciseID: number,Name: string,Description: string,gifLink: string, hasWeight:boolean, repetitions: number, sets:number, weight:number);
   constructor(ExerciseID: number,Name: string,Description: string,gifLink: string, hasWeight:boolean);
   constructor();
   constructor(
@@ -25,16 +26,19 @@ export class Exercise {
     Name?: string,
     Description?: string,
     gifLink?: string,
-    hasWeight?:boolean
+    hasWeight?:boolean,
+    repetitions?:number,
+    sets?:number,
+    weight?:number,
   ){
   this.ExerciseID = ExerciseID ?? 0;
   this.Name = Name ?? "";
   this.Description = Description ?? "";
   this.gifLink = gifLink ?? "";
-  this.repetitions = 0;
-  this.sets = 0;
+  this.repetitions = repetitions ?? 0;
+  this.sets = sets ?? 0;
   this.hasWeight = hasWeight ?? false;
-  this.weight = 0;
+  this.weight = weight ?? 0;
   this.XP_Total = 0;
   this.XP_breast = 0;
   this.XP_Back = 0;
