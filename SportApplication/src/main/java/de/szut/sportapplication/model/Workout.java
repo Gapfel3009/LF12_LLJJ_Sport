@@ -21,13 +21,6 @@ public class Workout {
     private String creator;
 
     private String description;
-    public Long getWorkoutId() {
-        return workoutID;
-    }
-
-    public void setWorkoutId(Long workoutId) {
-        this.workoutID = workoutId;
-    }
 
     public String getTitle() {
         return title;
