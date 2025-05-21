@@ -16,20 +16,17 @@ public class WorkoutController {
     @Autowired
     private WorkoutRepository workoutRepository;
 
-    // 📄 GET: Alle Workouts abrufen
     @GetMapping
     public List<Workout> getAllWorkouts() {
         return workoutRepository.findAll();
     }
 
-    // ➕ POST: Neues Workout erstellen
     @PostMapping
     public ResponseEntity<Workout> createWorkout(@RequestBody Workout workout) {
         Workout saved = workoutRepository.save(workout);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
-    // 🔄 PUT: Workout aktualisieren
     @PutMapping("/{id}")
     public ResponseEntity<Workout> updateWorkout(@PathVariable Long id, @RequestBody Workout updatedWorkout) {
         return workoutRepository.findById(id)
@@ -43,7 +40,6 @@ public class WorkoutController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // ❌ DELETE: Workout löschen
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteWorkout(@PathVariable Long id) {
         if (workoutRepository.existsById(id)) {
@@ -54,7 +50,6 @@ public class WorkoutController {
         }
     }
 
-    // 🔍 GET: Einzelnes Workout anzeigen
     @GetMapping("/{id}")
     public ResponseEntity<Workout> getWorkoutById(@PathVariable Long id) {
         return workoutRepository.findById(id)

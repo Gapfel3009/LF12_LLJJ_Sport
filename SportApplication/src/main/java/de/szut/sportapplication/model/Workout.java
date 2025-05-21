@@ -8,6 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @Table(name = "workout")
 @Entity
+//@Getter
+//@Setter
 @Data
 public class Workout {
 
