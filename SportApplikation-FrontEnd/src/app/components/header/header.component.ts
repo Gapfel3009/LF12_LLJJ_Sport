@@ -1,24 +1,26 @@
 import { Component } from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-header',
   imports: [
-    NgOptimizedImage
+    NgOptimizedImage,
+    RouterModule
   ],
   templateUrl: './header.component.html',
   standalone: true,
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  constructor(private route: Router){}
+  constructor(private router: Router){}
+
   MainRedirect(){
-    this.route.navigate(['/Mainsite']);
+    this.router.navigate(['/Mainsite']);
   }
 
   WorkoutsRedirect(){
-    this.route.navigate(['/Workout-list'])
+    this.router.navigate(['/Workout-list'])
   }
 
 }

@@ -17,4 +17,11 @@ export class WorkoutService {
         .set('Content-Type', 'application/json')
     });
   }
+
+  getWorkoutById(workoutID:number):Observable<any>{
+    return this.http.get<Workout>(`${this.ApiUrl}/api/workouts/${workoutID}`,{
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+    })
+  }
 }

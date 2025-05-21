@@ -1,22 +1,22 @@
 import {Exercise} from './exercise';
 
 export class Workout {
-  workoutID: number | null;
+  workoutId: number | null;
   title: string | null;
   description: string | null;
   creator: string | null;
   exercises:Exercise[] | null;
 
-  constructor(workoutID: number, title: string, description: string, creator:string, exercises:Exercise[]);
+  constructor(workoutId: number, title: string, description: string, creator:string, exercises:Exercise[]);
   constructor();
   constructor(
-    workoutID?: number,
+    workoutId?: number,
     title?: string,
     description?: string,
     creator?:string,
     exercises?:Exercise[]
   ){
-    this.workoutID = workoutID ?? null;
+    this.workoutId = workoutId ?? null;
     this.title = title ?? null;
     this.description = description ?? null;
     this.exercises = exercises ?? null;

@@ -85,9 +85,7 @@ export class WorkoutErstellenComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<any[]>) {
-    console.log(this.workout)
     moveItemInArray(this.workout, event.previousIndex, event.currentIndex);
-    console.log(this.workout)
   }
 
   CancelButton(workoutTitle:string, workoutDescription: string):void{
@@ -99,6 +97,7 @@ export class WorkoutErstellenComponent implements OnInit {
   }
 
   CancelButtonRedirect(){
+    console.log(this.returnTo);
     this.router.navigateByUrl(this.returnTo);
   }
 }

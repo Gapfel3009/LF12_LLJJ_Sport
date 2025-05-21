@@ -1,11 +1,32 @@
 <div class="page-container">
   <div id="workout-header">
     <div id="detail-box" class="card">
-      <h1>{{this.workout.Title}}</h1>
-      <p>{{this.workout.Description}}</p>
+      <h1>{{this.workout.title}}</h1>
+      <p>{{this.workout.description}}</p>
     </div>
     <div id="timer-box" class="card">
-      Timer
+      <i class="bi bi-clock"></i>
+      <div class="timer-value">{{ formattedTime }}</div>
+    </div>
+  </div>
+  <div id="workout-body" class="card">
+    <button *ngIf="!workoutStarted" (click)="workoutStarten()">Workout starten</button>
+    <div id="workout-box" *ngIf="workoutStarted">
+      <h3>{{currentExercise.Name}}</h3>
+      <div style="display: flex; gap:10px">
+        <p align="justify" style="min-width: 522px">{{currentExercise.Description}}</p>
+        <img ngSrc="{{currentExercise.gifLink}}" alt="Gif" width="200" height="200">
+      </div>
+      <div class="set-row" *ngFor="let i of getCounter(currentExercise.sets); let idx = index" [ngClass]="{'checked-background': checkedSets[idx]}">
+        <div class="set-number">{{ idx + 1 }}</div>
+        <div class="set-info">
+          <span *ngIf="currentExercise.hasWeight">{{ currentExercise.weight }} kg x </span>
+          <span>{{ currentExercise.repetitions }} Wiederholungen</span>
+        </div>
+        <div class="set-done">
+          <input type="checkbox" [(ngModel)]="checkedSets[idx]"/>
+        </div>
+      </div>
     </div>
   </div>
 </div>

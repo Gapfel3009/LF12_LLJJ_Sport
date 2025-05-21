@@ -1,19 +1,128 @@
 .page-container{
-  width: 100%;
+  display: flex;
+  width: 50%;
   padding: 20px;
+  margin: 0 auto;
+  gap: 1rem;
+  flex-direction: column;
+  min-height: calc(100vh - 80px);
 }
+
 #workout-header{
   display: flex;
   gap: 1rem;
 }
 
 #detail-box{
-  width: 1200px;
-  height: 150px;
+  width: 75%;
+  height: 120px;
+  justify-content: center;
+  align-items: center;
 }
 
 #timer-box{
-  width: 280px;
-  height: 150px;
+  flex: 1;
+  display: flex;
+  height: 120px;
   gap: 1rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-value {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.bi-clock{
+  font-size: 40px;
+}
+
+#workout-body{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+button {
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border: solid 1px black;
+}
+
+button:hover {
+  border: solid 1px black;
+  background-color: whitesmoke;
+  color: black;
+}
+
+
+.set-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.set-row:hover {
+  background-color: #f5f5f5;
+}
+
+.set-number {
+  width: 28px;
+  height: 28px;
+  background-color: #7e57c2;
+  color: white;
+  font-weight: 600;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  font-size: 14px;
+}
+
+.set-info {
+  flex-grow: 1;
+  font-size: 15px;
+  color: #424242;
+  display: flex;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.set-time {
+  color: #757575;
+  font-size: 13px;
+  margin-right: 16px;
+  white-space: nowrap;
+}
+
+.set-done input[type="checkbox"] {
+  accent-color: #0075ff;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.checked-background {
+  background-color: #e8f5e9;
+  border-left: 3px solid #66bb6a;
+}
+
+.checked-background .set-number {
+  background-color: #66bb6a;
 }

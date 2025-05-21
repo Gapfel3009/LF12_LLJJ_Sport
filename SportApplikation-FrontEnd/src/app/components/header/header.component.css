@@ -15,6 +15,12 @@
   margin-left: 10px;
   font-family: 'Poppins', sans-serif;
 }
+.navbar-brand:hover{
+  cursor: pointer;
+}
+.navbar{
+  height: 80px;
+}
 
 
 

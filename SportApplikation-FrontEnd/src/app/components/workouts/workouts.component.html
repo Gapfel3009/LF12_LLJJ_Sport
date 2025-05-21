@@ -6,11 +6,11 @@
         <div *ngFor="let workout of workouts" class="card big-card hover-true" (click)="ShowWorkout(workout)">
           <h1>{{workout.title}}</h1>
           <p>{{workout.description}}</p>
-          <button class="button" (click)="WorkoutDurchfuehrenRedirect(workout); $event.stopPropagation()">Workout starten</button>
+          <button class="button" (click)="WorkoutDurchfuehrenRedirect(workout); $event.stopPropagation()">Workout machen</button>
         </div>
       </div>
     </div>
-    <div style="border-bottom: solid 1px darkgray; margin: 20px"></div>
+    <div class="divider"></div>
     <div class="standard-workouts-box">
       <h4>Deine Workouts</h4>
       <div class="card-box">
@@ -20,7 +20,7 @@
         <div *ngFor="let workout of workouts" class="card big-card hover-true" (click)="ShowWorkout(workout)">
           <h1>{{workout.title}}</h1>
           <p>{{workout.description}}</p>
-          <button class="button" (click)="WorkoutDurchfuehrenRedirect(workout); $event.stopPropagation()">Workout starten</button>
+          <button class="button" (click)="WorkoutDurchfuehrenRedirect(workout); $event.stopPropagation()">Workout machen</button>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
           <p>{{this.selectedWorkout.description}}</p>
       </div>
       <div id="button-box" class="card">
-        <button class="button" (click)="WorkoutDurchfuehrenRedirect(this.selectedWorkout)">Workout starten</button>
+        <button class="button" (click)="WorkoutDurchfuehrenRedirect(this.selectedWorkout)">Workout machen</button>
         <button class="button" (click)="this.showWorkout = !this.showWorkout">Zurück</button>
       </div>
     </div>
