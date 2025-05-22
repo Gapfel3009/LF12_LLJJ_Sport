@@ -1,4 +1,4 @@
-<div class="page-container">
+<div class="page-container" *ngIf="!showGame">
   <div id="workout-header">
     <div id="detail-box" class="card">
       <h1>{{this.workout.title}}</h1>
@@ -24,10 +24,13 @@
           <span>{{ currentExercise.repetitions }} Wiederholungen</span>
         </div>
         <div class="set-done">
-          <input type="checkbox" [(ngModel)]="checkedSets[idx]"/>
+          <input type="checkbox" [(ngModel)]="checkedSets[idx]" (change)="CheckboxChange()"/>
         </div>
       </div>
     </div>
   </div>
+</div>
+<div *ngIf="showGame">
+  <app-flappy-bird></app-flappy-bird>
 </div>
 
