@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Workout} from '../../../models/workout';
 import {interval, Subscription} from 'rxjs';
@@ -6,6 +6,7 @@ import {WorkoutService} from '../../services/workout.service';
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {Exercise} from '../../../models/exercise';
 import {FormsModule} from '@angular/forms';
+import {GameComponent} from '../flappy-bird/flappy-bird.component';
 
 @Component({
   selector: 'app-workout-durchfuehren',
@@ -14,7 +15,8 @@ import {FormsModule} from '@angular/forms';
     NgForOf,
     NgOptimizedImage,
     NgClass,
-    FormsModule
+    FormsModule,
+    GameComponent
 
   ],
   templateUrl: './workout-durchfuehren.component.html',
@@ -32,6 +34,7 @@ export class WorkoutDurchfuehrenComponent {
   private timerSubscription: Subscription | null = null;
   currentIndex:number = 0;
   checkedSets:boolean[] = [];
+  showGame:boolean = false;
 
   constructor(private route: ActivatedRoute,private router:Router, service:WorkoutService) {
     this.route.queryParams.subscribe(params => {
@@ -40,7 +43,8 @@ export class WorkoutDurchfuehrenComponent {
     //service.getWorkoutById(this.workoutId).subscribe(
     //  {next: (workout) =>{this.workout = workout}}
     //)
-    this.checkedSets = Array(this.currentIndex).fill(false);
+    // @ts-ignore
+    this.checkedSets = Array(this.workout.exercises[this.currentIndex].sets).fill(false);
   };
 
   workoutStarten(){
@@ -78,11 +82,22 @@ export class WorkoutDurchfuehrenComponent {
     this.timerSubscription = null;
   }
 
+  CheckboxChange(){
+    //this.showGame = true
+    console.log(this.checkedSets);
+    if(this.checkedSets.every(value => value === true)){
+      this.nextExercise()
+      setTimeout(() => {
+        // @ts-ignore
+        this.checkedSets = Array(this.workout.exercises[this.currentIndex].sets).fill(false);
+      }, 10);
+    }
+  }
+
   get formattedTime(): string {
     const minutes = Math.floor(this.time / 60);
     const seconds = this.time % 60;
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   }
-
 
 }

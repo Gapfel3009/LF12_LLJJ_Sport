@@ -99,7 +99,7 @@ INSERT INTO exercise (
     xp_total, xp_chest, xp_back, xp_shoulders, xp_legs,
     xp_triceps, xp_abs, xp_glutes, xp_biceps, xp_flexibility
 )
-SELECT 'Push Ups', 'Klassische Liegestütze', NULL, FALSE,
+SELECT 'Push Ups', 'Klassische Liegestütze', 'https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif', FALSE,
        100, 50, 0, 20, 0, 10, 10, 0, 10, 0
 WHERE NOT EXISTS (SELECT 1 FROM exercise WHERE name = 'Push Ups');
 
@@ -108,7 +108,7 @@ INSERT INTO exercise (
     xp_total, xp_chest, xp_back, xp_shoulders, xp_legs,
     xp_triceps, xp_abs, xp_glutes, xp_biceps, xp_flexibility
 )
-SELECT 'Lunges', 'Ausfallschritte mit Körpergewicht', NULL, FALSE,
+SELECT 'Lunges', 'Ausfallschritte mit Körpergewicht', 'https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif', FALSE,
        120, 0, 10, 10, 60, 0, 10, 10, 0, 20
 WHERE NOT EXISTS (SELECT 1 FROM exercise WHERE name = 'Lunges');
 
