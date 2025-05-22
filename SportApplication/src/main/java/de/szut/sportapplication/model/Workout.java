@@ -25,13 +25,16 @@ public class Workout {
 
     private String title;
 
-    @Column(name = "userid")
-    private Integer userid;
+    @ManyToOne
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinColumn(name = "userid")
+    private AppUser userid;
 
     private String description;
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<WorkoutExercise> workoutExercises = new HashSet<>();
+
 
     public Long getWorkoutId() {
         return workoutID;
@@ -46,11 +49,11 @@ public class Workout {
         this.title = title;
     }
 
-    public Integer getUserid() {
+    public AppUser getUserid() {
         return userid;
     }
 
-    public void setUserid(Integer userid) {
+    public void setUserid(AppUser userid) {
         this.userid = userid;
     }
 

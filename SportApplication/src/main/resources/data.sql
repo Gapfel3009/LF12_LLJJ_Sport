@@ -28,7 +28,7 @@ CREATE TABLE if not exists workout
 (
     workout_id SERIAL PRIMARY KEY,
     title      VARCHAR(100),
-    userid    INTEGER,
+    userid    INTEGER REFERENCES app_user (user_id),
     description VARCHAR(255)
     );
 CREATE TABLE if not exists  exercise
@@ -48,13 +48,13 @@ CREATE TABLE if not exists  exercise
     xp_glutes      INTEGER,
     xp_biceps      INTEGER,
     xp_flexibility INTEGER
-    );
+    );/*
 CREATE TABLE if not exists user_workout
 (
     user_workout_id SERIAL PRIMARY KEY,
     user_id      INTEGER NOT NULL REFERENCES app_user (user_id),
     workout_id   INTEGER NOT NULL REFERENCES workout (workout_id)
-    );
+    );*/
 CREATE TABLE if not exists workout_exercise
 (
     workout_exercise_id SERIAL PRIMARY KEY,
@@ -67,15 +67,7 @@ CREATE TABLE if not exists workout_exercise
     );
 
 
--- Testdaten --
-INSERT INTO workout (title, userid, description)
-SELECT 'Ganzkörper Workout', 1, 'Einsteigerfreundliches Ganzkörpertraining'
-WHERE NOT EXISTS (SELECT 1 FROM workout);
 
-INSERT INTO workout (title, userid, description)
-SELECT 'Cardio Blast', 1, 'Intensives Ausdauertraining'
-WHERE NOT EXISTS (
-    SELECT 1 FROM workout WHERE title = 'Cardio Blast');
 --Avatar--
 INSERT INTO avatar (filename, full_path)
 SELECT 'avatar2.png', 'C:\Ordern\avatar2.png'
@@ -89,10 +81,20 @@ WHERE NOT EXISTS (
 INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total)
 SELECT 'user1@example.com', 'hash1', 'userAdmin', 1, 1, 250
 WHERE NOT EXISTS (SELECT 1 FROM app_user);
+
 INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total)
 SELECT 'testuser1@example.com', 'hash1', 'testuser', 1, 1, 250
 WHERE NOT EXISTS (
     SELECT 1 FROM app_user WHERE username = 'testuser');
+-- Testdaten --
+INSERT INTO workout (title, userid, description)
+SELECT 'Ganzkörper Workout', 1, 'Einsteigerfreundliches Ganzkörpertraining'
+WHERE NOT EXISTS (SELECT 1 FROM workout);
+
+INSERT INTO workout (title, userid, description)
+SELECT 'Cardio Blast', 1, 'Intensives Ausdauertraining'
+WHERE NOT EXISTS (
+    SELECT 1 FROM workout WHERE title = 'Cardio Blast');
 --Exercise--
 INSERT INTO exercise (
     name, description, gif_link, has_weights,
@@ -112,7 +114,7 @@ SELECT 'Lunges', 'Ausfallschritte mit Körpergewicht', NULL, FALSE,
        120, 0, 10, 10, 60, 0, 10, 10, 0, 20
 WHERE NOT EXISTS (SELECT 1 FROM exercise WHERE name = 'Lunges');
 
-INSERT INTO user_workout (user_id, workout_id)
+/*INSERT INTO user_workout (user_id, workout_id)
 SELECT 1, 1
 WHERE NOT EXISTS (
     SELECT 1 FROM user_workout WHERE user_id = 1 AND workout_id = 1
@@ -123,7 +125,7 @@ SELECT 1, 2
 WHERE NOT EXISTS (
     SELECT 1 FROM user_workout WHERE user_id = 1 AND workout_id = 2
 );
-
+*/
 INSERT INTO workout_exercise (
     workout_id, exercise_id, exercise_order, number_of_sets, number_of_reps, weight_amount
 )

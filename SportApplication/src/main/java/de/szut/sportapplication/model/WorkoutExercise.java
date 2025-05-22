@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@IdClass(WorkoutExerciseId.class)
 public class WorkoutExercise {
     @Id
     @JoinColumn(name = "workout_exercise_id", insertable = false, updatable = false)

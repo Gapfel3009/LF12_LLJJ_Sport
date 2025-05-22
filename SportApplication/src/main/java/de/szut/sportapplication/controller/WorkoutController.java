@@ -1,8 +1,6 @@
 package de.szut.sportapplication.controller;
 
-import de.szut.sportapplication.model.UserWorkout;
 import de.szut.sportapplication.model.Workout;
-import de.szut.sportapplication.repository.UserWorkoutRepository;
 import de.szut.sportapplication.repository.WorkoutRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -20,8 +17,7 @@ public class WorkoutController{
 
     @Autowired
     private WorkoutRepository workoutRepository;
-    @Autowired
-    private UserWorkoutRepository userWorkoutRepository;
+
 
     @GetMapping
     public List<Workout> getAllWorkouts() {
@@ -39,7 +35,7 @@ public class WorkoutController{
         return workoutRepository.findById(id)
                 .map(existingWorkout -> {
                     existingWorkout.setTitle(updatedWorkout.getTitle());
-                    existingWorkout.setUserid(updatedWorkout.getUserid());
+                    //existingWorkout.setUserid(updatedWorkout.getUserid());
                     existingWorkout.setDescription(updatedWorkout.getDescription());
                     Workout saved = workoutRepository.save(existingWorkout);
                     return ResponseEntity.ok(saved);
@@ -64,11 +60,13 @@ public class WorkoutController{
                 .orElse(ResponseEntity.notFound().build());
     }
     @Transactional
-    @GetMapping("/user/{userId}")
-    public List<Workout> getWorkoutsByUserId(@PathVariable Integer userId) {
-        List<UserWorkout> userWorkouts = userWorkoutRepository.findByAppUser_userID(userId);
-        return userWorkouts.stream()
-                .map(UserWorkout::getWorkout)
-                .collect(Collectors.toList());
+    @GetMapping("/byUser/{userId}")
+    public List<Workout> getWorkoutsByUser(@PathVariable int userId) {
+        return workoutRepository.findByUserid_UserID(userId);
+    }
+    @Transactional
+    @GetMapping("/standard")
+    public List<Workout> getStandardWorkouts() {
+        return workoutRepository.findByUserid_UserID(1);
     }
 }
