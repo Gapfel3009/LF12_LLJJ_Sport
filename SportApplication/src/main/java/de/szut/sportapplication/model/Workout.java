@@ -1,7 +1,11 @@
 package de.szut.sportapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 @NoArgsConstructor
@@ -11,6 +15,7 @@ import lombok.*;
 //@Getter
 //@Setter
 @Data
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Workout {
 
     @Id
@@ -20,9 +25,14 @@ public class Workout {
 
     private String title;
 
-    private String creator;
+    @Column(name = "userid")
+    private Integer userid;
 
     private String description;
+
+    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<WorkoutExercise> workoutExercises = new HashSet<>();
+
     public Long getWorkoutId() {
         return workoutID;
     }
@@ -36,12 +46,12 @@ public class Workout {
         this.title = title;
     }
 
-    public String getCreator() {
-        return creator;
+    public Integer getUserid() {
+        return userid;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
     public String getDescription() {

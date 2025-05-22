@@ -15,9 +15,11 @@ public class WorkoutExercise {
     private int workoutExerciseId;
 
     @ManyToOne
+    @JoinColumn(name = "workout_id")
     private Workout workoutID;
 
     @ManyToOne
+    @JoinColumn(name = "exercise_id")
     private Exercise exerciseID;
 
     private Integer sequence;

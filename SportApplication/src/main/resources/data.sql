@@ -28,7 +28,7 @@ CREATE TABLE if not exists workout
 (
     workout_id SERIAL PRIMARY KEY,
     title      VARCHAR(100),
-    creator    VARCHAR(100),
+    userid    INTEGER,
     description VARCHAR(255)
     );
 CREATE TABLE if not exists  exercise
@@ -68,12 +68,12 @@ CREATE TABLE if not exists workout_exercise
 
 
 -- Testdaten --
-INSERT INTO workout (title, creator, description)
-SELECT 'Ganzkörper Workout', 'System', 'Einsteigerfreundliches Ganzkörpertraining'
+INSERT INTO workout (title, userid, description)
+SELECT 'Ganzkörper Workout', 1, 'Einsteigerfreundliches Ganzkörpertraining'
 WHERE NOT EXISTS (SELECT 1 FROM workout);
 
-INSERT INTO workout (title, creator, description)
-SELECT 'Cardio Blast', 'System', 'Intensives Ausdauertraining'
+INSERT INTO workout (title, userid, description)
+SELECT 'Cardio Blast', 1, 'Intensives Ausdauertraining'
 WHERE NOT EXISTS (
     SELECT 1 FROM workout WHERE title = 'Cardio Blast');
 --Avatar--
@@ -89,6 +89,10 @@ WHERE NOT EXISTS (
 INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total)
 SELECT 'user1@example.com', 'hash1', 'userAdmin', 1, 1, 250
 WHERE NOT EXISTS (SELECT 1 FROM app_user);
+INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total)
+SELECT 'testuser1@example.com', 'hash1', 'testuser', 1, 1, 250
+WHERE NOT EXISTS (
+    SELECT 1 FROM app_user WHERE username = 'testuser');
 --Exercise--
 INSERT INTO exercise (
     name, description, gif_link, has_weights,
