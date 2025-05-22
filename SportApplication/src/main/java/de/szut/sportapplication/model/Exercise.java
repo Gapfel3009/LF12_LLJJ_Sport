@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,8 +32,10 @@ public class Exercise {
     private Integer xpGlutes = 0;
     private Integer xpBiceps = 0;
     private Integer xpFlexibility = 0;
-    @OneToMany(mappedBy = "exercise")
-    private Set<WorkoutExercise> workoutExercises = new HashSet<>();
+
+    @ManyToMany(mappedBy = "exercises")
+    private List<Workout> workouts;
+
     public String getName() {
         return name;
     }

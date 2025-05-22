@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -68,5 +69,12 @@ public class WorkoutController{
     @GetMapping("/standard")
     public List<Workout> getStandardWorkouts() {
         return workoutRepository.findByUserid_UserID(1);
+    }
+
+    @GetMapping("/exercise/{id}")
+    public ResponseEntity<Workout> getWorkoutWithExercises(@PathVariable long id) {
+        Optional<Workout> workout = workoutRepository.findByIdWithExercises(id);
+        return workout.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

@@ -95,6 +95,10 @@ INSERT INTO workout (title, userid, description)
 SELECT 'Cardio Blast', 1, 'Intensives Ausdauertraining'
 WHERE NOT EXISTS (
     SELECT 1 FROM workout WHERE title = 'Cardio Blast');
+INSERT INTO workout (title, userid, description)
+SELECT 'DiscoPumper', 2, 'Intensives Discotraining'
+WHERE NOT EXISTS (
+    SELECT 1 FROM workout WHERE title = 'DiscoPumper');
 --Exercise--
 INSERT INTO exercise (
     name, description, gif_link, has_weights,
@@ -113,6 +117,22 @@ INSERT INTO exercise (
 SELECT 'Lunges', 'Ausfallschritte mit Körpergewicht', 'https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif', FALSE,
        120, 0, 10, 10, 60, 0, 10, 10, 0, 20
 WHERE NOT EXISTS (SELECT 1 FROM exercise WHERE name = 'Lunges');
+INSERT INTO exercise (
+    name, description, gif_link, has_weights,
+    xp_total, xp_chest, xp_back, xp_shoulders, xp_legs,
+    xp_triceps, xp_abs, xp_glutes, xp_biceps, xp_flexibility
+)
+SELECT 'Bankdrücken', 'Dullieübung', 'https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif', FALSE,
+       120, 0, 10, 10, 60, 0, 10, 10, 0, 20
+WHERE NOT EXISTS (SELECT 1 FROM exercise WHERE name = 'Bankdrücken');
+INSERT INTO exercise (
+    name, description, gif_link, has_weights,
+    xp_total, xp_chest, xp_back, xp_shoulders, xp_legs,
+    xp_triceps, xp_abs, xp_glutes, xp_biceps, xp_flexibility
+)
+SELECT 'Curls', 'Für die Discoboyz', 'https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif', FALSE,
+       120, 0, 10, 10, 60, 0, 10, 10, 0, 20
+WHERE NOT EXISTS (SELECT 1 FROM exercise WHERE name = 'Curls');
 
 /*INSERT INTO user_workout (user_id, workout_id)
 SELECT 1, 1
@@ -140,4 +160,32 @@ INSERT INTO workout_exercise (
 SELECT 2, 2, 1, 4, 12, NULL
 WHERE NOT EXISTS (
     SELECT 1 FROM workout_exercise WHERE workout_id = 2 AND exercise_id = 2
+);
+INSERT INTO workout_exercise (
+    workout_id, exercise_id, exercise_order, number_of_sets, number_of_reps, weight_amount
+)
+SELECT 3, 2, 1, 4, 12, NULL
+WHERE NOT EXISTS (
+    SELECT 1 FROM workout_exercise WHERE workout_id = 3 AND exercise_id = 2
+);
+INSERT INTO workout_exercise (
+    workout_id, exercise_id, exercise_order, number_of_sets, number_of_reps, weight_amount
+)
+SELECT 3, 1, 2, 4, 12, NULL
+WHERE NOT EXISTS (
+    SELECT 1 FROM workout_exercise WHERE workout_id = 3 AND exercise_id = 1
+);
+INSERT INTO workout_exercise (
+    workout_id, exercise_id, exercise_order, number_of_sets, number_of_reps, weight_amount
+)
+SELECT 3, 3, 3, 4, 12, NULL
+WHERE NOT EXISTS (
+    SELECT 1 FROM workout_exercise WHERE workout_id = 3 AND exercise_id = 3
+);
+INSERT INTO workout_exercise (
+    workout_id, exercise_id, exercise_order, number_of_sets, number_of_reps, weight_amount
+)
+SELECT 3, 4, 4, 4, 12, NULL
+WHERE NOT EXISTS (
+    SELECT 1 FROM workout_exercise WHERE workout_id = 3 AND exercise_id = 4
 );

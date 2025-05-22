@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -32,9 +33,16 @@ public class Workout {
 
     private String description;
 
-    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<WorkoutExercise> workoutExercises = new HashSet<>();
+    //@OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private Set<WorkoutExercise> workoutExercises = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "workout_exercise",
+            joinColumns = @JoinColumn(name = "workout_id"),
+            inverseJoinColumns = @JoinColumn(name = "exercise_id")
+    )
+    private List<Exercise> exercises;
 
     public Long getWorkoutId() {
         return workoutID;
