@@ -14,18 +14,19 @@ public class Avatar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "avatar_id")
-    private Long avatarID;
+    private Integer avatarID;
+
     @Column(name = "filename")
     private String fileName;
 
     @Column(name = "full_path")
     private String fullPath;
 
-    public Long getAvatarId() {
+    public Integer getAvatarId() {
         return this.avatarID;
     }
 
-    public void setAvatarId(Long avatarId) {
+    public void setAvatarId(Integer avatarId) {
         this.avatarID = avatarId;
     }
 

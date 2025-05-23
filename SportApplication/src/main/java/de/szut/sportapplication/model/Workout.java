@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class Workout {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "workout_id")
-    private Long workoutID;
+    private Integer workoutID;
 
     private String title;
 
@@ -33,21 +34,16 @@ public class Workout {
 
     private String description;
 
-    //@OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
-    //private Set<WorkoutExercise> workoutExercises = new HashSet<>();
+    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WorkoutExercise> workoutExercises = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "workout_exercise",
-            joinColumns = @JoinColumn(name = "workout_id"),
-            inverseJoinColumns = @JoinColumn(name = "exercise_id")
-    )
-    private List<Exercise> exercises;
-
-    public Long getWorkoutId() {
+    public Integer getWorkoutId() {
         return workoutID;
     }
 
+    public void setWorkoutId(Integer workoutID) {
+        this.workoutID = workoutID;
+    }
 
     public String getTitle() {
         return title;

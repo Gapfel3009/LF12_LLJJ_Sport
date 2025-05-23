@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -19,7 +18,8 @@ public class WorkoutController{
     @Autowired
     private WorkoutRepository workoutRepository;
 
-
+//Todo: findall brauchen wir nicht gehen über userid und standard
+// getestet: post, getAllWorkouts, put, delete, getWorkoutById, getStandardWorkouts,getWorkoutsByUser
     @GetMapping
     public List<Workout> getAllWorkouts() {
         return workoutRepository.findAll();
@@ -32,7 +32,7 @@ public class WorkoutController{
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Workout> updateWorkout(@PathVariable Long id, @RequestBody Workout updatedWorkout) {
+    public ResponseEntity<Workout> updateWorkout(@PathVariable Integer id, @RequestBody Workout updatedWorkout) {
         return workoutRepository.findById(id)
                 .map(existingWorkout -> {
                     existingWorkout.setTitle(updatedWorkout.getTitle());
@@ -45,7 +45,7 @@ public class WorkoutController{
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteWorkout(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteWorkout(@PathVariable Integer id) {
         if (workoutRepository.existsById(id)) {
             workoutRepository.deleteById(id);
             return ResponseEntity.noContent().build();
@@ -55,26 +55,22 @@ public class WorkoutController{
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Workout> getWorkoutById(@PathVariable Long id) {
+    public ResponseEntity<Workout> getWorkoutById(@PathVariable Integer id) {
         return workoutRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
     @Transactional
     @GetMapping("/byUser/{userId}")
     public List<Workout> getWorkoutsByUser(@PathVariable int userId) {
         return workoutRepository.findByUserid_UserID(userId);
     }
+
     @Transactional
     @GetMapping("/standard")
     public List<Workout> getStandardWorkouts() {
         return workoutRepository.findByUserid_UserID(1);
     }
 
-    @GetMapping("/exercise/{id}")
-    public ResponseEntity<Workout> getWorkoutWithExercises(@PathVariable long id) {
-        Optional<Workout> workout = workoutRepository.findByIdWithExercises(id);
-        return workout.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
 }

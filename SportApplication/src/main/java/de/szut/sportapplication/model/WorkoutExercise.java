@@ -8,31 +8,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkoutExercise {
+
     @Id
     @JoinColumn(name = "workout_exercise_id", insertable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int workoutExerciseId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer workoutExerciseId;
 
     @ManyToOne
     @JoinColumn(name = "workout_id")
-    private Workout workoutID;
-
-    @ManyToOne
-    @JoinColumn(name = "exercise_id")
-    private Exercise exerciseID;
-
-    //private Integer sequence;
-    private Integer number_of_sets;
-    private Integer number_of_reps;
-
-
-    @ManyToOne
-    @JoinColumn(name = "workout_ID", insertable = false, updatable = false)
     private Workout workout;
 
     @ManyToOne
-    @JoinColumn(name = "exercise_ID", insertable = false, updatable = false)
+    @JoinColumn(name = "exercise_id")
     private Exercise exercise;
+    @Column(name = "exercise_order")
+    private Integer exerciseOrder;
+    @Column(name = "number_of_sets")
+    private Integer numSets;
+    @Column(name = "number_of_reps")
+    private Integer numReps;
+    @Column(name = "weight_amount")
+    private Integer weightAmount;
 
     public int getWorkoutExerciseId() {
         return workoutExerciseId;
@@ -43,58 +39,50 @@ public class WorkoutExercise {
     }
 
     public Workout getWorkoutID() {
-        return workoutID;
-    }
-
-    public void setWorkoutID(Workout workoutID) {
-        this.workoutID = workoutID;
-    }
-
-    public Exercise getExerciseID() {
-        return exerciseID;
-    }
-
-    public void setExerciseID(Exercise exerciseID) {
-        this.exerciseID = exerciseID;
-    }
-
-//    public Integer getSequence() {
-//        return sequence;
-//    }
-//
-//    public void setSequence(Integer sequence) {
-//        this.sequence = sequence;
-//    }
-
-    public Integer getNumSets() {
-        return number_of_sets;
-    }
-
-    public void setNumSets(Integer numSets) {
-        this.number_of_sets = numSets;
-    }
-
-    public Integer getNumReps() {
-        return number_of_reps;
-    }
-
-    public void setNumReps(Integer numReps) {
-        this.number_of_reps = numReps;
-    }
-
-    public Workout getWorkout() {
         return workout;
     }
 
-    public void setWorkout(Workout workout) {
+    public void setWorkoutID(Workout workout) {
         this.workout = workout;
     }
 
-    public Exercise getExercise() {
+    public Exercise getExerciseID() {
         return exercise;
     }
 
-    public void setExercise(Exercise exercise) {
+    public void setExerciseID(Exercise exercise) {
         this.exercise = exercise;
+    }
+
+    public Integer getExerciseOrder() {
+        return exerciseOrder;
+    }
+
+    public void setExerciseOrder(Integer exerciseOrder) {
+        this.exerciseOrder = exerciseOrder;
+    }
+
+    public Integer getNumSets() {
+        return numSets;
+    }
+
+    public void setNumSets(Integer numSets) {
+        this.numSets = numSets;
+    }
+
+    public Integer getNumReps() {
+        return numReps;
+    }
+
+    public void setNumReps(Integer numReps) {
+        this.numReps = numReps;
+    }
+
+    public Integer getWeightAmount() {
+        return weightAmount;
+    }
+
+    public void setWeightAmount(Integer weightAmount) {
+        this.weightAmount = weightAmount;
     }
 }

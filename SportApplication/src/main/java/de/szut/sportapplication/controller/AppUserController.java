@@ -12,8 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/appuser")
+@RequestMapping("/api/appUser")
 public class AppUserController {
+    //getestet: getUser, post, put - kein delete?
     @Autowired
     private UsersRepository usersRepository;
 
@@ -46,6 +47,7 @@ public class AppUserController {
                     existingUser.setXpBiceps(updatedUser.getXpBiceps());
                     existingUser.setXpFlexibility(updatedUser.getXpFlexibility());
                     existingUser.setAvatarID(updatedUser.getAvatarID());
+                   // existingUser.setAvatar(updatedUser.getAvatar());
                     AppUser saved = usersRepository.save(existingUser);
                     return ResponseEntity.ok(saved);
                 })

@@ -1,9 +1,14 @@
 package de.szut.sportapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @Entity
 @Data
@@ -15,19 +20,16 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userID;
+    private Integer userID;
 
     @Column(name = "email_address",nullable = false, unique = true)
     private String email;
 
     @Column(name = "password_hash",nullable = false)
     private String passwordHash;
-
+    @Column(name = "last_workout")
+    private Date lastWorkout;
     private String username;
-
- //   @Column(name = "avatar_id")
-  //  private Integer avatarId;
-
     private Integer streak;
 
     @Column(name = "xp_total")
@@ -60,12 +62,24 @@ public class AppUser {
     @Column(name = "xp_flexibility")
     private Integer xpFlexibility = 0;
 
-    @ManyToOne
-  @JoinColumn(name = "avatar_id")
-    private Avatar avatarID;
+    @Column(name = "avatar_id")
+    private Integer avatarID;
 
-    public int getUserID() {
+    //nur zum lesen - für alles andere wird die avatarid genommen
+    //NICHT aus json einlesen
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "avatar_id", insertable = false, updatable = false)
+    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    //@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private Avatar avatar;
+
+    public Integer getUserID() {
         return userID;
+    }
+
+    public void setUserID(Integer userID) {
+        this.userID = userID;
     }
 
     public String getEmail() {
@@ -180,11 +194,19 @@ public class AppUser {
         this.xpFlexibility = xpFlexibility;
     }
 
-    public Avatar getAvatarID() {
+    public Integer getAvatarID() {
         return avatarID;
     }
 
-    public void setAvatarID(Avatar avatarID) {
+  /*  public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }*/
+
+    public void setAvatarID(Integer avatarID) {
         this.avatarID = avatarID;
     }
 }

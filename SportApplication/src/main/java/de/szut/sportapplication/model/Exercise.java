@@ -5,9 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -18,10 +17,15 @@ public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "exercise_id")
-    private Long exerciseID;
+    private Integer exerciseID;
 
     private String name;
-
+    private String description;
+    //TODO:gif und has weight noch hinzufügen/sowie spaltenname -- funktioniert in postman aber bis jetzt auch so
+    // create und update?
+    @Column(name = "has_weights")
+    private boolean hasWeights;
+    private String gifLink;
     private Integer xpTotal = 0;
     private Integer xpChest = 0;
     private Integer xpBack = 0;
@@ -33,8 +37,36 @@ public class Exercise {
     private Integer xpBiceps = 0;
     private Integer xpFlexibility = 0;
 
-    @ManyToMany(mappedBy = "exercises")
-    private List<Workout> workouts;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isHasWeight() {
+        return hasWeights;
+    }
+
+    public void setHasWeight(boolean hasWeight) {
+        this.hasWeights = hasWeight;
+    }
+
+    public String getGifLink() {
+        return gifLink;
+    }
+
+    public void setGifLink(String gifLink) {
+        this.gifLink = gifLink;
+    }
+
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WorkoutExercise> workoutExercises = new ArrayList<>();
+
+    public Integer getExerciseID() {return exerciseID;}
+
+    public void setExerciseID (Integer exerciseID) {this.exerciseID = exerciseID;}
 
     public String getName() {
         return name;
@@ -66,6 +98,6 @@ public class Exercise {
     public void setXpBiceps(Integer xpBiceps) {this.xpBiceps = xpBiceps;}
     public Integer getXpFlexibility() {return xpFlexibility;}
     public void setXpFlexibility(Integer xpFlexibility) {this.xpFlexibility = xpFlexibility;}
-    public Long getExerciseID() {return exerciseID;}
+
 }
 

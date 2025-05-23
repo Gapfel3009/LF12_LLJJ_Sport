@@ -10,15 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface WorkoutRepository extends JpaRepository<Workout, Long> {
+public interface WorkoutRepository extends JpaRepository<Workout, Integer> {
     List<Workout> findByUserid_UserID(Integer userId);
 
-    @Query("SELECT w FROM Workout w LEFT JOIN FETCH w.exercises WHERE w.workoutID = :id")
-    Optional<Workout> findByIdWithExercises(@Param("id") long id);
-
-    /* @Query("SELECT w FROM Workout as w " +
-            "JOIN FETCH w.workoutExercises we " +
-            "JOIN FETCH we.exercise " +
-            "WHERE w.workout_id = :id")
-    Optional<Workout> findByIdWithExercisesDetailed(@Param("id") Long id);*/
 }
