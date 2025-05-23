@@ -21,17 +21,17 @@ public class WorkoutExercise {
     @JoinColumn(name = "exercise_id")
     private Exercise exerciseID;
 
-    private Integer sequence;
-    private Integer numSets;
-    private Integer numReps;
+    //private Integer sequence;
+    private Integer number_of_sets;
+    private Integer number_of_reps;
 
 
     @ManyToOne
-    @JoinColumn(name = "workoutID", insertable = false, updatable = false)
+    @JoinColumn(name = "workout_ID", insertable = false, updatable = false)
     private Workout workout;
 
     @ManyToOne
-    @JoinColumn(name = "exerciseID", insertable = false, updatable = false)
+    @JoinColumn(name = "exercise_ID", insertable = false, updatable = false)
     private Exercise exercise;
 
     public int getWorkoutExerciseId() {
@@ -58,28 +58,28 @@ public class WorkoutExercise {
         this.exerciseID = exerciseID;
     }
 
-    public Integer getSequence() {
-        return sequence;
-    }
-
-    public void setSequence(Integer sequence) {
-        this.sequence = sequence;
-    }
+//    public Integer getSequence() {
+//        return sequence;
+//    }
+//
+//    public void setSequence(Integer sequence) {
+//        this.sequence = sequence;
+//    }
 
     public Integer getNumSets() {
-        return numSets;
+        return number_of_sets;
     }
 
     public void setNumSets(Integer numSets) {
-        this.numSets = numSets;
+        this.number_of_sets = numSets;
     }
 
     public Integer getNumReps() {
-        return numReps;
+        return number_of_reps;
     }
 
     public void setNumReps(Integer numReps) {
-        this.numReps = numReps;
+        this.number_of_reps = numReps;
     }
 
     public Workout getWorkout() {
