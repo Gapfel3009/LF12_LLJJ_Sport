@@ -6,7 +6,6 @@ import {WorkoutService} from '../../services/workout.service';
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {Exercise} from '../../../models/exercise';
 import {FormsModule} from '@angular/forms';
-import {GameComponent} from '../flappy-bird/flappy-bird.component';
 
 @Component({
   selector: 'app-workout-durchfuehren',
@@ -16,8 +15,6 @@ import {GameComponent} from '../flappy-bird/flappy-bird.component';
     NgOptimizedImage,
     NgClass,
     FormsModule,
-    GameComponent
-
   ],
   templateUrl: './workout-durchfuehren.component.html',
   styleUrl: './workout-durchfuehren.component.css'
