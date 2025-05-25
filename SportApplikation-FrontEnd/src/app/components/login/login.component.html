@@ -22,8 +22,9 @@
             <label class="form-label">Passwort</label>
             <input type="password" class="form-control" placeholder="Passwort">
           </div>
+          <p *ngIf="showWrongPassword" style="color: red; font-size:12px">Es existiert kein Account mit diesen Logindaten</p>
           <div style="margin-bottom: 5%"  class="hover-underline d-block text-dark ">Passwort vergessen?</div>
-          <button type="submit" style="background-color: black; color: white" class="btn btn-login w-100" (click)="Login()" >Anmelden</button>
+          <button type="submit" style="background-color: black; color: white" class="btn btn-login w-100" (click)="Login($event)" >Anmelden</button>
         </form>
       </div>
 

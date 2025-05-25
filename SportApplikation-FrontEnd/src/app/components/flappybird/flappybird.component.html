@@ -1,0 +1,9 @@
+<div class="game-container">
+  <canvas #canvas width="400" height="600"></canvas>
+
+  <!-- Scores unter dem Canvas -->
+  <div class="score-section" *ngIf="gameStarted && !gameOver">
+    <p>Score: {{ score }}</p>
+    <p>Highscore: {{ highScore }}</p>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import {WorkoutService} from '../../services/workout.service';
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {Exercise} from '../../../models/exercise';
 import {FormsModule} from '@angular/forms';
+import {FlappyBirdComponent} from '../flappybird/flappybird.component';
 
 @Component({
   selector: 'app-workout-durchfuehren',
@@ -15,6 +16,7 @@ import {FormsModule} from '@angular/forms';
     NgOptimizedImage,
     NgClass,
     FormsModule,
+    FlappyBirdComponent,
   ],
   templateUrl: './workout-durchfuehren.component.html',
   styleUrl: './workout-durchfuehren.component.css'
@@ -32,6 +34,9 @@ export class WorkoutDurchfuehrenComponent {
   currentIndex:number = 0;
   checkedSets:boolean[] = [];
   showGame:boolean = false;
+  GamingTimerSecondsLeft: number = 90;
+  GamingTimerEnded: boolean = false;
+  GamingTimer: any;
 
   constructor(private route: ActivatedRoute,private router:Router, service:WorkoutService) {
     this.route.queryParams.subscribe(params => {
@@ -84,10 +89,12 @@ export class WorkoutDurchfuehrenComponent {
     console.log(this.checkedSets);
     if(this.checkedSets.every(value => value === true)){
       this.nextExercise()
+      this.showGame = true;
       setTimeout(() => {
         // @ts-ignore
         this.checkedSets = Array(this.workout.exercises[this.currentIndex].sets).fill(false);
       }, 10);
+      this.GameTimer()
     }
   }
 
@@ -95,6 +102,19 @@ export class WorkoutDurchfuehrenComponent {
     const minutes = Math.floor(this.time / 60);
     const seconds = this.time % 60;
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  }
+
+  GameTimer(){
+    this.GamingTimerEnded = false;
+    this.GamingTimerSecondsLeft = 90;
+
+    this.GamingTimer = setInterval(() => {
+      this.GamingTimerSecondsLeft--;
+
+      if (this.GamingTimerSecondsLeft <= 0) {
+        this.showGame = false;
+      }
+    }, 1000);
   }
 
 }

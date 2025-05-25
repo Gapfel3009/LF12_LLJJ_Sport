@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 import {AppUser} from '../../../models/AppUser';
 import {UserService} from '../../services/user.service';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-login',
   imports: [
+    NgIf
   ],
   templateUrl: './login.component.html',
   standalone: true,
@@ -15,19 +17,17 @@ export class LoginComponent {
   showWrongPassword = false;
   constructor(private router: Router, private userService: UserService) { }
 
-  Login(){
+  Login(event:Event){
+    event.preventDefault();
     if(this.userService.authenticateUser("test@mail","password")){
-      console.log("Authenticated")
-      console.log(this.userService.isAuthenticated())
       this.LoginRedirect()
     }else{
+
       this.showWrongPassword = true;
-      console.log("Looser")
+      console.log(this.showWrongPassword)
     }
   }
   LoginRedirect(){
-    console.log("vor Routing")
     this.router.navigate(['/Mainsite']);
-    console.log("nach Routing")
   }
 }
