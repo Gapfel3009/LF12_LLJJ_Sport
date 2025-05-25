@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
+import {AppUser} from '../../../models/AppUser';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +12,22 @@ import {Router} from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  constructor(private route: Router){}
+  showWrongPassword = false;
+  constructor(private router: Router, private userService: UserService) { }
+
+  Login(){
+    if(this.userService.authenticateUser("test@mail","password")){
+      console.log("Authenticated")
+      console.log(this.userService.isAuthenticated())
+      this.LoginRedirect()
+    }else{
+      this.showWrongPassword = true;
+      console.log("Looser")
+    }
+  }
   LoginRedirect(){
-    this.route.navigate(['/Mainsite']);
+    console.log("vor Routing")
+    this.router.navigate(['/Mainsite']);
+    console.log("nach Routing")
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ import {NgOptimizedImage} from '@angular/common';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  constructor(private router: Router){}
+  constructor(private router: Router, private userService: UserService) { }
 
   MainRedirect(){
     this.router.navigate(['/Mainsite']);
@@ -23,4 +24,9 @@ export class HeaderComponent {
     this.router.navigate(['/Workout-list'])
   }
 
+  UserLogout(){
+    console.log('User logged out');
+    this.router.navigate(['/']);
+    this.userService.logout();
+  }
 }

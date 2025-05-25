@@ -3,7 +3,7 @@
     <div class="standard-workouts-box">
       <h4>Standard Workouts</h4>
       <div class="card-box">
-        <div *ngFor="let workout of workouts" class="card big-card hover-true" (click)="ShowWorkout(workout)">
+        <div *ngFor="let workout of standardWorkouts" class="card big-card hover-true" (click)="ShowWorkout(workout)">
           <h1>{{workout.title}}</h1>
           <p>{{workout.description}}</p>
           <button class="button" (click)="WorkoutDurchfuehrenRedirect(workout); $event.stopPropagation()">Workout machen</button>
@@ -17,7 +17,7 @@
         <div class="card big-card hover-true" (click)="WorkoutErstellenRedirect()">
           <h1>Workout erstellen</h1>
         </div>
-        <div *ngFor="let workout of workouts" class="card big-card hover-true" (click)="ShowWorkout(workout)">
+        <div *ngFor="let workout of userWorkouts" class="card big-card hover-true" (click)="ShowWorkout(workout)">
           <h1>{{workout.title}}</h1>
           <p>{{workout.description}}</p>
           <button class="button" (click)="WorkoutDurchfuehrenRedirect(workout); $event.stopPropagation()">Workout machen</button>
@@ -25,29 +25,29 @@
       </div>
     </div>
   </div>
-  <div *ngIf="showWorkout">
+  <div *ngIf="showWorkout && selectedWorkout">
     <div id="workout-header">
       <div id="detail-box" class="card">
-          <h1>{{this.selectedWorkout.title}}</h1>
-          <p>{{this.selectedWorkout.description}}</p>
+          <h1>{{this.selectedWorkout?.title}}</h1>
+          <p>{{this.selectedWorkout?.description}}</p>
       </div>
       <div id="button-box" class="card">
-        <button class="button" (click)="WorkoutDurchfuehrenRedirect(this.selectedWorkout)">Workout machen</button>
+        <button class="button" [disabled]="!selectedWorkout" (click)="WorkoutDurchfuehrenRedirect(selectedWorkout)">Workout machen</button>
         <button class="button" (click)="this.showWorkout = !this.showWorkout">Zurück</button>
       </div>
     </div>
     <div id="workout-body">
-      <div id="exercise-box" *ngFor="let exercise of this.selectedWorkout.exercises">
-        <h3>{{exercise.Name}}</h3>
+      <div id="exercise-box" *ngFor="let exercise of this.selectedWorkout?.exercises">
+        <h3>{{exercise?.Name}}</h3>
         <div style="display: flex; gap:10px">
-          <p align="justify" style="min-width: 522px">{{exercise.Description}}</p>
-          <img ngSrc="{{exercise.gifLink}}" alt="Gif" width="200" height="200">
+          <p align="justify" style="min-width: 522px">{{exercise?.Description}}</p>
+          <img ngSrc="{{exercise?.gifLink}}" alt="Gif" width="200" height="200">
         </div>
         <div class="set-row" *ngFor="let i of getCounter(exercise.sets); let idx = index">
           <div class="set-number">{{ idx + 1 }}</div>
           <div class="set-info">
-            <span *ngIf="exercise.hasWeight">{{ exercise.weight }} kg x </span>
-            <span>{{ exercise.repetitions }} Wiederholungen</span>
+            <span *ngIf="exercise?.hasWeight">{{ exercise?.weight }} kg x </span>
+            <span>{{ exercise?.repetitions }} Wiederholungen</span>
           </div>
         </div>
       </div>
