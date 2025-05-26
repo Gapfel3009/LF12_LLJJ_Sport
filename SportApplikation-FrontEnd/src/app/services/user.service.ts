@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import {AppUser} from '../../models/AppUser';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Workout} from '../../models/workout';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +10,9 @@ import {AppUser} from '../../models/AppUser';
 export class UserService {
   private appUser:AppUser | null = null;
 
-  constructor() { }
+  private ApiUrl:string = "http://localhost:8081";
+  constructor(private http: HttpClient) { }
+
 
   authenticateUser(email: string, passwordHash: string):boolean {
     //TODO: Enpunkt einbinden, sobald existiert
@@ -15,6 +20,8 @@ export class UserService {
     this.appUser = new AppUser(1,"test@mail","password", new Date(Date.now()),"Bizeps Brecher Bernd", 3,3,3,3,3,3,3,3,3,3,3)
     return true;
   }
+
+
 
   getCurrentUser(): AppUser | null {
     return this.appUser;

@@ -33,7 +33,9 @@ export class WorkoutDurchfuehrenComponent {
   private timerSubscription: Subscription | null = null;
   currentIndex:number = 0;
   checkedSets:boolean[] = [];
+  showAbbrechKontext:boolean = false;
   showGame:boolean = false;
+  showWorkoutFinished:boolean = false;
   GamingTimerSecondsLeft: number = 90;
   GamingTimerEnded: boolean = false;
   GamingTimer: any;
@@ -61,10 +63,13 @@ export class WorkoutDurchfuehrenComponent {
   }
 
 
-  nextExercise(){
+  nextExercise():boolean {
     // @ts-ignore
     if(this.currentIndex < this.workout.exercises.length - 1){
       this.currentIndex++;
+      return true;
+    }else{
+      return false;
     }
   }
   getCounter(n: number): any[] {
@@ -85,17 +90,20 @@ export class WorkoutDurchfuehrenComponent {
   }
 
   CheckboxChange(){
-    //this.showGame = true
-    console.log(this.checkedSets);
     if(this.checkedSets.every(value => value === true)){
-      this.nextExercise()
-      this.showGame = true;
-      setTimeout(() => {
-        // @ts-ignore
-        this.checkedSets = Array(this.workout.exercises[this.currentIndex].sets).fill(false);
-      }, 10);
-      this.GameTimer()
+      if(this.nextExercise()){
+        //this.showGame = true;
+        //this.GameTimer()
+        setTimeout(() => {
+          // @ts-ignore
+          this.checkedSets = Array(this.workout.exercises[this.currentIndex].sets).fill(false);
+        }, 10);
+      }else{
+        this.showWorkoutFinished = true;
+      }
     }
+    //this.showGame = true
+    //this.GameTimer()
   }
 
   get formattedTime(): string {
@@ -117,4 +125,11 @@ export class WorkoutDurchfuehrenComponent {
     }, 1000);
   }
 
+  WorkoutAbbrechen(){
+    this.showAbbrechKontext = true;
+  }
+
+  MainRedirect(){
+    this.router.navigate(['/Mainsite']);
+  }
 }

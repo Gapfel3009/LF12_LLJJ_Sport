@@ -32,6 +32,7 @@ export class WorkoutsComponent implements OnInit {
   ngOnInit(){
     this.workoutService.getAllStandardWorkouts().subscribe({
       next: (data)=>{
+        console.log(data);
         this.standardWorkouts = data
       }
     });
@@ -56,8 +57,7 @@ export class WorkoutsComponent implements OnInit {
   }
 
   ShowWorkout(workout:Workout){
-    //TODO: Wieder reinpacken, sobald get Exercise da ist
-    //this.selectedWorkout = workout;
+    this.selectedWorkout = workout;
     this.showWorkout = true;
 
   }
