@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Exercise {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "exercise_id")
@@ -37,6 +38,14 @@ public class Exercise {
     private Integer xpBiceps = 0;
     private Integer xpFlexibility = 0;
 
+    public boolean isHasWeights() {
+        return hasWeights;
+    }
+
+    public void setHasWeights(boolean hasWeights) {
+        this.hasWeights = hasWeights;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -45,13 +54,6 @@ public class Exercise {
         this.description = description;
     }
 
-    public boolean isHasWeight() {
-        return hasWeights;
-    }
-
-    public void setHasWeight(boolean hasWeight) {
-        this.hasWeights = hasWeight;
-    }
 
     public String getGifLink() {
         return gifLink;
