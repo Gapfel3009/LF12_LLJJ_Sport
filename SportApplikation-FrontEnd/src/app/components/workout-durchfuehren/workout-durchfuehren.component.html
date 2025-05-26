@@ -31,5 +31,10 @@
   </div>
 </div>
 <div *ngIf="showGame">
+  <div id="gaming-timer">
+    <i class="bi bi-clock"></i>
+    <div class="timer-value">{{ GamingTimerSecondsLeft }} Sekunden Pause</div>
+  </div>
+  <app-flappybird></app-flappybird>
 </div>
 

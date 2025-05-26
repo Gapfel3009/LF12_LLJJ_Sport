@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {Router} from '@angular/router';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-mainsite',
@@ -17,18 +18,18 @@ export class MainsiteComponent {
   showSummaryInfo:boolean = false;
   showStatsInfo:boolean = false;
 
-  constructor(private route: Router){}
+  constructor(private router: Router, public userService: UserService) {}
   WorkoutErstellenRedirect(){
-    this.route.navigate(['/Workout-erstellen'], {
-      queryParams: {returnTo: this.route.url}
+    this.router.navigate(['/Workout-erstellen'], {
+      queryParams: {returnTo: this.router.url}
     });
   }
 
   WorkoutsRedirect(){
-    this.route.navigate(['/Workout-list'])
+    this.router.navigate(['/Workout-list'])
   }
 
   ProfileRedirect(){
-    this.route.navigate(['/Profile'])
+    this.router.navigate(['/Profile'])
   }
 }
