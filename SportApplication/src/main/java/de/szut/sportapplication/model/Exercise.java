@@ -61,8 +61,8 @@ public class Exercise {
         this.gifLink = gifLink;
     }
 
-    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkoutExercise> workoutExercises = new ArrayList<>();
+   // @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
+   // private List<WorkoutExercise> workoutExercises = new ArrayList<>();
 
     public Integer getExerciseID() {return exerciseID;}
 

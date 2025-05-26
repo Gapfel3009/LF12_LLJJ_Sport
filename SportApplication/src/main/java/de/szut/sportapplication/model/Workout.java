@@ -40,8 +40,8 @@ public class Workout {
 
     private String description;
 
-    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkoutExercise> workoutExercises = new ArrayList<>();
+   // @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private List<WorkoutExercise> workoutExercises = new ArrayList<>();
 
     public Integer getWorkoutId() {
         return workoutID;
