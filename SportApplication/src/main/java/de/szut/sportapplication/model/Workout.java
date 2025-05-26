@@ -1,5 +1,6 @@
 package de.szut.sportapplication.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,8 +30,13 @@ public class Workout {
 
     @ManyToOne
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
     @JoinColumn(name = "userid")
     private AppUser userid;
+
+    @JoinColumn(name = "userid")
+    @Transient
+    private Integer userID;
 
     private String description;
 
@@ -43,6 +49,18 @@ public class Workout {
 
     public void setWorkoutId(Integer workoutID) {
         this.workoutID = workoutID;
+    }
+
+    public Integer getUserID() {
+        return  (userid != null) ? userid.getUserID() : null;
+    }
+
+    public void setUserID(Integer userID) {
+        this.userID = userID;
+        if (userID != null){
+            this.userid = new AppUser();
+            this.userid.setUserID(userID);
+        }
     }
 
     public String getTitle() {
