@@ -19,8 +19,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      const noHeaderRoutes = ['/'];
-      this.showHeader = !noHeaderRoutes.includes(this.router.url);
+      const noHeaderRoutes = ['/Login','/Workout?'];
+      console.log(this.router.url);
+      console.log(noHeaderRoutes.some(item => item.startsWith(this.router.url)))
+      this.showHeader = !noHeaderRoutes.some(item => this.router.url.startsWith(item) || item === this.router.url);
     })
   }
 }
