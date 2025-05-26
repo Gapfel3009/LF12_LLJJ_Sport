@@ -1,4 +1,5 @@
 package de.szut.sportapplication.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,44 +16,73 @@ public class WorkoutExercise {
     private Integer workoutExerciseId;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "workout_id")
     private Workout workout;
+
+    @Transient
+    private Integer workoutId;
 
     @ManyToOne
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
-    @Column(name = "exercise_order")
-    private Integer exerciseOrder;
-    @Column(name = "number_of_sets")
-    private Integer numSets;
-    @Column(name = "number_of_reps")
-    private Integer numReps;
-    @Column(name = "weight_amount")
-    private Integer weightAmount;
 
-    public int getWorkoutExerciseId() {
-        return workoutExerciseId;
-    }
-
-    public void setWorkoutExerciseId(int workoutExerciseId) {
-        this.workoutExerciseId = workoutExerciseId;
-    }
-
-    public Workout getWorkoutID() {
-        return workout;
-    }
-
-    public void setWorkoutID(Workout workout) {
-        this.workout = workout;
-    }
-
-    public Exercise getExerciseID() {
+    public Exercise getExercise() {
         return exercise;
     }
 
-    public void setExerciseID(Exercise exercise) {
+    public void setExercise(Exercise exercise) {
         this.exercise = exercise;
     }
+
+    @Transient
+    private Integer exerciseId;
+
+    @Column(name = "exercise_order")
+    private Integer exerciseOrder;
+
+    @Column(name = "number_of_sets")
+    private Integer numSets;
+
+    @Column(name = "number_of_reps")
+    private Integer numReps;
+
+    @Column(name = "weight_amount")
+    private Integer weightAmount;
+
+
+
+    public void setWorkoutExerciseId(Integer workoutExerciseId) {
+        this.workoutExerciseId = workoutExerciseId;
+    }
+
+    public Integer getWorkoutId() {
+       return (workout != null) ? workout.getWorkoutId() : workoutId;
+    }
+
+    public void setWorkoutId(Integer workoutId) {
+        this.workoutId = workoutId;
+        if (workoutId != null) {
+            this.workout = new Workout();
+            this.workout.setWorkoutId(workoutId);
+        }
+    }
+
+    public Integer getExerciseId() {
+      return (exercise != null) ? exercise.getExerciseID() : exerciseId;
+    }
+
+    public void setExerciseId(Integer exerciseId) {
+        this.exerciseId = exerciseId;
+        if (exerciseId != null) {
+            this.exercise = new Exercise();
+            this.exercise.setExerciseID(exerciseId);
+        }
+    }
+
+
+
+
 
     public Integer getExerciseOrder() {
         return exerciseOrder;

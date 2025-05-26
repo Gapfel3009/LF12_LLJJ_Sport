@@ -29,15 +29,15 @@ public class WorkoutExerciseController {
 
     @PostMapping
     public ResponseEntity<WorkoutExercise> addExerciseToWorkout(@RequestBody WorkoutExercise we) {
-        Workout workout = workoutRepository.findById(we.getWorkoutID().getWorkoutId()).orElse(null);
-        Exercise exercise = exerciseRepository.findById(we.getExerciseID().getExerciseID()).orElse(null);
+        Workout workout = workoutRepository.findById(we.getWorkoutId()).orElse(null);
+        Exercise exercise = exerciseRepository.findById(we.getExerciseId()).orElse(null);
 
         if (workout == null || exercise == null) {
             return ResponseEntity.badRequest().build();
         }
 
-        we.setWorkoutID(workout);
-        we.setExerciseID(exercise);
+        we.setWorkoutId(workout.getWorkoutId());
+        we.setExerciseId(exercise.getExerciseID());
         return ResponseEntity.status(HttpStatus.CREATED).body(workoutExerciseRepository.save(we));
     }
 // Todo: brauchen wir erstmal nicht da nachträglich kein workout bearbeitbar ist.
