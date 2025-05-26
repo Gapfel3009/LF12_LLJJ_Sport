@@ -167,3 +167,10 @@ button:hover {
   justify-content: center;
   gap: 1rem;
 }
+
+#workout-finish-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

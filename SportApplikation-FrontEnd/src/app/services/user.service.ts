@@ -17,7 +17,7 @@ export class UserService {
   authenticateUser(email: string, passwordHash: string):boolean {
     //TODO: Enpunkt einbinden, sobald existiert
 
-    this.appUser = new AppUser(1,"test@mail","password", new Date(Date.now()),"Bizeps Brecher Bernd", 3,3,3,3,3,3,3,3,3,3,3)
+    this.appUser = new AppUser(2,"test@mail","password", new Date(Date.now()),"Bizeps Brecher Bernd", 3,3,3,3,3,3,3,3,3,3,3)
     return true;
   }
 

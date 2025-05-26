@@ -10,8 +10,8 @@
             <img ngSrc="{{exercise.gifLink}}" alt="Gif" width="100" height="100" style="max-height: 100%; height: auto">
           </div>
           <div class="card-text">
-            <h3 class="section-title">{{exercise.Name}}</h3>
-            <p align="justify">{{exercise.Description}}</p>
+            <h3 class="section-title">{{exercise.name}}</h3>
+            <p align="justify">{{exercise.description}}</p>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
             <img ngSrc="{{exercise.gifLink}}" alt="Gif" width="100" height="100" style="max-height: 100%; height: auto">
           </div>
           <div class="card-text">
-            <h3 class="section-title">{{i + 1}}. {{exercise.Name}}</h3>
+            <h3 class="section-title">{{i + 1}}. {{exercise.name}}</h3>
             <button class="button button-removeExercise" (click)="removeExerciseFromWorkout(i); $event.stopPropagation()">Entfernen</button>
           </div>
         </div>
@@ -44,25 +44,25 @@
       <img ngSrc="{{selectedExercise.gifLink}}" alt="Gif" width="600" height="600">
       <div class="ExcerciseBox">
         <div id="exercise-title-and-description">
-          <h1 class="ExcerciseTitle">{{selectedExercise.Name}}</h1>
-          <p align="justify">{{selectedExercise.Description}}</p>
+          <h1 class="ExcerciseTitle">{{selectedExercise.name}}</h1>
+          <p align="justify">{{selectedExercise.description}}</p>
         </div>
         <div class="xp-wrapper">
           <span class="xp-label">XP</span>
-          <span class="xp-value">50</span>
+          <span class="xp-value">{{selectedExercise.xpTotal}}</span>
         </div>
         <div class="set-reps-box">
           <div class="set-reps-input-div">
             <label class="label" for="exercise-reps">Wiederholungen</label>
-            <input class="input" type="number"  id="exercise-reps" name="exercise-reps" [(ngModel)]="selectedExercise.repetitions">
+            <input class="input" type="number"  id="exercise-reps" name="exercise-reps" [(ngModel)]="selectedExercise.numReps">
           </div>
           <div class="set-reps-input-div">
             <label class="label" for="exercise-sets">Sätze</label>
-            <input class="input" type="number"  id="exercise-sets" name="exercise-sets" [(ngModel)]="selectedExercise.sets">
+            <input class="input" type="number"  id="exercise-sets" name="exercise-sets" [(ngModel)]="selectedExercise.numSets">
           </div>
-          <div *ngIf="selectedExercise.hasWeight" class="set-reps-input-div">
+          <div *ngIf="selectedExercise.hasWeights" class="set-reps-input-div">
             <label class="label" for="exercise-weight">Gewicht</label>
-            <input class="input" type="number"  id="exercise-weight" name="exercise-weight" [(ngModel)]="selectedExercise.weight">
+            <input class="input" type="number"  id="exercise-weight" name="exercise-weight" [(ngModel)]="selectedExercise.weightAmount">
           </div>
         </div>
         <div class="nav-buttons">
