@@ -7,6 +7,8 @@ import {NgClass, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {Exercise} from '../../../models/exercise';
 import {FormsModule} from '@angular/forms';
 import {FlappyBirdComponent} from '../flappybird/flappybird.component';
+import {UserService} from '../../services/user.service';
+import {AppUser} from '../../../models/AppUser';
 
 @Component({
   selector: 'app-workout-durchfuehren',
@@ -22,11 +24,8 @@ import {FlappyBirdComponent} from '../flappybird/flappybird.component';
   styleUrl: './workout-durchfuehren.component.css'
 })
 export class WorkoutDurchfuehrenComponent {
-  exercises: Exercise[]= [new Exercise(1,"Übung 1", "Werbung", "https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif", true, 10, 5, 30),
-                          new Exercise(2,"Übung 2", "Werbung", "https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif", true, 10, 5, 30),
-                          new Exercise(3,"Übung 3", "Werbung", "https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif", true, 10, 5, 30),
-                          new Exercise(4,"Übung 4", "Werbung", "https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif", true, 10, 5, 30)];
-  workout: Workout= new Workout(1,"Test Workout","Total tolles test Training", "Fikse Hartmann", this.exercises);
+  exercises: Exercise[] = [];
+  workout: Workout | null = null;
   workoutId:number = 0;
   time:number = 0;
   workoutStarted:boolean = false;
@@ -40,19 +39,34 @@ export class WorkoutDurchfuehrenComponent {
   GamingTimerEnded: boolean = false;
   GamingTimer: any;
 
-  constructor(private route: ActivatedRoute,private router:Router, service:WorkoutService) {
+  constructor(private route: ActivatedRoute,private router:Router, private workoutService:WorkoutService, private userService:UserService) {
     this.route.queryParams.subscribe(params => {
       this.workoutId = params['workoutID'];
     });
-    //service.getWorkoutById(this.workoutId).subscribe(
-    //  {next: (workout) =>{this.workout = workout}}
-    //)
-    // @ts-ignore
-    this.checkedSets = Array(this.workout.exercises[this.currentIndex].sets).fill(false);
+
   };
+
+  ngOnInit(){
+    this.workoutService.getWorkoutById(this.workoutId).subscribe(
+      {next: (workout) =>{
+          this.workout = workout
+          this.workoutService.getExercisesByWorkoutId(this.workoutId).subscribe({
+            next: (data)=>{
+              console.log(data)
+              this.exercises = data.map((json:any) => Exercise.fromWorkoutExerciseJson(json))
+              if(this.workout)
+                this.workout.exercises = this.exercises;
+              // @ts-ignore
+              this.checkedSets = Array(this.workout.exercises[this.currentIndex].numSets).fill(false);
+            }
+          })
+        }
+      })
+  }
 
   workoutStarten(){
     this.workoutStarted = true;
+    console.log(this.workout);
     this.startTimer()
   }
 
@@ -91,19 +105,21 @@ export class WorkoutDurchfuehrenComponent {
 
   CheckboxChange(){
     if(this.checkedSets.every(value => value === true)){
+      console.log(this.checkedSets);
       if(this.nextExercise()){
-        //this.showGame = true;
-        //this.GameTimer()
+        this.showGame = true;
+        this.GameTimer()
         setTimeout(() => {
           // @ts-ignore
           this.checkedSets = Array(this.workout.exercises[this.currentIndex].sets).fill(false);
         }, 10);
       }else{
+        this.stopTimer()
         this.showWorkoutFinished = true;
       }
     }
-    //this.showGame = true
-    //this.GameTimer()
+    this.showGame = true
+    this.GameTimer()
   }
 
   get formattedTime(): string {
@@ -131,5 +147,16 @@ export class WorkoutDurchfuehrenComponent {
 
   MainRedirect(){
     this.router.navigate(['/Mainsite']);
+  }
+
+  FinishWorkout(){
+    //TODO:
+    /*let user : AppUser | null = this.userService.getCurrentUser();
+    if(user){
+      user.lastWorkout = new Date(Date.now());
+      user.addXpTotal()
+    }*/
+
+    this.MainRedirect();
   }
 }

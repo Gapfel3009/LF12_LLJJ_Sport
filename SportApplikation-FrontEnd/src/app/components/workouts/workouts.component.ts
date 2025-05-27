@@ -18,17 +18,12 @@ import {Exercise} from '../../../models/exercise';
 })
 export class WorkoutsComponent implements OnInit {
   showWorkout: boolean = false;
-  exercises: Exercise[]= [new Exercise(1,"Übung 1", "Werbung", "https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif", true, 10, 5, 30),
-    new Exercise(2,"Übung 2", "Werbung", "https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif", true, 10, 5, 30),
-    new Exercise(3,"Übung 3", "Werbung", "https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif", true, 10, 5, 30),
-    new Exercise(4,"Übung 4", "Werbung", "https://fitnessprogramer.com/wp-content/uploads/2023/09/shadow-boxing-workout.gif", true, 10, 5, 30)];
-  standardWorkouts: Workout[] = [new Workout(1,"Test Workout","Total tolles test Training", "Fikse Hartmann", this.exercises)];
-
+  standardWorkouts: Workout[] = [];
+  exercises:Exercise[] = [];
   userWorkouts: Workout[] = [];
   selectedWorkout:Workout | null = null;
 
-  constructor(private router:Router, private workoutService:WorkoutService, private userService:UserService ) {
-  }
+  constructor(private router:Router, private workoutService:WorkoutService, private userService:UserService ) {}
   ngOnInit(){
     this.workoutService.getAllStandardWorkouts().subscribe({
       next: (data)=>{
@@ -58,8 +53,16 @@ export class WorkoutsComponent implements OnInit {
 
   ShowWorkout(workout:Workout){
     //TODO: Wieder reinpacken, sobald get Exercise da ist
-    //this.selectedWorkout = workout;
-    this.showWorkout = true;
+    this.workoutService.getExercisesByWorkoutId(workout.workoutId).subscribe({
+      next: (data)=>{
+        console.log(data)
+        this.exercises = data.map((json:any) => Exercise.fromWorkoutExerciseJson(json))
+        workout.exercises = this.exercises
+        this.selectedWorkout = workout;
+        this.showWorkout = true;
+      }
+    })
+
 
   }
 
