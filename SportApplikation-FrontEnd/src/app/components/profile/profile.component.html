@@ -16,8 +16,19 @@
             class="img-fluid rounded"
             style="max-height: 450px;"
           />
+          <svg *ngIf="hoveredMuscle" class="position-absolute top-0 start-0 w-100 h-100" style="pointer-events: none">
+            <line
+              *ngIf="muscleLines[hoveredMuscle]"
+              [attr.x1]="muscleLines[hoveredMuscle].x1"
+              [attr.y1]="muscleLines[hoveredMuscle].y1"
+              [attr.x2]="muscleLines[hoveredMuscle].x2"
+              [attr.y2]="muscleLines[hoveredMuscle].y2"
+              stroke="red"
+              stroke-width="2"
+            />
+          </svg>
         </div>
-<!--TODO: 1. sortierung der Muskelgruppen nach front und back
+<!--TODO: 1. sortierung der Muskelgruppen nach front und back. DONE
     TODO: 2. Hover Effekt bei Aktiver Seite (anzeigen von SVG koordinaten)
     TODO: 3. Daten des Useres Richtig anbinden front und Backend
     TODO: 4. Berechnung der Level (Berechnet sich aus xp im Frontend)
@@ -28,34 +39,37 @@
         <div class="col-md-7 px-4">
           <h6 class="mb-3 text-secondary">Deine XP-Übersicht</h6>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between px-0">
-              <span>XP Total</span> <span>{{currentUser?.xpTotal}}</span>
+            <li class="list-group-item d-flex justify-content-between px-0 hoverable"
+                (mouseenter)="isfront ? hoveredMuscle='xpTotal': null" (mouseleave)="hoveredMuscle = null">
+              <span>XP Total</span> <span>{{ currentUser?.xpTotal }}</span>
             </li>
-            <!--
-            <li class="list-group-item d-flex justify-content-between px-0">
-              <span>XP Brust</span> <span>{{currentUser.}}</span>
+            <li class="list-group-item d-flex justify-content-between px-0 hoverable"
+                (mouseenter)="hoveredMuscle = 'xpShoulders'" (mouseleave)="hoveredMuscle = null">
+              <span>XP Schultern</span> <span>{{ currentUser?.xpShoulders }}</span>
             </li>
-            -->
-            <li class="list-group-item d-flex justify-content-between px-0">
+            <li class="list-group-item d-flex justify-content-between px-0 hoverable"
+                (mouseenter)="isfront ? hoveredMuscle = 'xpBiceps': null" (mouseleave)="hoveredMuscle = null">
+              <span>XP Bizeps</span> <span>{{ currentUser?.xpBiceps }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between px-0 hoverable"
+                (mouseenter)="!isfront ? hoveredMuscle = 'xpTriceps': null" (mouseleave)="hoveredMuscle = null">
+              <span>XP Trizeps</span> <span>{{ currentUser?.xpTriceps }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between px-0 hoverable"
+                (mouseenter)="!isfront ? hoveredMuscle = 'xpBack': null" (mouseleave)="hoveredMuscle = null">
               <span>XP Rücken</span> <span>{{ currentUser?.xpBack }}</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between px-0">
-              <span>XP Schultern</span> <span>{{currentUser?.xpShoulders}}</span>
+            <li class="list-group-item d-flex justify-content-between px-0 hoverable"
+                (mouseenter)="isfront ? hoveredMuscle = 'xpAbs': null" (mouseleave)="hoveredMuscle = null">
+              <span>XP Bauch</span> <span>{{ currentUser?.xpAbs }}</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between px-0">
-              <span>XP Beine</span> <span>{{currentUser?.xpLegs}}</span>
+            <li class="list-group-item d-flex justify-content-between px-0 hoverable"
+                (mouseenter)="!isfront ? hoveredMuscle = 'xpGlutes': null" (mouseleave)="hoveredMuscle = null">
+              <span>XP Gluteus Maximus</span> <span>{{ currentUser?.xpGlutes }}</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between px-0">
-              <span>XP Trizeps</span> <span>{{currentUser?.xpTriceps}}</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between px-0">
-              <span>XP Bauch</span> <span>{{currentUser?.xpAbs}}</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between px-0">
-              <span>XP Gluteus Maximus</span> <span>{{currentUser?.xpGlutes}}</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between px-0">
-              <span>XP Bizeps</span> <span>{{currentUser?.xpBiceps}}</span>
+            <li class="list-group-item d-flex justify-content-between px-0 hoverable"
+                (mouseenter)="hoveredMuscle = 'xpLegs'" (mouseleave)="hoveredMuscle = null">
+              <span>XP Beine</span> <span>{{ currentUser?.xpLegs }}</span>
             </li>
           </ul>
         </div>
