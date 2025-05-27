@@ -57,7 +57,8 @@ export class WorkoutsComponent implements OnInit {
   }
 
   ShowWorkout(workout:Workout){
-    this.selectedWorkout = workout;
+    //TODO: Wieder reinpacken, sobald get Exercise da ist
+    //this.selectedWorkout = workout;
     this.showWorkout = true;
 
   }

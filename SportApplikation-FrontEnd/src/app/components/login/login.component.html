@@ -16,11 +16,11 @@
         <form>
           <div class="mb-3">
             <label class="form-label">Email</label>
-            <input type="email" class="form-control" placeholder="Email">
+            <input type="email" [(ngModel)]="loginMail" name="loginMail" class="form-control" placeholder="Email">
           </div>
           <div class="mb-3">
             <label class="form-label">Passwort</label>
-            <input type="password" class="form-control" placeholder="Passwort">
+            <input type="password" [(ngModel)]="loginPassword" name="loginPassword" class="form-control" placeholder="Passwort">
           </div>
           <p *ngIf="showWrongPassword" style="color: red; font-size:12px">Es existiert kein Account mit diesen Logindaten</p>
           <div style="margin-bottom: 5%"  class="hover-underline d-block text-dark ">Passwort vergessen?</div>
@@ -33,17 +33,19 @@
         <form>
           <div class="mb-3">
             <label class="form-label">Email</label>
-            <input type="email" class="form-control" placeholder="Email">
+            <input type="email"[(ngModel)]="regMail" name="regMail" class="form-control" placeholder="Email">
           </div>
           <div class="mb-3">
             <label class="form-label">Passwort</label>
-            <input type="password" class="form-control" placeholder="Passwort">
+            <input type="password" [(ngModel)]="regPassword" name="regPassword" class="form-control" placeholder="Passwort">
           </div>
           <div class="mb-3">
             <label class="form-label">Passwort bestätigen</label>
-            <input type="password" class="form-control" placeholder="Passwort">
+            <input type="password" [(ngModel)]="regPassword2" name="regPassword2"class="form-control" placeholder="Passwort">
           </div>
-          <button type="submit" style="background-color: black; color: white" class="btn btn-login w-100">Registrieren</button>
+          <p *ngIf="passwordNichtGleich" style="color: red; font-size:12px">Passwörter stimmen nicht überein.</p>
+          <button type="submit" style="background-color: black; color: white" class="btn btn-login w-100" (click)="Register($event)">Registrieren</button>
+
         </form>
       </div>
     </div>

@@ -70,6 +70,7 @@ public class WorkoutController{
     @Transactional
     @GetMapping("/standard")
     public List<Workout> getStandardWorkouts() {
+
         return workoutRepository.findByUserid_UserID(1);
     }
 

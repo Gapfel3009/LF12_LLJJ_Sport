@@ -12,25 +12,29 @@ export class WorkoutService {
   private ApiUrl:string = "http://localhost:8081";
   constructor(private http: HttpClient) { }
 
+  private setHeaderToken(): HttpHeaders {
+    const token = localStorage.getItem("token");
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token ? `Bearer ${token}`:""
+    })
+  }
 
   getAllStandardWorkouts():Observable<any>{
     return this.http.get<Workout[]>(`${this.ApiUrl}/api/workouts/standard`,{
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json')
+      headers: this.setHeaderToken()
     })
   }
 
   getAllUserWorkouts(userId:number | null):Observable<any>{
     return this.http.get<Workout[]>(`${this.ApiUrl}/api/workouts/byUser/${userId}`,{
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json')
+      headers: this.setHeaderToken()
     })
   }
 
   getWorkoutById(workoutID:number):Observable<any>{
     return this.http.get<Workout>(`${this.ApiUrl}/api/workouts/${workoutID}`,{
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json')
+      headers: this.setHeaderToken()
     })
   }
 }
