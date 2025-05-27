@@ -39,7 +39,7 @@ export class UserService {
       passwordHash: password
     };
     console.log("Register-Request:", body);
-    return this.http.post<any>('http://localhost:8081/api/auth/register', body);
+    return this.http.post<any>(`${this.ApiUrl}/api/auth/register`, body);
   }
 
   getToken(): string|null{
