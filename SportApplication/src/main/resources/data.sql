@@ -79,7 +79,7 @@ WHERE NOT EXISTS (
     SELECT 1 FROM avatar WHERE filename = 'avatar3.png');
 --User--
 INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total)
-SELECT 'user1@example.com', 'hash1', 'userAdmin', 1, 1, 250
+SELECT 'admin', '$2a$10$VCeM7thQ7fOf.yxUOEtDsOL5U6F9Yy5jCE0FJ4VpZoF4NjCr0p5Qm', 'admin', 1, 1, 250
 WHERE NOT EXISTS (SELECT 1 FROM app_user);
 
 INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total)
