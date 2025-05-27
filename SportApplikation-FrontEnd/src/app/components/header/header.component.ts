@@ -24,6 +24,10 @@ export class HeaderComponent {
     this.router.navigate(['/Workout-list'])
   }
 
+  ProfileRedirect(){
+    this.router.navigate(['/Profile']);
+  }
+
   UserLogout(){
     console.log('User logged out');
     this.router.navigate(['/']);

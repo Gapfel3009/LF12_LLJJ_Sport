@@ -1,13 +1,65 @@
-<div class="container">
-  <div class="container-front" *ngIf="isfront">
-    <img ngSrc="/front.png" alt="front" height="449" width="280" style="max-height: 100%; height: auto">
+<div class="container py-4">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Dein Profil</h5>
+      <button class="btn btn-sm btn-light" (click)="FlipThePage()">
+        {{ isfront ? 'Zur Rückseite wechseln' : 'Zur Vorderseite wechseln' }}
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <!-- Bildbereich -->
+        <div class="col-md-5 text-center mb-3 mb-md-0 border-end">
+          <img
+            [ngSrc]="isfront ? '/front.png' : '/Back.png'"
+            alt="Profilbild"
+            class="img-fluid rounded"
+            style="max-height: 450px;"
+          />
+        </div>
+<!--TODO: 1. sortierung der Muskelgruppen nach front und back
+    TODO: 2. Hover Effekt bei Aktiver Seite (anzeigen von SVG koordinaten)
+    TODO: 3. Daten des Useres Richtig anbinden front und Backend
+    TODO: 4. Berechnung der Level (Berechnet sich aus xp im Frontend)
+    TODO: 5. mehrere Avatar optionen im Backend und Frontend hnterlegt (2-4)
+    TODO: 6. Registrierung führt zum Profil und der Auswahl der Avatare + UserName-->
+
+        <!-- XP-Werte -->
+        <div class="col-md-7 px-4">
+          <h6 class="mb-3 text-secondary">Deine XP-Übersicht</h6>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between px-0">
+              <span>XP Total</span> <span>{{currentUser?.xpTotal}}</span>
+            </li>
+            <!--
+            <li class="list-group-item d-flex justify-content-between px-0">
+              <span>XP Brust</span> <span>{{currentUser.}}</span>
+            </li>
+            -->
+            <li class="list-group-item d-flex justify-content-between px-0">
+              <span>XP Rücken</span> <span>{{ currentUser?.xpBack }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between px-0">
+              <span>XP Schultern</span> <span>{{currentUser?.xpShoulders}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between px-0">
+              <span>XP Beine</span> <span>{{currentUser?.xpLegs}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between px-0">
+              <span>XP Trizeps</span> <span>{{currentUser?.xpTriceps}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between px-0">
+              <span>XP Bauch</span> <span>{{currentUser?.xpAbs}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between px-0">
+              <span>XP Gluteus Maximus</span> <span>{{currentUser?.xpGlutes}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between px-0">
+              <span>XP Bizeps</span> <span>{{currentUser?.xpBiceps}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="container-back" *ngIf="!isfront">
-    <img ngSrc="/Back.png" alt="back" height="449" width="280">
-  </div>
-  <button (click)="FlipThePage()" >{{isfront}}</button>
-    <svg id="overlay" width="600" height="400">
-      <line x1="100" y1="100" x2="250" y2="100"
-            stroke="black" stroke-width="2"/>
-    </svg>
 </div>
