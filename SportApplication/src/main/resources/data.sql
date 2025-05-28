@@ -27,8 +27,8 @@ CREATE TABLE if not exists app_user
 CREATE TABLE if not exists workout
 (
     workout_id SERIAL PRIMARY KEY,
-    title      VARCHAR(100),
-    userid    INTEGER REFERENCES app_user (user_id),
+    title      VARCHAR(100) NOT NULL,
+    userid    INTEGER NOT NULL REFERENCES app_user (user_id),
     description VARCHAR(255)
     );
 CREATE TABLE if not exists  exercise

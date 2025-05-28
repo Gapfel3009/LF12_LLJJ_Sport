@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
 
-    @Component
-    public class JWTAuthService {
+@Component
+public class JWTAuthService {
         private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 //todo: zeit höher setzen -- zum testen des token auf 1 std
-        private final long loginGültigFür = 1000*60*60;
+        private final long loginGültigFür = 1000*60*60*5;
 
 
 
@@ -40,5 +40,5 @@ import java.util.Date;
            } catch (Exception e) {
                return false;
            }
-        }
-    }
+       }
+}

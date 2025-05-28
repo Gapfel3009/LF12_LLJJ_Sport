@@ -25,9 +25,19 @@ public class WorkoutController{
     }
 
     @PostMapping
-    public ResponseEntity<Workout> createWorkout(@RequestBody Workout workout) {
-        Workout saved = workoutRepository.save(workout);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    public ResponseEntity<Workout> createWorkout(@RequestBody Workout newWorkout) {
+        Workout workout = new Workout();
+        if (!newWorkout.getTitle().isEmpty()){
+            workout.setTitle(newWorkout.getTitle());
+        }
+        if (!newWorkout.getDescription().isEmpty()){
+            workout.setDescription(newWorkout.getDescription());
+        }
+        if (newWorkout.getUserID() != null){
+            workout.setUserID(newWorkout.getUserID());
+        }
+        workoutRepository.save(workout);
+        return ResponseEntity.status(HttpStatus.CREATED).body(workout);
     }
 
     @PutMapping("/{id}")
