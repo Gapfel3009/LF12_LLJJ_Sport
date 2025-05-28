@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Workout} from '../../models/workout';
-import {catchError, map, Observable, of} from 'rxjs';
+import {catchError, firstValueFrom, map, Observable, of} from 'rxjs';
 import {Exercise} from '../../models/exercise';
 
 @Injectable({
@@ -10,7 +10,7 @@ import {Exercise} from '../../models/exercise';
 export class WorkoutService {
 
   private ApiUrl:string = "http://localhost:8081";
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private setHeaderToken(): HttpHeaders {
     const token = localStorage.getItem("token");
@@ -52,17 +52,43 @@ export class WorkoutService {
     })
   }
 
-  createWokrout(workout:Workout):Observable<number>{
-    return this.http.post<Workout>(`${this.ApiUrl}/api/workouts`, workout,{
-      headers: new HttpHeaders()
-      .set('Content-Type', 'application/json')
-    }).pipe(
-      map((response: Workout) => response.workoutId ?? 0),
-      catchError((error) => {
-        console.error(error.error);
-        return of(0);
-      })
-    );
+  async createWorkout(workout: Workout): Promise<number> {
+    try {
+      const response = await firstValueFrom(
+        this.http.post<Workout>(`${this.ApiUrl}/api/workouts`, workout, {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+        })
+      );
+      return response.workoutId ?? 0;
+    } catch (error: any) {
+      console.error(error.error);
+      return 0;
+    }
+  }
+
+  AddExerciseToWorkout(exercises:Exercise[], workoutID:number){
+    for(let i = 0; i < exercises.length; i++){
+      const exercise = exercises[i];
+      const JSON = {
+        workoutId: workoutID,
+        exerciseId: exercise.exerciseID,
+        exerciseOrder: i + 1,
+        numSets: exercise.numSets,
+        numReps: exercise.numReps,
+        weightAmount: exercise.weightAmount
+      }
+      this.http.post(`${this.ApiUrl}/api/workout-exercises`, JSON, {
+        headers: new HttpHeaders().set('Content-Type', 'application/json')
+      }).subscribe({
+        next: (response) => {
+          console.log('Übung erfolgreich hinzugefügt:', response);
+        },
+        error: (error) => {
+          console.error('Fehler beim Hinzufügen:', error);
+        }
+      });
+      console.log(JSON)
+    }
   }
 }
 

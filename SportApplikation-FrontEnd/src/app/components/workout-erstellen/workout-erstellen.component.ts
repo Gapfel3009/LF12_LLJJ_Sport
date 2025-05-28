@@ -1,9 +1,8 @@
-import {Component,OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {Exercise} from '../../../models/exercise';
 import {ExpansionCase} from '@angular/compiler';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import {CdkDragDrop, DragDropModule, moveItemInArray} from '@angular/cdk/drag-drop';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {WorkoutService} from '../../services/workout.service';
@@ -103,12 +102,11 @@ export class WorkoutErstellenComponent implements OnInit {
     this.router.navigateByUrl(this.returnTo);
   }
 
-  SaveButton(workoutTitle:string, workoutDescription:string){
+  async SaveButton(workoutTitle:string, workoutDescription:string){
     const workout:Workout = new Workout(workoutTitle,workoutDescription,this.userService.getUserId())
-    this.workoutService.createWokrout(workout).subscribe((workoutID) =>{
-      workout.workoutId = workoutID;
-      console.log(workout);
-    });
+    workout.workoutId = await this.workoutService.createWorkout(workout);
+    this.workoutService.AddExerciseToWorkout(this.workout, workout.workoutId)
+    this.router.navigateByUrl(this.returnTo);
   }
 }
 
