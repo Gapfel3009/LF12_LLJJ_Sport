@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/workout-exercises")
@@ -27,17 +28,33 @@ public class WorkoutExerciseController {
     private ExerciseRepository exerciseRepository;
 
     @PostMapping
-    public ResponseEntity<WorkoutExercise> addExerciseToWorkout(@RequestBody WorkoutExercise we) {
+    public ResponseEntity<?> addExerciseToWorkout(@RequestBody WorkoutExercise we) {
         Workout workout = workoutRepository.findById(we.getWorkoutId()).orElse(null);
         Exercise exercise = exerciseRepository.findById(we.getExerciseId()).orElse(null);
 
         if (workout == null || exercise == null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(Map.of("error", "Workout oder Übung nicht gefunden."));
+        }
+        if(we.getWorkoutId() == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "WorkoutId darf nicht leer sein."));
         }
 
-        we.setWorkoutId(workout.getWorkoutId());
-        we.setExerciseId(exercise.getExerciseID());
-        return ResponseEntity.status(HttpStatus.CREATED).body(workoutExerciseRepository.save(we));
+        if(we.getExerciseId() == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Titel darf nicht leer sein."));        }
+
+        if(we.getExerciseOrder() == null){
+            return ResponseEntity.badRequest().body(Map.of("error", "Titel darf nicht leer sein."));
+        }
+
+        if(we.getNumReps() == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Titel darf nicht leer sein."));        }
+
+        if(we.getNumSets() == null){
+            return ResponseEntity.badRequest().body(Map.of("error", "Titel darf nicht leer sein."));
+        }
+
+        workoutExerciseRepository.save(we);
+        return ResponseEntity.ok(Map.of("workoutId", we.getWorkoutId()));
     }
 // Todo: brauchen wir erstmal nicht da nachträglich kein workout bearbeitbar ist.
 //  die anderen beiden endpunkte sind getestet und funkionieren.
