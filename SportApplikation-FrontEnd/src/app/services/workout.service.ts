@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Workout} from '../../models/workout';
-import {Observable} from 'rxjs';
-import {AppUser} from '../../models/AppUser';
+import {catchError, map, Observable, of} from 'rxjs';
 import {Exercise} from '../../models/exercise';
 
 @Injectable({
@@ -51,6 +50,19 @@ export class WorkoutService {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
     })
+  }
+
+  createWokrout(workout:Workout):Observable<number>{
+    return this.http.post<Workout>(`${this.ApiUrl}/api/workouts`, workout,{
+      headers: new HttpHeaders()
+      .set('Content-Type', 'application/json')
+    }).pipe(
+      map((response: Workout) => response.workoutId ?? 0),
+      catchError((error) => {
+        console.error(error.error);
+        return of(0);
+      })
+    );
   }
 }
 

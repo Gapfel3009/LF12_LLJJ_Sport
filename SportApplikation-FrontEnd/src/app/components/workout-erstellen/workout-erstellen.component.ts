@@ -7,6 +7,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {WorkoutService} from '../../services/workout.service';
+import {Workout} from '../../../models/workout';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-workout-erstellen',
@@ -35,7 +37,7 @@ export class WorkoutErstellenComponent implements OnInit {
   protected readonly Exercise = Exercise;
   protected readonly ExpansionCase = ExpansionCase;
 
-  constructor(private route: ActivatedRoute,private router:Router, private workoutService:WorkoutService) {
+  constructor(private route: ActivatedRoute,private router:Router, private workoutService:WorkoutService, private userService:UserService) {
     this.route.queryParams.subscribe(params => {
       this.returnTo = params['returnTo'] || '/'; // Fallback
     });
@@ -98,8 +100,15 @@ export class WorkoutErstellenComponent implements OnInit {
   }
 
   CancelButtonRedirect(){
-    console.log(this.returnTo);
     this.router.navigateByUrl(this.returnTo);
+  }
+
+  SaveButton(workoutTitle:string, workoutDescription:string){
+    const workout:Workout = new Workout(workoutTitle,workoutDescription,this.userService.getUserId())
+    this.workoutService.createWokrout(workout).subscribe((workoutID) =>{
+      workout.workoutId = workoutID;
+      console.log(workout);
+    });
   }
 }
 

@@ -50,8 +50,8 @@ export class UserService {
     return this.appUser;
   }
 
-  getUserId(): number | null {
-    return this.appUser ? this.appUser.userID : null;
+  getUserId(): number{
+    return this.appUser ? this.appUser.userID : 0;
   }
 
   isAuthenticated(): boolean {

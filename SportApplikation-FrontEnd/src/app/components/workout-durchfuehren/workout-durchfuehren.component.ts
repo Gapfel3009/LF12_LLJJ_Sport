@@ -118,8 +118,10 @@ export class WorkoutDurchfuehrenComponent {
         this.showWorkoutFinished = true;
       }
     }
-    this.showGame = true
-    this.GameTimer()
+    if(this.checkedSets.some(value => value === false)){
+      this.showGame = true
+      this.GameTimer()
+    }
   }
 
   get formattedTime(): string {

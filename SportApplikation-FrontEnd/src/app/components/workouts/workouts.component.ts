@@ -53,6 +53,7 @@ export class WorkoutsComponent implements OnInit {
 
   ShowWorkout(workout:Workout){
     //TODO: Wieder reinpacken, sobald get Exercise da ist
+    if(workout.workoutId)
     this.workoutService.getExercisesByWorkoutId(workout.workoutId).subscribe({
       next: (data)=>{
         console.log(data)
