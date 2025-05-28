@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/workouts")
@@ -25,17 +26,20 @@ public class WorkoutController{
     }
 
     @PostMapping
-    public ResponseEntity<Workout> createWorkout(@RequestBody Workout newWorkout) {
+    public ResponseEntity<?> createWorkout(@RequestBody Workout newWorkout) {
         Workout workout = new Workout();
-        if (!newWorkout.getTitle().isEmpty()){
+        if (newWorkout.getTitle() != null){
             workout.setTitle(newWorkout.getTitle());
-        }
-        if (!newWorkout.getDescription().isEmpty()){
+        }else return ResponseEntity.badRequest().body(Map.of("error", "Titel darf nicht leer sein."));
+
+        if (newWorkout.getDescription() != null){
             workout.setDescription(newWorkout.getDescription());
         }
+
         if (newWorkout.getUserID() != null){
             workout.setUserID(newWorkout.getUserID());
-        }
+        }else return ResponseEntity.badRequest().body(Map.of("error", "UserID darf nicht leer sein."));
+
         workoutRepository.save(workout);
         return ResponseEntity.status(HttpStatus.CREATED).body(workout);
     }
