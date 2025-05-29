@@ -14,6 +14,7 @@ interface loginResponse{
 export class UserService {
   private appUser:AppUser | null = null;
   private readonly tokenKey ="";
+  private readonly userKey = "user"
   private ApiUrl:string = "http://localhost:8081";
   constructor(private http: HttpClient) { }
 
@@ -25,7 +26,9 @@ export class UserService {
 
         localStorage.setItem(this.tokenKey, response.token);
         if (response.user) {
+          localStorage.setItem(this.userKey,JSON.stringify(response.user));
           this.appUser = response.user;
+
    // this.appUser = new AppUser(1,"test@mail","password", new Date(Date.now()),"Bizeps Brecher Bernd", 3,3,3,3,3,3,3,3,3,3,3)
     //return true;
           }
@@ -50,6 +53,10 @@ export class UserService {
     return this.appUser;
   }
 
+  setUser(user: AppUser){
+    this.appUser = user;
+  }
+
   getUserId(): number{
     return this.appUser ? this.appUser.userID : 0;
   }
@@ -61,6 +68,7 @@ export class UserService {
   logout(): void {
     this.appUser = null;
     localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.userKey);
   }
 
   setHighscore(highScore:number):void{
