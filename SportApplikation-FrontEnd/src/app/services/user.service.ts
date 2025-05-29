@@ -81,9 +81,6 @@ export class UserService {
       console.log(this.appUser.flappyHighScore);
     }
     if(this.appUser){
-      console.log(this.appUser.flappyHighScore < highScore);
-      console.log(this.appUser.flappyHighScore);
-      console.log(highScore);
     }
 
   }
@@ -95,7 +92,6 @@ export class UserService {
   }
 
   updateUser(user:AppUser){
-    console.log(user)
     return this.http.put<AppUser>(`${this.ApiUrl}/api/appUser/${user.userID}`, user,{
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')

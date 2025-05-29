@@ -103,9 +103,9 @@ export class WorkoutDurchfuehrenComponent {
       if(this.nextExercise()){
         this.showGame = true;
         setTimeout(() => {
-          // @ts-ignore
-          this.checkedSets = Array(this.workout.exercises[this.currentIndex].sets).fill(false);
-        }, 10);
+          if(this.workout?.exercises)
+            this.checkedSets = Array(this.workout.exercises[this.currentIndex].numSets).fill(false);
+        }, 5);
       }else{
         this.stopTimer()
         this.showWorkoutFinished = true;

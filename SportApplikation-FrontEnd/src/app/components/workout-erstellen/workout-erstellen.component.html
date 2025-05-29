@@ -54,15 +54,15 @@
         <div class="set-reps-box">
           <div class="set-reps-input-div">
             <label class="label" for="exercise-reps">Wiederholungen</label>
-            <input class="input" type="number"  id="exercise-reps" name="exercise-reps" [(ngModel)]="selectedExercise.numReps">
+            <input class="input" type="number" min="1" id="exercise-reps" name="exercise-reps" [(ngModel)]="selectedExercise.numReps">
           </div>
           <div class="set-reps-input-div">
             <label class="label" for="exercise-sets">Sätze</label>
-            <input class="input" type="number"  id="exercise-sets" name="exercise-sets" [(ngModel)]="selectedExercise.numSets">
+            <input class="input" type="number" min="1" id="exercise-sets" name="exercise-sets" [(ngModel)]="selectedExercise.numSets">
           </div>
           <div *ngIf="selectedExercise.hasWeights" class="set-reps-input-div">
             <label class="label" for="exercise-weight">Gewicht</label>
-            <input class="input" type="number"  id="exercise-weight" name="exercise-weight" [(ngModel)]="selectedExercise.weightAmount">
+            <input class="input" type="number" min="1" id="exercise-weight" name="exercise-weight" [(ngModel)]="selectedExercise.weightAmount">
           </div>
         </div>
         <div class="nav-buttons">

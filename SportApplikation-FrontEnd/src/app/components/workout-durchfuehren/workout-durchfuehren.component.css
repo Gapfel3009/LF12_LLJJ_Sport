@@ -65,6 +65,9 @@ button:hover {
   color: white;
 }
 
+#workout-box{
+  max-width: 732px;
+}
 
 .set-row {
   display: flex;

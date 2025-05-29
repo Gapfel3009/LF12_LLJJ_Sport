@@ -188,7 +188,6 @@ export class FlappyBirdComponent implements AfterViewInit {
 
   @HostListener('window:click')
   onClick() {
-    console.log(this.gameOver,this.GamingTimerEnded);
     if (!this.gameStarted && !this.GamingTimerEnded) {
       this.startGame();
     } else if (this.gameOver && !this.GamingTimerEnded) {
