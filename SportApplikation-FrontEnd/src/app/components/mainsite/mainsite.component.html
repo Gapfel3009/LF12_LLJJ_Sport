@@ -3,26 +3,23 @@
   <div class="dashboard">
     <div class="section">
       <h2 class="section-title">Zusammenfassung</h2>
-      <table>
-        <tbody>
-          <tr>
-            <td>Arme</td>
-            <td><strong>Lvl 20: 500/7650</strong></td>
-          </tr>
-          <tr>
-            <td>Torso</td>
-            <td><strong>Lvl 25: 4500/9050</strong></td>
-          </tr>
-          <tr>
-            <td>Beine</td>
-            <td><strong>Lvl 1: 100/500</strong></td>
-          </tr>
-          <tr>
-            <td>Flexibilität</td>
-            <td><strong>Lvl 7: 175/2500</strong></td>
-          </tr>
-        </tbody>
-      </table>
+      <ul>
+        <li >
+          Total LVL: {{this.calculateLevel(userService.getCurrentUser()?.xpTotal!) }}
+        </li>
+        <li >
+          Schultern LVL: {{this.calculateLevel(this.userService.getCurrentUser()?.xpShoulders!) }}
+        </li>
+        <li >
+          Bizeps LVL: {{this.calculateLevel(this.userService.getCurrentUser()?.xpBiceps!) }}
+        </li>
+        <li >
+          Trizeps LVL: {{this.calculateLevel(this.userService.getCurrentUser()?.xpTriceps!) }}
+        </li>
+        <li>
+          Rücken LVL: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpBack!) }}
+        </li>
+        </ul>
       <i class="bi bi-info-circle" (click)="showSummaryInfo = !showSummaryInfo"></i>
     </div>
 
@@ -32,26 +29,23 @@
 
     <div class="section">
       <h2 class="section-title">Stats</h2>
-      <table>
-        <tbody>
-        <tr>
-          <td>Streak</td>
-          <td><strong>200</strong></td>
-        </tr>
-        <tr>
-          <td>Einheiten Allgemein</td>
-          <td><strong>221</strong></td>
-        </tr>
-        <tr>
-          <td>Dieses Jahr</td>
-          <td><strong>154</strong></td>
-        </tr>
-        <tr>
-          <td>Diesen Monat</td>
-          <td><strong>15</strong></td>
-        </tr>
-        </tbody>
-      </table>
+      <ul>
+        <li>
+          Brust LVL: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpChest!) }}
+        </li>
+        <li>
+          Bauch LVL: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpAbs!) }}
+        </li>
+        <li>
+          Gluteus Maximus LVL: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpGlutes!) }}
+        </li>
+        <li>
+          Bein LVL: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpLegs!)}}
+        </li>
+        <li>
+          Flexiblität LVL: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpFlexibility!) }}
+        </li>
+      </ul>
       <i class="bi bi-info-circle" (click)="showStatsInfo = !showStatsInfo"></i>
     </div>
   </div>
@@ -79,8 +73,39 @@
   <div class="overlay" *ngIf="showSummaryInfo">
     <div class="confirmation-box button">
       <i class="bi bi-x-circle" (click)="showSummaryInfo = !showSummaryInfo"></i>
-      <p class="info-text">Test</p>
-    </div>
+      <ul>
+        <li >
+          Total EXP: {{this.userService.getCurrentUser()?.xpTotal }}
+        </li>
+        <li >
+          Schultern EXP: {{this.userService.getCurrentUser()?.xpShoulders }}
+        </li>
+        <li >
+          Bizeps EXP: {{this.userService.getCurrentUser()?.xpBiceps }}
+        </li>
+        <li >
+          Trizeps EXP: {{this.userService.getCurrentUser()?.xpTriceps }}
+        </li>
+        <li>
+          Rücken EXP: {{ this.userService.getCurrentUser()?.xpBack }}
+        </li>
+        <li>
+          Brust EXP: {{ this.userService.getCurrentUser()?.xpChest }}
+        </li>
+        <li>
+          Bauch EXP: {{ this.userService.getCurrentUser()?.xpAbs }}
+        </li>
+        <li>
+          Gluteus Maximus EXP: {{ this.userService.getCurrentUser()?.xpGlutes }}
+        </li>
+        <li>
+          Bein EXP: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpLegs!)}}
+        </li>
+        <li>
+          Flexiblität EXP: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpFlexibility!) }}
+        </li>
+      </ul>
+  </div>
   </div>
   <div class="overlay" *ngIf="showStatsInfo">
     <div class="confirmation-box button">

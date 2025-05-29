@@ -17,6 +17,7 @@ export class MainsiteComponent {
 
   showSummaryInfo:boolean = false;
   showStatsInfo:boolean = false;
+  xpTable:number[] = [0, 250, 500, 750, 1000, 1500, 2500, 3000, 3500, 4000, 5500, 6000, 7000, 6000, 9000, 10000];
 
   constructor(private router: Router, public userService: UserService) {}
   WorkoutErstellenRedirect(){
@@ -31,5 +32,15 @@ export class MainsiteComponent {
 
   ProfileRedirect(){
     this.router.navigate(['/Profile'])
+  }
+
+  calculateLevel(xp: number): number {
+    for (let i = this.xpTable.length - 1; i >= 0; i--) {
+      console.log(xp)
+      if (xp >= this.xpTable[i]) {
+        return i + 1; // Level 1 startet bei xpTable[0]
+      }
+    }
+    return 1;
   }
 }
