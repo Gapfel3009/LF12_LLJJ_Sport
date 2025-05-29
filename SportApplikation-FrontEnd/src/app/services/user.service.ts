@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {AppUser} from '../../models/AppUser';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
-import {Workout} from '../../models/workout';
+import {parseJson} from '@angular/cli/src/utilities/json-file';
+import {Exercise} from '../../models/exercise';
 
 interface loginResponse{
   token: string;
@@ -20,7 +21,6 @@ export class UserService {
 
 
   authenticateUser(email: string, passwordHash: string): Observable<loginResponse> {
-    //TODO: Enpunkt einbinden, sobald existiert
     return this.http.post<loginResponse>(`${this.ApiUrl}/api/auth/login`, { email, passwordHash }).pipe(
       tap(response => {
 
@@ -54,7 +54,11 @@ export class UserService {
   }
 
   setUser(user: AppUser){
-    this.appUser = user;
+    this.getUserByID(user.userID).subscribe({
+      next: (data)=>{
+        this.appUser = data
+      }
+  })
   }
 
   getUserId(): number{
@@ -88,5 +92,20 @@ export class UserService {
       return this.appUser.flappyHighScore
     }
     return 0;
+  }
+
+  updateUser(user:AppUser){
+    console.log(user)
+    return this.http.put<AppUser>(`${this.ApiUrl}/api/appUser/${user.userID}`, user,{
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+    });
+  }
+
+  getUserByID(id:number)  {
+    return this.http.get<AppUser>(`${this.ApiUrl}/api/appUser/${id}`,{
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+    });
   }
 }

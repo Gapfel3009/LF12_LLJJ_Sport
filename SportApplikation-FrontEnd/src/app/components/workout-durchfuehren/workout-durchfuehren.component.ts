@@ -35,9 +35,6 @@ export class WorkoutDurchfuehrenComponent {
   showAbbrechKontext:boolean = false;
   showGame:boolean = false;
   showWorkoutFinished:boolean = false;
-  GamingTimerSecondsLeft: number = 90;
-  GamingTimerEnded: boolean = false;
-  GamingTimer: any;
 
   constructor(private route: ActivatedRoute,private router:Router, private workoutService:WorkoutService, private userService:UserService) {
     this.route.queryParams.subscribe(params => {
@@ -134,17 +131,78 @@ export class WorkoutDurchfuehrenComponent {
   }
 
   FinishWorkout(){
-    //TODO:
-    /*let user : AppUser | null = this.userService.getCurrentUser();
+
+    let user : AppUser | null = this.userService.getCurrentUser();
     if(user){
+      if(!this.isToday(user.lastWorkout))
+        user.streak = user.streak++;
       user.lastWorkout = new Date(Date.now());
-      user.addXpTotal()
-    }*/
+      user.xpTotal += this.getTotalXpTotal(this.exercises);
+      user.xpChest += this.getTotalXpChest(this.exercises);
+      user.xpBack += this.getTotalXpBack(this.exercises);
+      user.xpShoulders += this.getTotalXpShoulders(this.exercises);
+      user.xpLegs += this.getTotalXpLegs(this.exercises);
+      user.xpTriceps += this.getTotalXpTriceps(this.exercises);
+      user.xpAbs += this.getTotalXpAbs(this.exercises);
+      user.xpGlutes += this.getTotalXpGlutes(this.exercises);
+      user.xpBiceps += this.getTotalXpBiceps(this.exercises);
+      user.xpFlexibility += this.getTotalXpFlexibility(this.exercises);
+      this.userService.updateUser(user).subscribe();
+    }
 
     this.MainRedirect();
   }
 
   receiveShowGame(showGame:boolean){
     this.showGame = showGame;
+  }
+
+  isToday(date: Date | null): boolean {
+    const today = new Date();
+    if(date){
+      return date.toDateString() === today.toDateString();
+    }else{
+      return false;
+    }
+  }
+
+  getTotalXpTotal(exercises: Exercise[]): number {
+    return exercises.reduce((sum, ex) => sum + ex.xpTotal, 0);
+  }
+
+  getTotalXpChest(exercises: Exercise[]): number {
+    return exercises.reduce((sum, ex) => sum + ex.xpChest, 0);
+  }
+
+  getTotalXpBack(exercises: Exercise[]): number {
+    return exercises.reduce((sum, ex) => sum + ex.xpBack, 0);
+  }
+
+  getTotalXpShoulders(exercises: Exercise[]): number {
+    return exercises.reduce((sum, ex) => sum + ex.xpShoulders, 0);
+  }
+
+  getTotalXpLegs(exercises: Exercise[]): number {
+    return exercises.reduce((sum, ex) => sum + ex.xpLegs, 0);
+  }
+
+  getTotalXpTriceps(exercises: Exercise[]): number {
+    return exercises.reduce((sum, ex) => sum + ex.xpTriceps, 0);
+  }
+
+  getTotalXpAbs(exercises: Exercise[]): number {
+    return exercises.reduce((sum, ex) => sum + ex.xpAbs, 0);
+  }
+
+  getTotalXpGlutes(exercises: Exercise[]): number {
+    return exercises.reduce((sum, ex) => sum + ex.xpGlutes, 0);
+  }
+
+  getTotalXpBiceps(exercises: Exercise[]): number {
+    return exercises.reduce((sum, ex) => sum + ex.xpBiceps, 0);
+  }
+
+  getTotalXpFlexibility(exercises: Exercise[]): number {
+    return exercises.reduce((sum, ex) => sum + ex.xpFlexibility, 0);
   }
 }

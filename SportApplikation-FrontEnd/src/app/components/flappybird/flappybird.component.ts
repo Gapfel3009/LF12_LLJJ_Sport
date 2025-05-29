@@ -56,7 +56,7 @@ export class FlappyBirdComponent implements AfterViewInit {
 
   GameTimer(){
     this.GamingTimerEnded = false;
-    this.GamingTimerSecondsLeft = 10;
+    this.GamingTimerSecondsLeft = 90;
 
     this.GamingTimer = setInterval(() => {
       this.GamingTimerSecondsLeft--;
