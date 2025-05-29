@@ -52,7 +52,6 @@ export class WorkoutDurchfuehrenComponent {
           this.workout = workout
           this.workoutService.getExercisesByWorkoutId(this.workoutId).subscribe({
             next: (data)=>{
-              console.log(data)
               this.exercises = data.map((json:any) => Exercise.fromWorkoutExerciseJson(json))
               if(this.workout)
                 this.workout.exercises = this.exercises;
@@ -66,7 +65,6 @@ export class WorkoutDurchfuehrenComponent {
 
   workoutStarten(){
     this.workoutStarted = true;
-    console.log(this.workout);
     this.startTimer()
   }
 
@@ -105,10 +103,8 @@ export class WorkoutDurchfuehrenComponent {
 
   CheckboxChange(){
     if(this.checkedSets.every(value => value === true)){
-      console.log(this.checkedSets);
       if(this.nextExercise()){
         this.showGame = true;
-        this.GameTimer()
         setTimeout(() => {
           // @ts-ignore
           this.checkedSets = Array(this.workout.exercises[this.currentIndex].sets).fill(false);
@@ -120,7 +116,6 @@ export class WorkoutDurchfuehrenComponent {
     }
     if(this.checkedSets.some(value => value === false)){
       this.showGame = true
-      this.GameTimer()
     }
   }
 
@@ -128,19 +123,6 @@ export class WorkoutDurchfuehrenComponent {
     const minutes = Math.floor(this.time / 60);
     const seconds = this.time % 60;
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  }
-
-  GameTimer(){
-    this.GamingTimerEnded = false;
-    this.GamingTimerSecondsLeft = 90;
-
-    this.GamingTimer = setInterval(() => {
-      this.GamingTimerSecondsLeft--;
-
-      if (this.GamingTimerSecondsLeft <= 0) {
-        this.showGame = false;
-      }
-    }, 1000);
   }
 
   WorkoutAbbrechen(){
@@ -160,5 +142,9 @@ export class WorkoutDurchfuehrenComponent {
     }*/
 
     this.MainRedirect();
+  }
+
+  receiveShowGame(showGame:boolean){
+    this.showGame = showGame;
   }
 }

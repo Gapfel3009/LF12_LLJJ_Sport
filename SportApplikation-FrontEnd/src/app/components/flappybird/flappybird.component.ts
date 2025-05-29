@@ -1,6 +1,7 @@
-import {Component, ElementRef, ViewChild, AfterViewInit, HostListener} from '@angular/core';
+import {Component, ElementRef, ViewChild, AfterViewInit, HostListener, Output, EventEmitter} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgIf} from '@angular/common';
+import {UserService} from '../../services/user.service';
 @Component({
   selector: 'app-flappybird',
   imports: [
@@ -12,6 +13,7 @@ import {NgIf} from '@angular/common';
 })
 export class FlappyBirdComponent implements AfterViewInit {
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
+  @Output() showGame = new EventEmitter<boolean>();
   ctx!: CanvasRenderingContext2D;
 
   birdY = 250;
@@ -28,10 +30,17 @@ export class FlappyBirdComponent implements AfterViewInit {
 
   gameStarted = false;
   gameOver = false;
+  GamingTimerSecondsLeft: number = 90;
+  GamingTimerEnded: boolean = false;
+  GamingTimer: any;
 
+  constructor(private userService: UserService) {
+
+  }
   ngAfterViewInit() {
     this.ctx = this.canvas.nativeElement.getContext('2d')!;
     this.drawStartScreen();
+    this.GameTimer()
   }
 
   startGame() {
@@ -43,6 +52,21 @@ export class FlappyBirdComponent implements AfterViewInit {
     this.gameStarted = true;
     this.gameOver = false;
     this.gameLoop();
+  }
+
+  GameTimer(){
+    this.GamingTimerEnded = false;
+    this.GamingTimerSecondsLeft = 10;
+
+    this.GamingTimer = setInterval(() => {
+      this.GamingTimerSecondsLeft--;
+
+      if (this.GamingTimerSecondsLeft <= 0) {
+        this.GamingTimerEnded= true;
+        this.GamingTimerSecondsLeft = 0;
+        clearInterval(this.GamingTimer);
+      }
+    }, 1000);
   }
 
   spawnPipes() {
@@ -150,11 +174,13 @@ export class FlappyBirdComponent implements AfterViewInit {
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     if (event.code === 'Space') {
-      if (!this.gameStarted) {
+      if (!this.gameStarted && !this.GamingTimerEnded) {
         this.startGame();
-      } else if (this.gameOver) {
+      } else if (this.gameOver && !this.GamingTimerEnded) {
         this.startGame();
-      } else {
+      } else if(this.gameOver && this.GamingTimerEnded) {
+        this.backToWorkout();
+      }else {
         this.birdVelocity = this.jumpStrength;
       }
     }
@@ -162,13 +188,22 @@ export class FlappyBirdComponent implements AfterViewInit {
 
   @HostListener('window:click')
   onClick() {
-    if (!this.gameStarted) {
+    console.log(this.gameOver,this.GamingTimerEnded);
+    if (!this.gameStarted && !this.GamingTimerEnded) {
       this.startGame();
-    } else if (this.gameOver) {
+    } else if (this.gameOver && !this.GamingTimerEnded) {
       this.startGame();
-    } else {
+    } else if(this.gameOver && this.GamingTimerEnded) {
+      this.backToWorkout();
+    }else {
       this.birdVelocity = this.jumpStrength;
     }
+  }
+
+  backToWorkout() {
+    this.showGame.emit(false);
+    //Vergleich der Scores in setHighscore
+    this.userService.setHighscore(this.highScore)
   }
 }
 

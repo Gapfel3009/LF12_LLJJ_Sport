@@ -27,7 +27,6 @@ export class WorkoutsComponent implements OnInit {
   ngOnInit(){
     this.workoutService.getAllStandardWorkouts().subscribe({
       next: (data)=>{
-        console.log(data);
         this.standardWorkouts = data
       }
     });
@@ -56,7 +55,6 @@ export class WorkoutsComponent implements OnInit {
     if(workout.workoutId)
     this.workoutService.getExercisesByWorkoutId(workout.workoutId).subscribe({
       next: (data)=>{
-        console.log(data)
         this.exercises = data.map((json:any) => Exercise.fromWorkoutExerciseJson(json))
         workout.exercises = this.exercises
         this.selectedWorkout = workout;

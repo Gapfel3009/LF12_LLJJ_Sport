@@ -62,4 +62,23 @@ export class UserService {
     this.appUser = null;
     localStorage.removeItem(this.tokenKey);
   }
+
+  setHighscore(highScore:number):void{
+    if(this.appUser && this.appUser.flappyHighScore < highScore){
+      this.appUser.flappyHighScore = highScore;
+      console.log(this.appUser.flappyHighScore);
+    }
+    if(this.appUser){
+      console.log(this.appUser.flappyHighScore < highScore);
+      console.log(this.appUser.flappyHighScore);
+      console.log(highScore);
+    }
+
+  }
+  getHighscore():number{
+    if(this.appUser){
+      return this.appUser.flappyHighScore
+    }
+    return 0;
+  }
 }

@@ -15,6 +15,7 @@ export class AppUser {
   xpBiceps: number;
   xpFlexibility: number;
   avatarID: number;
+  flappyHighScore: number = 0;
 
   constructor(userID: number,
   email: string,
@@ -31,7 +32,8 @@ export class AppUser {
   xpGlutes: number,
   xpBiceps: number,
   xpFlexibility: number,
-  avatarID: number) {
+  avatarID: number,
+  flappyHighScore: number) {
     this.userID = userID;
     this.email = email;
     this.passwordHash = passwordHash;
@@ -48,6 +50,7 @@ export class AppUser {
     this.xpBiceps = xpBiceps;
     this.xpFlexibility = xpFlexibility;
     this.avatarID = avatarID;
+    this.flappyHighScore = flappyHighScore;
   }
 
   addXpTotal(amount: number): void {

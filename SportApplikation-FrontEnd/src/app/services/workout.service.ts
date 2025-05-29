@@ -81,13 +81,10 @@ export class WorkoutService {
         headers: new HttpHeaders().set('Content-Type', 'application/json')
       }).subscribe({
         next: (response) => {
-          console.log('Übung erfolgreich hinzugefügt:', response);
         },
         error: (error) => {
-          console.error('Fehler beim Hinzufügen:', error);
         }
       });
-      console.log(JSON)
     }
   }
 }
