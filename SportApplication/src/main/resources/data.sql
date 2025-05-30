@@ -59,7 +59,7 @@ CREATE TABLE if not exists user_workout
 CREATE TABLE if not exists workout_exercise
 (
     workout_exercise_id SERIAL PRIMARY KEY,
-    workout_id     INTEGER NOT NULL REFERENCES workout (workout_id),
+    workout_id     INTEGER NOT NULL REFERENCES workout (workout_id) ON DELETE CASCADE,
     exercise_id    INTEGER NOT NULL REFERENCES exercise (exercise_id),
     exercise_order INTEGER,
     number_of_sets INTEGER,
