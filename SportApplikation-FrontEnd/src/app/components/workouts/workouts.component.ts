@@ -18,6 +18,8 @@ import {Exercise} from '../../../models/exercise';
 })
 export class WorkoutsComponent implements OnInit {
   showWorkout: boolean = false;
+  deletePossible: boolean = false;
+  confirmDelete: boolean = false;
   standardWorkouts: Workout[] = [];
   exercises:Exercise[] = [];
   userWorkouts: Workout[] = [];
@@ -30,7 +32,7 @@ export class WorkoutsComponent implements OnInit {
         this.standardWorkouts = data
       }
     });
-
+    console.log(this.userService.getCurrentUser())
     this.workoutService.getAllUserWorkouts(this.userService.getUserId()).subscribe({
       next: (data)=>{
         this.userWorkouts = data
@@ -50,7 +52,7 @@ export class WorkoutsComponent implements OnInit {
     });
   }
 
-  ShowWorkout(workout:Workout){
+  ShowWorkout(workout:Workout, deletePossible:boolean){
     //TODO: Wieder reinpacken, sobald get Exercise da ist
     if(workout.workoutId)
     this.workoutService.getExercisesByWorkoutId(workout.workoutId).subscribe({
@@ -59,6 +61,7 @@ export class WorkoutsComponent implements OnInit {
         workout.exercises = this.exercises
         this.selectedWorkout = workout;
         this.showWorkout = true;
+        this.deletePossible = deletePossible;
       }
     })
 
@@ -67,5 +70,12 @@ export class WorkoutsComponent implements OnInit {
 
   getCounter(n: number): any[] {
     return Array(n);
+  }
+
+  deleteWorkout(){
+    if(this.selectedWorkout && this.selectedWorkout.workoutId)
+      this.workoutService.deleteWorkoutById(this.selectedWorkout.workoutId).subscribe();
+    this.confirmDelete = false;
+    this.showWorkout = false;
   }
 }
