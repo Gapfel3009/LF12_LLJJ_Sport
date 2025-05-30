@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
+import {AVATARS} from '../../../models/Avatar';
 
 @Component({
   selector: 'app-mainsite',
@@ -13,6 +14,7 @@ import {UserService} from '../../services/user.service';
   standalone: true,
   styleUrl: './mainsite.component.css'
 })
+
 export class MainsiteComponent {
 
   showSummaryInfo:boolean = false;
@@ -24,6 +26,9 @@ export class MainsiteComponent {
     this.router.navigate(['/Workout-erstellen'], {
       queryParams: {returnTo: this.router.url}
     });
+  }
+  getavatar(AvatarID: number){
+    return AVATARS[AvatarID];
   }
 
   WorkoutsRedirect(){
@@ -43,4 +48,5 @@ export class MainsiteComponent {
     }
     return 1;
   }
+
 }

@@ -3,47 +3,57 @@
   <div class="dashboard">
     <div class="section">
       <h2 class="section-title">Zusammenfassung</h2>
-      <ul>
-        <li >
-          Total LVL: {{this.calculateLevel(userService.getCurrentUser()?.xpTotal!) }}
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Total Level:</span>
+          <span class="text-end">{{ calculateLevel(userService.getCurrentUser()?.xpTotal!) }}</span>
         </li>
-        <li >
-          Schultern LVL: {{this.calculateLevel(this.userService.getCurrentUser()?.xpShoulders!) }}
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Schultern Level:</span>
+          <span class="text-end">{{ calculateLevel(userService.getCurrentUser()?.xpShoulders!) }}</span>
         </li>
-        <li >
-          Bizeps LVL: {{this.calculateLevel(this.userService.getCurrentUser()?.xpBiceps!) }}
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Bizeps Level:</span>
+          <span class="text-end">{{ calculateLevel(userService.getCurrentUser()?.xpBiceps!) }}</span>
         </li>
-        <li >
-          Trizeps LVL: {{this.calculateLevel(this.userService.getCurrentUser()?.xpTriceps!) }}
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Trizeps Level:</span>
+          <span class="text-end">{{ calculateLevel(userService.getCurrentUser()?.xpTriceps!) }}</span>
         </li>
-        <li>
-          Rücken LVL: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpBack!) }}
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Rücken Level:</span>
+          <span class="text-end">{{ calculateLevel(userService.getCurrentUser()?.xpBack!) }}</span>
         </li>
-        </ul>
+      </ul>
       <i class="bi bi-info-circle" (click)="showSummaryInfo = !showSummaryInfo"></i>
     </div>
 
     <div class="section" style="text-align: center;">
-      <img ngSrc="/muskeln-muskulatur-scaled.jpeg" alt="Avatar" width="240" height="320" style="max-height: 100%; height: auto" />
+      <img ngSrc="{{getavatar(this.userService.getCurrentUser()?.avatarID!).front}}" alt="Avatar" width="240" height="320" style="max-height: 100%; height: auto" />
     </div>
 
     <div class="section">
       <h2 class="section-title">Stats</h2>
-      <ul>
-        <li>
-          Brust LVL: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpChest!) }}
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Brust Level: </span>
+          <span class="text-end">{{ this.calculateLevel(this.userService.getCurrentUser()?.xpChest!) }}</span>
         </li>
-        <li>
-          Bauch LVL: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpAbs!) }}
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Bauch Level: </span>
+          <span class="text-end">{{ this.calculateLevel(this.userService.getCurrentUser()?.xpAbs!) }}</span>
         </li>
-        <li>
-          Gluteus Maximus LVL: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpGlutes!) }}
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Gluteus Maximus Level: </span>
+          <span class="text-end">{{ this.calculateLevel(this.userService.getCurrentUser()?.xpGlutes!) }}</span>
         </li>
-        <li>
-          Bein LVL: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpLegs!)}}
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Bein Level: </span>
+          <span class="text-end">{{ this.calculateLevel(this.userService.getCurrentUser()?.xpLegs!)}}</span>
         </li>
-        <li>
-          Flexiblität LVL: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpFlexibility!) }}
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Flexiblität Level: </span>
+          <span class="text-end">{{ this.calculateLevel(this.userService.getCurrentUser()?.xpFlexibility!) }}</span>
         </li>
       </ul>
       <i class="bi bi-info-circle" (click)="showStatsInfo = !showStatsInfo"></i>
@@ -99,7 +109,7 @@
           Gluteus Maximus EXP: {{ this.userService.getCurrentUser()?.xpGlutes }}
         </li>
         <li>
-          Bein EXP: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpLegs!)}}
+          Bein EXP: {{ this.userService.getCurrentUser()?.xpLegs!}}
         </li>
         <li>
           Flexiblität EXP: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpFlexibility!) }}

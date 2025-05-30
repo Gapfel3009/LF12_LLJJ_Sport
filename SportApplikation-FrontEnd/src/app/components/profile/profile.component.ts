@@ -45,4 +45,9 @@ export class ProfileComponent implements OnInit {
   getUser(){
     this.currentUser = this.userService.getCurrentUser();
   }
+  setAvatarId(avatarID:number){
+    this.currentUser!.avatarID = avatarID;
+    console.log(this.currentUser);
+    this.userService.updateUser(this.currentUser!);
+  }
 }
