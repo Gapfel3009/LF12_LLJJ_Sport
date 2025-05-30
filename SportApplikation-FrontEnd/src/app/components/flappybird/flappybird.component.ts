@@ -1,12 +1,10 @@
 import {Component, ElementRef, ViewChild, AfterViewInit, HostListener, Output, EventEmitter} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {NgIf} from '@angular/common';
 import {UserService} from '../../services/user.service';
 @Component({
   selector: 'app-flappybird',
   imports: [
     FormsModule,
-    NgIf,
   ],
   templateUrl: './flappybird.component.html',
   styleUrl: './flappybird.component.css'
@@ -35,7 +33,7 @@ export class FlappyBirdComponent implements AfterViewInit {
   GamingTimer: any;
 
   constructor(private userService: UserService) {
-
+   this.highScore =  this.userService.getHighscore()
   }
   ngAfterViewInit() {
     this.ctx = this.canvas.nativeElement.getContext('2d')!;
@@ -56,7 +54,7 @@ export class FlappyBirdComponent implements AfterViewInit {
 
   GameTimer(){
     this.GamingTimerEnded = false;
-    this.GamingTimerSecondsLeft = 90;
+    this.GamingTimerSecondsLeft = 10;
 
     this.GamingTimer = setInterval(() => {
       this.GamingTimerSecondsLeft--;
@@ -86,6 +84,7 @@ export class FlappyBirdComponent implements AfterViewInit {
     } else {
       if (this.score > this.highScore) {
         this.highScore = this.score;
+        this.userService.setHighscore(this.highScore)
       }
       this.gameOver = true;
       this.gameStarted = false;
