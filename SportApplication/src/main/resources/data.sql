@@ -22,7 +22,8 @@ CREATE TABLE if not exists app_user
     xp_abs         INTEGER,
     xp_glutes      INTEGER,
     xp_biceps      INTEGER,
-    xp_flexibility INTEGER
+    xp_flexibility INTEGER,
+    flappyHighScore INTEGER
     );
 CREATE TABLE if not exists workout
 (
@@ -78,12 +79,12 @@ SELECT 'avatar3.png', 'C:\Ordern\avatar3.png'
 WHERE NOT EXISTS (
     SELECT 1 FROM avatar WHERE filename = 'avatar3.png');
 --User--
-INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total)
-SELECT 'admin', '$2a$10$VCeM7thQ7fOf.yxUOEtDsOL5U6F9Yy5jCE0FJ4VpZoF4NjCr0p5Qm', 'admin', 1, 1, 250
+INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total,xp_abs,xp_back,xp_biceps,xp_chest,xp_glutes,xp_shoulders,flappyHighScore)
+SELECT 'admin', '$2a$10$VCeM7thQ7fOf.yxUOEtDsOL5U6F9Yy5jCE0FJ4VpZoF4NjCr0p5Qm', 'admin', 1, 1, 250,99999,99999,99999,99999,99999,99999,99999
 WHERE NOT EXISTS (SELECT 1 FROM app_user);
 
-INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total)
-SELECT 'foo', '$2a$10$GP1hwKD2QNl8QvQ.re7vlO18B4KIqzIf5GsiKzQB0UNzEfi24FK9i', 'testuser', 1, 1, 250
+INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total, flappyHighScore)
+SELECT 'foo', '$2a$10$GP1hwKD2QNl8QvQ.re7vlO18B4KIqzIf5GsiKzQB0UNzEfi24FK9i', 'testuser', 1, 1, 250,5
 WHERE NOT EXISTS (
     SELECT 1 FROM app_user WHERE username = 'testuser');
 -- Testdaten --

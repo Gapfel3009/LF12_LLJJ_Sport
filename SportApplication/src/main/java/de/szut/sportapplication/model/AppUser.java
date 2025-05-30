@@ -73,6 +73,17 @@ public class AppUser {
     //@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Avatar avatar;
 
+    @Column(name = "flappyhighscore")
+    private Integer flappyHighScore ;
+
+    public Integer getFlappyHighScore() {
+        return flappyHighScore;
+    }
+
+    public void setFlappyHighScore(Integer flappyHighScore) {
+        this.flappyHighScore = flappyHighScore;
+    }
+
     public Integer getUserID() {
         return userID;
     }

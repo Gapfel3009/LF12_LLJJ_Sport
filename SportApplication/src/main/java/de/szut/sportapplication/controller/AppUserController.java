@@ -43,6 +43,7 @@ public class AppUserController {
                     existingUser.setXpBiceps(updatedUser.getXpBiceps());
                     existingUser.setXpFlexibility(updatedUser.getXpFlexibility());
                     existingUser.setAvatarID(updatedUser.getAvatarID());
+                    existingUser.setFlappyHighScore(updatedUser.getFlappyHighScore());
                    // existingUser.setAvatar(updatedUser.getAvatar());
                     AppUser saved = usersRepository.save(existingUser);
                     return ResponseEntity.ok(saved);
