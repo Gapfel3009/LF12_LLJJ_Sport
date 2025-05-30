@@ -132,4 +132,44 @@ h4{
   margin: 20px;
 }
 
+#workout-löschen-box{
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.workout-löschen{
+  background-color: #ff0000;
+}
+
+.workout-löschen:hover {
+  background-color: #9c0b0b;
+  color: white;
+}
+
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:1rem;
+}
+
+.overlay-box{
+  background: white;
+  padding: 25px;
+  border-radius: 25px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+#delete-button-box{
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
 

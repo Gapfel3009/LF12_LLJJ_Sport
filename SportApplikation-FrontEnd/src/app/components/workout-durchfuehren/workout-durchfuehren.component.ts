@@ -136,18 +136,18 @@ export class WorkoutDurchfuehrenComponent {
     if(user){
       if(!this.isToday(user.lastWorkout))
         user.streak = user.streak++;
-      user.lastWorkout = new Date(Date.now());
-      user.xpTotal += this.getTotalXpTotal(this.exercises);
-      user.xpChest += this.getTotalXpChest(this.exercises);
-      user.xpBack += this.getTotalXpBack(this.exercises);
-      user.xpShoulders += this.getTotalXpShoulders(this.exercises);
-      user.xpLegs += this.getTotalXpLegs(this.exercises);
-      user.xpTriceps += this.getTotalXpTriceps(this.exercises);
-      user.xpAbs += this.getTotalXpAbs(this.exercises);
-      user.xpGlutes += this.getTotalXpGlutes(this.exercises);
-      user.xpBiceps += this.getTotalXpBiceps(this.exercises);
-      user.xpFlexibility += this.getTotalXpFlexibility(this.exercises);
-      this.userService.updateUser(user).subscribe();
+        user.lastWorkout = new Date(Date.now());
+        user.xpTotal += this.getTotalXpTotal(this.exercises);
+        user.xpChest += this.getTotalXpChest(this.exercises);
+        user.xpBack += this.getTotalXpBack(this.exercises);
+        user.xpShoulders += this.getTotalXpShoulders(this.exercises);
+        user.xpLegs += this.getTotalXpLegs(this.exercises);
+        user.xpTriceps += this.getTotalXpTriceps(this.exercises);
+        user.xpAbs += this.getTotalXpAbs(this.exercises);
+        user.xpGlutes += this.getTotalXpGlutes(this.exercises);
+        user.xpBiceps += this.getTotalXpBiceps(this.exercises);
+        user.xpFlexibility += this.getTotalXpFlexibility(this.exercises);
+        this.userService.updateUser(user).subscribe();
     }
 
     this.MainRedirect();

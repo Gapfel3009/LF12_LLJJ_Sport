@@ -36,10 +36,10 @@ export class Exercise {
   this.name = Name ?? "";
   this.description = Description ?? "";
   this.gifLink = gifLink ?? "";
-  this.numReps = repetitions ?? 0;
-  this.numSets = sets ?? 0;
+  this.numReps = repetitions ?? 1;
+  this.numSets = sets ?? 1;
   this.hasWeights = hasWeight ?? false;
-  this.weightAmount = weight ?? 0;
+  this.weightAmount = weight ?? 1;
   this.xpTotal = 0;
   this.xpChest = 0;
   this.xpBack = 0;

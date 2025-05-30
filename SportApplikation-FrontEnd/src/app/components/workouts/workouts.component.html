@@ -3,7 +3,7 @@
     <div class="standard-workouts-box">
       <h4>Standard Workouts</h4>
       <div class="card-box">
-        <div *ngFor="let workout of standardWorkouts" class="card big-card hover-true" (click)="ShowWorkout(workout)">
+        <div *ngFor="let workout of standardWorkouts" class="card big-card hover-true" (click)="ShowWorkout(workout, false)">
           <h1>{{workout.title}}</h1>
           <p>{{workout.description}}</p>
           <button class="button" (click)="WorkoutDurchfuehrenRedirect(workout); $event.stopPropagation()">Workout machen</button>
@@ -17,7 +17,7 @@
         <div class="card big-card hover-true" (click)="WorkoutErstellenRedirect()">
           <h1>Workout erstellen</h1>
         </div>
-        <div *ngFor="let workout of userWorkouts" class="card big-card hover-true" (click)="ShowWorkout(workout)">
+        <div *ngFor="let workout of userWorkouts" class="card big-card hover-true" (click)="ShowWorkout(workout, true)">
           <h1>{{workout.title}}</h1>
           <p>{{workout.description}}</p>
           <button class="button" (click)="WorkoutDurchfuehrenRedirect(workout); $event.stopPropagation()">Workout machen</button>
@@ -50,6 +50,18 @@
             <span>{{ exercise?.numReps }} Wiederholungen</span>
           </div>
         </div>
+      </div>
+    </div>
+    <div id="workout-löschen-box" *ngIf="deletePossible">
+      <button class="button workout-löschen"  (click)="confirmDelete = true">Workout löschen</button>
+    </div>
+  </div>
+  <div *ngIf="confirmDelete" class="overlay">
+    <div class="overlay-box">
+      <p>Bist du sicher, dass du dein Workout löschen willst?</p>
+      <div id="delete-button-box">
+        <button class="button" (click)="confirmDelete = false">Abbrechen</button>
+        <button class="button workout-löschen" (click)="deleteWorkout()">Löschen</button>
       </div>
     </div>
   </div>

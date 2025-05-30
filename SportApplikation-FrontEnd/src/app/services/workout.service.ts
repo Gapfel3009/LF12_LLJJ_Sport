@@ -32,6 +32,12 @@ export class WorkoutService {
     })
   }
 
+  deleteWorkoutById(id:number){
+    return this.http.delete<Workout>(`${this.ApiUrl}/api/workouts/${id}`,{
+      headers: this.setHeaderToken()
+    })
+  }
+
   getWorkoutById(workoutID:number):Observable<any>{
     return this.http.get<Workout>(`${this.ApiUrl}/api/workouts/${workoutID}`,{
       headers: this.setHeaderToken()
