@@ -1,64 +1,58 @@
 <div class="container py-4">
   <div class="card shadow-lg">
-    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+    <div class="card-header bg-primary text-white">
       <h5 class="mb-0">Dein Profil: {{currentUser?.username}}</h5>
     </div>
     <div class="card-body">
       <div class="row">
-        <!-- Bildbereich -->
-        <div class="col-md-6 text-center mb-3 mb-md-0 border-end">
-          <div>
-            <button (click)="setAvatarId(1)">Avatar 1</button>
-            <button (click)="setAvatarId(2)">Avatar 2</button>
-          </div>
-          <div>
-            <button>Avatar 3</button>
-            <button>Avatar 4</button>
-          </div>
-        </div>
-        <div class="col-md-6 px-4">
-          <h6 class="mb-3 text-secondary">Deine XP-Übersicht</h6>
-          <div class="row">
-            <div class="col-6">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item ">
-                  <span>Total XP: {{ currentUser?.xpTotal }}</span>
-                </li>
-                <li class="list-group-item ">
-                  <span>Schultern XP: {{ currentUser?.xpShoulders }}</span>
-                </li>
-                <li class="list-group-item ">
-                  <span>Bizeps XP: {{ currentUser?.xpBiceps }}</span>
-                </li>
-                <li class="list-group-item ">
-                  <span>Trizeps XP: {{ currentUser?.xpTriceps }}</span>
-                </li>
-                <li class="list-group-item ">
-                  <span>Rücken XP: {{ currentUser?.xpBack }}</span>
-                </li>
-              </ul>
+        <!-- Avatar Auswahl (2x2 Layout) -->
+        <div class="col-md-6">
+          <div class="row g-3 justify-content-center">
+            <div class="col-5 d-flex justify-content-center">
+              <button class="btn btn-light border w-75" style="aspect-ratio: 1; background-image: url('/Ava1Front.png'); background-size: cover;" (click)="setAvatarId(1)">
+              </button>
             </div>
-            <div class="col-6">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item ">
-                  <span>Brust XP: {{ currentUser?.xpChest }}</span>
-                </li>
-                <li class="list-group-item ">
-                  <span>Bauch XP: {{ currentUser?.xpAbs }}</span>
-                </li>
-                <li class="list-group-item ">
-                  <span>Gluteus Maximus XP: {{ currentUser?.xpGlutes }}</span>
-                </li>
-                <li class="list-group-item ">
-                  <span>Bein XP: {{ currentUser?.xpLegs }}</span>
-                </li>
-                <li class="list-group-item ">
-                  <span>Flexiblität XP: {{ currentUser?.xpFlexibility }}</span>
-                </li>
-              </ul>
+            <div class="col-5 d-flex justify-content-center">
+              <button class="btn btn-light border w-75" style="aspect-ratio: 1; background-image: url('/Ava2Front.png'); background-size: cover;" (click)="setAvatarId(2)">
+              </button>
+            </div>
+            <div class="col-5 d-flex justify-content-center">
+              <button class="btn btn-light border w-75" style="aspect-ratio: 1; background-image: url('/Ava2Front.png'); background-size: cover;" (click)="setAvatarId(2)">
+              </button>
+            </div>
+            <div class="col-5 d-flex justify-content-center">
+              <button class="btn btn-light border w-75" style="aspect-ratio: 1; background-image: url('/Ava1Front.png'); background-size: cover; " (click)="setAvatarId(1)">
+              </button>
             </div>
           </div>
         </div>
+
+        <!-- Benutzernamen ändern -->
+        <div class="col-md-6">
+          <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0">Benutzernamen ändern</h5>
+            </div>
+            <div class="card-body">
+              <form (ngSubmit)="UpdateUser(newUsername)">
+                <div class="mb-3">
+                  <label for="usernameInput" class="form-label">Neuer Benutzername</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="usernameInput"
+                    [(ngModel)]="newUsername"
+                    name="username"
+                    placeholder="Gib deinen neuen Benutzernamen ein"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Aktualisieren</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

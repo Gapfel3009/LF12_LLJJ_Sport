@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgIf, NgOptimizedImage} from "@angular/common";
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
@@ -15,13 +15,19 @@ import {AVATARS} from '../../../models/Avatar';
   styleUrl: './mainsite.component.css'
 })
 
-export class MainsiteComponent {
+export class MainsiteComponent implements OnInit {
 
   showSummaryInfo:boolean = false;
   showStatsInfo:boolean = false;
   xpTable:number[] = [0, 250, 500, 750, 1000, 1500, 2500, 3000, 3500, 4000, 5500, 6000, 7000, 6000, 9000, 10000];
 
   constructor(private router: Router, public userService: UserService) {}
+
+  ngOnInit() {
+    console.log(this.userService.getCurrentUser());
+    console.log(this.getavatar(this.userService.getCurrentUser()?.avatarID!))
+  }
+
   WorkoutErstellenRedirect(){
     this.router.navigate(['/Workout-erstellen'], {
       queryParams: {returnTo: this.router.url}
