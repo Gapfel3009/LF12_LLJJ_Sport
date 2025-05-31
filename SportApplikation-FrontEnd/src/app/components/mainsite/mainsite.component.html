@@ -25,7 +25,6 @@
           <span class="text-end">{{ calculateLevel(userService.getCurrentUser()?.xpBack!) }}</span>
         </li>
       </ul>
-      <i class="bi bi-info-circle" (click)="showSummaryInfo = !showSummaryInfo"></i>
     </div>
 
     <div class="section" style="text-align: center;">
@@ -80,47 +79,23 @@
     </div>
   </div>
 
-  <div class="overlay" *ngIf="showSummaryInfo">
-    <div class="confirmation-box button">
-      <i class="bi bi-x-circle" (click)="showSummaryInfo = !showSummaryInfo"></i>
-      <ul>
-        <li >
-          Total EXP: {{this.userService.getCurrentUser()?.xpTotal }}
-        </li>
-        <li >
-          Schultern EXP: {{this.userService.getCurrentUser()?.xpShoulders }}
-        </li>
-        <li >
-          Bizeps EXP: {{this.userService.getCurrentUser()?.xpBiceps }}
-        </li>
-        <li >
-          Trizeps EXP: {{this.userService.getCurrentUser()?.xpTriceps }}
-        </li>
-        <li>
-          Rücken EXP: {{ this.userService.getCurrentUser()?.xpBack }}
-        </li>
-        <li>
-          Brust EXP: {{ this.userService.getCurrentUser()?.xpChest }}
-        </li>
-        <li>
-          Bauch EXP: {{ this.userService.getCurrentUser()?.xpAbs }}
-        </li>
-        <li>
-          Gluteus Maximus EXP: {{ this.userService.getCurrentUser()?.xpGlutes }}
-        </li>
-        <li>
-          Bein EXP: {{ this.userService.getCurrentUser()?.xpLegs!}}
-        </li>
-        <li>
-          Flexiblität EXP: {{ this.calculateLevel(this.userService.getCurrentUser()?.xpFlexibility!) }}
-        </li>
-      </ul>
-  </div>
-  </div>
   <div class="overlay" *ngIf="showStatsInfo">
     <div class="confirmation-box button">
       <i class="bi bi-x-circle" (click)="showStatsInfo = !showStatsInfo"></i>
-      <p class="info-text">Test</p>
+      <ng-container *ngIf="userService.getCurrentUser() as user">
+        <ul class="stats-list">
+          <li><strong>Total EXP:</strong> {{ user.xpTotal }}</li>
+          <li><strong>Schultern EXP:</strong> {{ user.xpShoulders }}</li>
+          <li><strong>Bizeps EXP:</strong> {{ user.xpBiceps }}</li>
+          <li><strong>Trizeps EXP:</strong> {{ user.xpTriceps }}</li>
+          <li><strong>Rücken EXP:</strong> {{ user.xpBack }}</li>
+          <li><strong>Brust EXP:</strong> {{ user.xpChest }}</li>
+          <li><strong>Bauch EXP:</strong> {{ user.xpAbs }}</li>
+          <li><strong>Gluteus Maximus EXP:</strong> {{ user.xpGlutes }}</li>
+          <li><strong>Beine EXP:</strong> {{ user.xpLegs }}</li>
+          <li><strong>Flexibilität EXP:</strong> {{ user.xpFlexibility }}</li>
+        </ul>
+      </ng-container>
     </div>
   </div>
 </div>
