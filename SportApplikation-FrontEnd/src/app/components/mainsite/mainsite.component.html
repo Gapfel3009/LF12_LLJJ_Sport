@@ -2,7 +2,6 @@
   <h1>Moin, {{this.userService.getCurrentUser()?.username}}!</h1>
   <div class="dashboard">
     <div class="section">
-      <h2 class="section-title">Zusammenfassung</h2>
       <ul class="list-group list-group-flush">
         <li class="list-group-item d-flex justify-content-between">
           <span class="flex-grow-1">Total Level:</span>
@@ -26,13 +25,11 @@
         </li>
       </ul>
     </div>
-
-    <div class="section" style="text-align: center;">
-      <img ngSrc="{{getavatar(this.userService.getCurrentUser()?.avatarID!).front}}" alt="Avatar" width="240" height="320" style="max-height: 100%; height: auto" />
+    <div class="section" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+      <img [ngSrc]="isfront ? GetAvatar(this.userService.getCurrentUser()?.avatarID!).front : GetAvatar(this.userService.getCurrentUser()?.avatarID!).back" alt="Avatar" width="240" priority height="320"/>
+      <button class="btn btn-sm btn-light" (click)="FlipThePage()">{{ isfront ? 'Zur Rückseite wechseln' : 'Zur Vorderseite wechseln' }}</button>
     </div>
-
     <div class="section">
-      <h2 class="section-title">Stats</h2>
       <ul class="list-group list-group-flush">
         <li class="list-group-item d-flex justify-content-between">
           <span class="flex-grow-1">Brust Level: </span>
@@ -58,12 +55,6 @@
       <i class="bi bi-info-circle" (click)="showStatsInfo = !showStatsInfo"></i>
     </div>
   </div>
-
-  <div class="welcome">
-    <h2>Willkommen</h2>
-    <p>Hier könnte Ihre Werbung stehen</p>
-  </div>
-
   <div class="cards">
     <div class="card" (click)="ProfileRedirect()">
       <h3>Profil</h3>
@@ -78,7 +69,6 @@
       <p>Erstelle eigene Trainingspläne und Ziele.</p>
     </div>
   </div>
-
   <div class="overlay" *ngIf="showStatsInfo">
     <div class="confirmation-box button">
       <i class="bi bi-x-circle" (click)="showStatsInfo = !showStatsInfo"></i>

@@ -17,15 +17,14 @@ import {AVATARS} from '../../../models/Avatar';
 
 export class MainsiteComponent implements OnInit {
 
-  showSummaryInfo:boolean = false;
   showStatsInfo:boolean = false;
   xpTable:number[] = [0, 250, 500, 750, 1000, 1500, 2500, 3000, 3500, 4000, 5500, 6000, 7000, 6000, 9000, 10000];
-
+  isfront: boolean = true;
   constructor(private router: Router, public userService: UserService) {}
 
   ngOnInit() {
     console.log(this.userService.getCurrentUser());
-    console.log(this.getavatar(this.userService.getCurrentUser()?.avatarID!))
+    console.log(this.GetAvatar(this.userService.getCurrentUser()?.avatarID!))
   }
 
   WorkoutErstellenRedirect(){
@@ -33,7 +32,7 @@ export class MainsiteComponent implements OnInit {
       queryParams: {returnTo: this.router.url}
     });
   }
-  getavatar(AvatarID: number){
+  GetAvatar(AvatarID: number){
     return AVATARS[AvatarID];
   }
 
@@ -55,4 +54,8 @@ export class MainsiteComponent implements OnInit {
     return 1;
   }
 
+  FlipThePage(){
+    this.isfront = !this.isfront;
+    console.log('FlipThePage' + this.isfront);
+  }
 }
