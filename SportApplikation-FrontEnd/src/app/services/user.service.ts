@@ -21,6 +21,10 @@ export class UserService {
   constructor(private http: HttpClient) { }
   firstLogin$ = this.firstLognSubject.asObservable();
 
+  setFirstLogin(isFirst:boolean){
+    this.firstLognSubject.next(isFirst);
+  }
+
   authenticateUser(email: string, passwordHash: string): Observable<loginResponse> {
     return this.http.post<loginResponse>(`${this.ApiUrl}/api/auth/login`, { email, passwordHash }).pipe(
       tap(response => {
@@ -104,9 +108,5 @@ export class UserService {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
     });
-  }
-
-  setFirstLogin(isFirst:boolean){
-    this.firstLognSubject.next(isFirst);
   }
 }

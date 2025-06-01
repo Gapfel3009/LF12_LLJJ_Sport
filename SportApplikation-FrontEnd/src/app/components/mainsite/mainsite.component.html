@@ -2,6 +2,7 @@
   <h1>Moin, {{this.userService.getCurrentUser()?.username}}!</h1>
   <div class="dashboard">
     <div class="section">
+      <h2 class="section-title">Deine Streak: {{this.userService.getCurrentUser()?.streak}}</h2>
       <ul class="list-group list-group-flush">
         <li class="list-group-item d-flex justify-content-between">
           <span class="flex-grow-1">Total Level:</span>
@@ -30,6 +31,7 @@
       <button class="btn btn-sm btn-light" (click)="FlipThePage()">{{ isfront ? 'Zur Rückseite wechseln' : 'Zur Vorderseite wechseln' }}</button>
     </div>
     <div class="section">
+      <h2 class="section-title">Dein Flappy Highscore: {{this.userService.getCurrentUser()?.flappyHighScore}}</h2>
       <ul class="list-group list-group-flush">
         <li class="list-group-item d-flex justify-content-between">
           <span class="flex-grow-1">Brust Level: </span>

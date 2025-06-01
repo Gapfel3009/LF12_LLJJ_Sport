@@ -9,8 +9,7 @@ import {Router} from '@angular/router';
   selector: 'app-profile',
   imports: [
     FormsModule,
-    NgClass,
-    NgIf
+    NgClass
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
@@ -21,18 +20,15 @@ export class ProfileComponent implements OnInit {
   currentUser: AppUser | null = null;
   AvaId: number = 1;
   newUsername: string = '';
-  JustRegisterd: boolean = false;
-  firstlogin: boolean = false;
+  FirstLogin: boolean = false;
   ngOnInit() {
 this.userService.firstLogin$.subscribe(isFirstLogin => {
   if (isFirstLogin) {
-    this.firstlogin = isFirstLogin;
+    this.FirstLogin = isFirstLogin;
   }
 })
     this.getUser()
     this.AvaId = this.currentUser?.avatarID!
-    console.log('currentUser', this.currentUser)
-    console.log(this.userService.getCurrentUser())
   }
 
   getUser(){
@@ -41,15 +37,18 @@ this.userService.firstLogin$.subscribe(isFirstLogin => {
   setAvatarId(avatarID:number){
     this.currentUser!.avatarID = avatarID;
     this.AvaId = avatarID;
-    console.log(this.currentUser);
     this.userService.updateUser(this.currentUser!).subscribe();
   }
   UpdateUser(username: string){
+    if (!username || username.trim().length === 0) {
+      alert('Ungültiger Benutzername.')
+      return;
+    }
     this.newUsername = username;
     this.currentUser!.username = this.newUsername;
-    console.log(this.currentUser!);
     this.userService.updateUser(this.currentUser!).subscribe();
-    console.log(this.userService.getCurrentUser())
+    this.userService.setFirstLogin(false);
+    this.FirstLogin = false;
     this.MainRedirect();
   }
   MainRedirect(){

@@ -15,17 +15,12 @@ import {AVATARS} from '../../../models/Avatar';
   styleUrl: './mainsite.component.css'
 })
 
-export class MainsiteComponent implements OnInit {
+export class MainsiteComponent {
 
   showStatsInfo:boolean = false;
   xpTable:number[] = [0, 250, 500, 750, 1000, 1500, 2500, 3000, 3500, 4000, 5500, 6000, 7000, 6000, 9000, 10000];
   isfront: boolean = true;
   constructor(private router: Router, public userService: UserService) {}
-
-  ngOnInit() {
-    console.log(this.userService.getCurrentUser());
-    console.log(this.GetAvatar(this.userService.getCurrentUser()?.avatarID!))
-  }
 
   WorkoutErstellenRedirect(){
     this.router.navigate(['/Workout-erstellen'], {
@@ -46,7 +41,6 @@ export class MainsiteComponent implements OnInit {
 
   calculateLevel(xp: number): number {
     for (let i = this.xpTable.length - 1; i >= 0; i--) {
-      console.log(xp)
       if (xp >= this.xpTable[i]) {
         return i + 1; // Level 1 startet bei xpTable[0]
       }
@@ -56,6 +50,5 @@ export class MainsiteComponent implements OnInit {
 
   FlipThePage(){
     this.isfront = !this.isfront;
-    console.log('FlipThePage' + this.isfront);
   }
 }

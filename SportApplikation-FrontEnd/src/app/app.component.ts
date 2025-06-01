@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   private readonly userString = localStorage.getItem('user');
   private readonly user: AppUser = this.userString ? JSON.parse(this.userString) : null;
-
+  FirstLogin: boolean = false;
   constructor(private router: Router, private userService: UserService) {
     if (this.user) {
       this.userService.setUser(this.user);
@@ -27,9 +27,24 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      const noHeaderRoutes = ['/Login','/Workout?'];
-      this.showHeader = !noHeaderRoutes.some(item => this.router.url.startsWith(item) || item === this.router.url);
-    })
+    this.userService.firstLogin$.subscribe(isFirstLogin => {
+      this.FirstLogin = isFirstLogin;
+      this.updateHeaderVisibility();
+    });
+
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.updateHeaderVisibility();
+      });
+  }
+  updateHeaderVisibility() {
+    const noHeaderRoutes = this.FirstLogin
+      ? ['/Login', '/Workout?', '/Profile']
+      : ['/Login', '/Workout?'];
+
+    this.showHeader = !noHeaderRoutes.some(
+      item => this.router.url.startsWith(item) || item === this.router.url
+    );
   }
 }
