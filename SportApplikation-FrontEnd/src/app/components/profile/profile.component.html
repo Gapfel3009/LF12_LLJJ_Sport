@@ -1,4 +1,4 @@
-<div class="container py-4">
+<div class="container py-4" *ngIf="!firstlogin">
   <div class="card shadow-lg">
     <div class="card-header bg-primary text-white">
       <h5 class="mb-0">Dein Profil: {{currentUser?.username}}</h5>

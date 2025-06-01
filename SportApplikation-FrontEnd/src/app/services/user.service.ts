@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AppUser} from '../../models/AppUser';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, tap} from 'rxjs';
+import {Observable, tap, BehaviorSubject} from 'rxjs';
 import {parseJson} from '@angular/cli/src/utilities/json-file';
 import {Exercise} from '../../models/exercise';
 
@@ -17,8 +17,9 @@ export class UserService {
   private readonly tokenKey ="";
   private readonly userKey = "user"
   private ApiUrl:string = "http://localhost:8081";
+  private firstLognSubject = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient) { }
-
+  firstLogin$ = this.firstLognSubject.asObservable();
 
   authenticateUser(email: string, passwordHash: string): Observable<loginResponse> {
     return this.http.post<loginResponse>(`${this.ApiUrl}/api/auth/login`, { email, passwordHash }).pipe(
@@ -103,5 +104,9 @@ export class UserService {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
     });
+  }
+
+  setFirstLogin(isFirst:boolean){
+    this.firstLognSubject.next(isFirst);
   }
 }

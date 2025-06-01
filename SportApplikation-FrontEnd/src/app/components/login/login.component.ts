@@ -38,9 +38,11 @@ export class LoginComponent {
     this.userService.registerUser(this.regMail,this.regPassword).subscribe(
       {
         next: (response) => {
-          // todo:loggt hier den token und user und password also rausnehmen nach der entwicklung
-        //  console.log("Registrierung erfolgreich", response.message);
-          this.RegRedirect()
+          this.userService.authenticateUser(this.regMail, this.regPassword).subscribe({
+            next: () => {
+              this.RegRedirect()
+            }
+          })
         },
         error: (error) => {
           console.error("Registrierungsfehler:", error);
@@ -68,7 +70,8 @@ export class LoginComponent {
     this.router.navigate(['/Mainsite']);
   }
   RegRedirect(){
-    const loginTab = document.querySelector('#login-tab') as HTMLElement;
-    loginTab?.click();
+    const isFirstLogin = true;
+    this.userService.setFirstLogin(isFirstLogin);
+    this.router.navigate(['/Profile']);
   }
 }

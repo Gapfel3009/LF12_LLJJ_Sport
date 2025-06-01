@@ -2,14 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {AppUser} from '../../../models/AppUser';
 import {FormsModule} from '@angular/forms';
-import {NgClass} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   imports: [
     FormsModule,
-    NgClass
+    NgClass,
+    NgIf
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
@@ -20,8 +21,14 @@ export class ProfileComponent implements OnInit {
   currentUser: AppUser | null = null;
   AvaId: number = 1;
   newUsername: string = '';
-
+  JustRegisterd: boolean = false;
+  firstlogin: boolean = false;
   ngOnInit() {
+this.userService.firstLogin$.subscribe(isFirstLogin => {
+  if (isFirstLogin) {
+    this.firstlogin = isFirstLogin;
+  }
+})
     this.getUser()
     this.AvaId = this.currentUser?.avatarID!
     console.log('currentUser', this.currentUser)
