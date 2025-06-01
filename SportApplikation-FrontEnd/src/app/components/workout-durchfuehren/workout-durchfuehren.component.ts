@@ -134,8 +134,11 @@ export class WorkoutDurchfuehrenComponent {
 
     let user : AppUser | null = this.userService.getCurrentUser();
     if(user){
-      if(!this.isToday(user.lastWorkout))
-        user.streak = user.streak++;
+      const today = new Date();
+      const lastWorkoutDate = new Date(user.lastWorkout);
+      if(!(lastWorkoutDate.setHours(0,0,0,0) == today.setHours(0,0,0,0))){
+        user.streak = user.streak + 1;
+      }
         user.lastWorkout = new Date(Date.now());
         user.xpTotal += this.getTotalXpTotal(this.exercises);
         user.xpChest += this.getTotalXpChest(this.exercises);
@@ -155,15 +158,6 @@ export class WorkoutDurchfuehrenComponent {
 
   receiveShowGame(showGame:boolean){
     this.showGame = showGame;
-  }
-
-  isToday(date: Date | null): boolean {
-    const today = new Date();
-    if(date){
-      return date.toDateString() === today.toDateString();
-    }else{
-      return false;
-    }
   }
 
   getTotalXpTotal(exercises: Exercise[]): number {

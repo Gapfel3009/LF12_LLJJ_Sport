@@ -32,6 +32,7 @@ public class AppUserController {
                     existingUser.setEmail(updatedUser.getEmail());
                     existingUser.setPasswordHash(updatedUser.getPasswordHash());
                     existingUser.setUsername(updatedUser.getUsername());
+                    existingUser.setLastWorkout(updatedUser.getLastWorkout());
                     existingUser.setStreak(updatedUser.getStreak());
                     existingUser.setXpTotal(updatedUser.getXpTotal());
                     existingUser.setXpChest(updatedUser.getXpChest());

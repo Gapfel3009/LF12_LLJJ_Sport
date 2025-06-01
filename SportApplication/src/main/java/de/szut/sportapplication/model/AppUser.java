@@ -29,7 +29,7 @@ public class AppUser {
     @Column(name = "last_workout")
     private Date lastWorkout;
     private String username;
-    private Integer streak;
+    private Integer streak = 0;
 
     @Column(name = "xp_total")
     private Integer xpTotal = 0;
@@ -74,7 +74,7 @@ public class AppUser {
     private Avatar avatar;
 
     @Column(name = "flappyhighscore")
-    private Integer flappyHighScore ;
+    private Integer flappyHighScore = 0;
 
     public Integer getFlappyHighScore() {
         return flappyHighScore;
