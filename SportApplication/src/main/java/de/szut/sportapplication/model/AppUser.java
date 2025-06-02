@@ -26,8 +26,10 @@ public class AppUser {
 
     @Column(name = "password_hash",nullable = false)
     private String passwordHash;
+
     @Column(name = "last_workout")
     private Date lastWorkout;
+
     private String username;
     private Integer streak = 0;
 
@@ -63,6 +65,14 @@ public class AppUser {
 
     @Column(name = "avatar_id")
     private Integer avatarID;
+
+    public Date getLastWorkout() {
+        return lastWorkout;
+    }
+
+    public void setLastWorkout(Date lastWorkout) {
+        this.lastWorkout = lastWorkout;
+    }
 
     //nur zum lesen - für alles andere wird die avatarid genommen
     //NICHT aus json einlesen
