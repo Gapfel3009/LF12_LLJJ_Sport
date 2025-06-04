@@ -18,7 +18,6 @@ export class Exercise {
   numReps: number;
   weightAmount: number;
 
-  //TODO: Constructor anpassen, erstmal für Testzwecke nur halb
   constructor(ExerciseID: number,Name: string,Description: string,gifLink: string, hasWeight:boolean, repetitions: number, sets:number, weight:number);
   constructor(ExerciseID: number,Name: string,Description: string,gifLink: string, hasWeight:boolean);
   constructor();

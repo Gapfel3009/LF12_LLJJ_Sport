@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FlappybirdComponent } from './flappybird.component';
+import {FlappyBirdComponent} from './flappybird.component';
 
 describe('FlappybirdComponent', () => {
-  let component: FlappybirdComponent;
-  let fixture: ComponentFixture<FlappybirdComponent>;
+  let component: FlappyBirdComponent;
+  let fixture: ComponentFixture<FlappyBirdComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FlappybirdComponent]
+      imports: [FlappyBirdComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FlappybirdComponent);
+    fixture = TestBed.createComponent(FlappyBirdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

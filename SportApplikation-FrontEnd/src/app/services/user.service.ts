@@ -46,7 +46,6 @@ export class UserService {
       email: email,
       passwordHash: password
     };
-    console.log("Register-Request:", body);
     return this.http.post<any>(`${this.ApiUrl}/api/auth/register`, body);
   }
 
@@ -83,7 +82,6 @@ export class UserService {
   setHighscore(highScore:number):void{
     if(this.appUser && this.appUser.flappyHighScore < highScore){
       this.appUser.flappyHighScore = highScore;
-      console.log(this.appUser.flappyHighScore);
     }
     if(this.appUser){
     }
