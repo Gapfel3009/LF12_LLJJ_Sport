@@ -44,19 +44,12 @@
 </div>
 <div *ngIf="showWorkoutFinished" class="overlay">
   <div id="workout-finish-box" class="overlay-box">
-    <h4>Herzlichen Glückfunsch du hast das Workout abgeschlossen</h4>
+    <h4>Herzlichen Glückwunsch du hast das Workout abgeschlossen</h4>
     <p>Deine Zeit: {{formattedTime}}</p>
     <button (click)="FinishWorkout()">Fertig</button>
   </div>
 </div>
 <div *ngIf="showGame">
-  <div id="gaming-timer">
-    <i class="bi bi-clock"></i>
-    <div class="timer-value">{{ GamingTimerSecondsLeft }} Sekunden Pause</div>
-  </div>
-  <app-flappybird></app-flappybird>
-  <div style="display: flex; justify-content: center; margin-top: 1rem">
-    <button (click)="this.showGame = false">Skip</button>
-  </div>
+  <app-flappybird (showGame)="this.receiveShowGame($event)"></app-flappybird>
 </div>
 

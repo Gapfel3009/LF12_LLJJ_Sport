@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
-import {AppUser} from '../../../models/AppUser';
 import {UserService} from '../../services/user.service';
+import * as CryptoJS from 'crypto-js';
 import {NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
@@ -27,6 +27,8 @@ export class LoginComponent {
   Register(event:Event){
     // Todo: password pre-hashen -- nicht lesbar übergeben!
     event.preventDefault();
+    this.regPassword = CryptoJS.SHA256(this.regPassword).toString();
+    this.regPassword2 = CryptoJS.SHA256(this.regPassword2).toString();
     this.passwordNichtGleich = this.regPassword !== this.regPassword2;
 
     if (this.passwordNichtGleich) {
@@ -36,9 +38,11 @@ export class LoginComponent {
     this.userService.registerUser(this.regMail,this.regPassword).subscribe(
       {
         next: (response) => {
-          // todo:loggt hier den token und user und password also rausnehmen nach der entwicklung
-        //  console.log("Registrierung erfolgreich", response.message);
-          this.RegRedirect()
+          this.userService.authenticateUser(this.regMail, this.regPassword).subscribe({
+            next: () => {
+              this.RegRedirect()
+            }
+          })
         },
         error: (error) => {
           console.error("Registrierungsfehler:", error);
@@ -50,7 +54,7 @@ export class LoginComponent {
 
   Login(event:Event){
     event.preventDefault();
-    this.userService.authenticateUser(this.loginMail, this.loginPassword).subscribe({
+    this.userService.authenticateUser(this.loginMail, CryptoJS.SHA256(this.loginPassword).toString()).subscribe({
       next: (response) => {
         // todo:loggt hier den token und user und password also rausnehmen nach der entwicklung
      //  console.log("Login erfolgreich", response);
@@ -66,7 +70,8 @@ export class LoginComponent {
     this.router.navigate(['/Mainsite']);
   }
   RegRedirect(){
-    const loginTab = document.querySelector('#login-tab') as HTMLElement;
-    loginTab?.click();
+    const isFirstLogin = true;
+    this.userService.setFirstLogin(isFirstLogin);
+    this.router.navigate(['/Profile']);
   }
 }

@@ -2,65 +2,61 @@
   <h1>Moin, {{this.userService.getCurrentUser()?.username}}!</h1>
   <div class="dashboard">
     <div class="section">
-      <h2 class="section-title">Zusammenfassung</h2>
-      <table>
-        <tbody>
-          <tr>
-            <td>Arme</td>
-            <td><strong>Lvl 20: 500/7650</strong></td>
-          </tr>
-          <tr>
-            <td>Torso</td>
-            <td><strong>Lvl 25: 4500/9050</strong></td>
-          </tr>
-          <tr>
-            <td>Beine</td>
-            <td><strong>Lvl 1: 100/500</strong></td>
-          </tr>
-          <tr>
-            <td>Flexibilität</td>
-            <td><strong>Lvl 7: 175/2500</strong></td>
-          </tr>
-        </tbody>
-      </table>
-      <i class="bi bi-info-circle" (click)="showSummaryInfo = !showSummaryInfo"></i>
+      <h2 class="section-title">Deine Streak: {{this.userService.getCurrentUser()?.streak}}</h2>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Total Level:</span>
+          <span class="text-end">{{ calculateLevel(userService.getCurrentUser()?.xpTotal!) }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Schultern Level:</span>
+          <span class="text-end">{{ calculateLevel(userService.getCurrentUser()?.xpShoulders!) }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Bizeps Level:</span>
+          <span class="text-end">{{ calculateLevel(userService.getCurrentUser()?.xpBiceps!) }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Trizeps Level:</span>
+          <span class="text-end">{{ calculateLevel(userService.getCurrentUser()?.xpTriceps!) }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Rücken Level:</span>
+          <span class="text-end">{{ calculateLevel(userService.getCurrentUser()?.xpBack!) }}</span>
+        </li>
+      </ul>
     </div>
-
-    <div class="section" style="text-align: center;">
-      <img ngSrc="/muskeln-muskulatur-scaled.jpeg" alt="Avatar" width="240" height="320" style="max-height: 100%; height: auto" />
+    <div class="section" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+      <img [ngSrc]="isfront ? GetAvatar(this.userService.getCurrentUser()?.avatarID!).front : GetAvatar(this.userService.getCurrentUser()?.avatarID!).back" alt="Avatar" width="240" priority height="320"/>
+      <button class="btn btn-sm btn-light" (click)="FlipThePage()">{{ isfront ? 'Zur Rückseite wechseln' : 'Zur Vorderseite wechseln' }}</button>
     </div>
-
     <div class="section">
-      <h2 class="section-title">Stats</h2>
-      <table>
-        <tbody>
-        <tr>
-          <td>Streak</td>
-          <td><strong>200</strong></td>
-        </tr>
-        <tr>
-          <td>Einheiten Allgemein</td>
-          <td><strong>221</strong></td>
-        </tr>
-        <tr>
-          <td>Dieses Jahr</td>
-          <td><strong>154</strong></td>
-        </tr>
-        <tr>
-          <td>Diesen Monat</td>
-          <td><strong>15</strong></td>
-        </tr>
-        </tbody>
-      </table>
+      <h2 class="section-title">Dein Flappy Highscore: {{this.userService.getCurrentUser()?.flappyHighScore}}</h2>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Brust Level: </span>
+          <span class="text-end">{{ this.calculateLevel(this.userService.getCurrentUser()?.xpChest!) }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Bauch Level: </span>
+          <span class="text-end">{{ this.calculateLevel(this.userService.getCurrentUser()?.xpAbs!) }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Gluteus Maximus Level: </span>
+          <span class="text-end">{{ this.calculateLevel(this.userService.getCurrentUser()?.xpGlutes!) }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Bein Level: </span>
+          <span class="text-end">{{ this.calculateLevel(this.userService.getCurrentUser()?.xpLegs!)}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="flex-grow-1">Flexiblität Level: </span>
+          <span class="text-end">{{ this.calculateLevel(this.userService.getCurrentUser()?.xpFlexibility!) }}</span>
+        </li>
+      </ul>
       <i class="bi bi-info-circle" (click)="showStatsInfo = !showStatsInfo"></i>
     </div>
   </div>
-
-  <div class="welcome">
-    <h2>Willkommen</h2>
-    <p>Hier könnte Ihre Werbung stehen</p>
-  </div>
-
   <div class="cards">
     <div class="card" (click)="ProfileRedirect()">
       <h3>Profil</h3>
@@ -75,17 +71,23 @@
       <p>Erstelle eigene Trainingspläne und Ziele.</p>
     </div>
   </div>
-
-  <div class="overlay" *ngIf="showSummaryInfo">
-    <div class="confirmation-box button">
-      <i class="bi bi-x-circle" (click)="showSummaryInfo = !showSummaryInfo"></i>
-      <p class="info-text">Test</p>
-    </div>
-  </div>
   <div class="overlay" *ngIf="showStatsInfo">
     <div class="confirmation-box button">
       <i class="bi bi-x-circle" (click)="showStatsInfo = !showStatsInfo"></i>
-      <p class="info-text">Test</p>
+      <ng-container *ngIf="userService.getCurrentUser() as user">
+        <ul class="stats-list">
+          <li><strong>Total EXP:</strong> {{ user.xpTotal }}</li>
+          <li><strong>Schultern EXP:</strong> {{ user.xpShoulders }}</li>
+          <li><strong>Bizeps EXP:</strong> {{ user.xpBiceps }}</li>
+          <li><strong>Trizeps EXP:</strong> {{ user.xpTriceps }}</li>
+          <li><strong>Rücken EXP:</strong> {{ user.xpBack }}</li>
+          <li><strong>Brust EXP:</strong> {{ user.xpChest }}</li>
+          <li><strong>Bauch EXP:</strong> {{ user.xpAbs }}</li>
+          <li><strong>Gluteus Maximus EXP:</strong> {{ user.xpGlutes }}</li>
+          <li><strong>Beine EXP:</strong> {{ user.xpLegs }}</li>
+          <li><strong>Flexibilität EXP:</strong> {{ user.xpFlexibility }}</li>
+        </ul>
+      </ng-container>
     </div>
   </div>
 </div>

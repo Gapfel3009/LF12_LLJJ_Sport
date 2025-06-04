@@ -1,9 +1,16 @@
 <div class="game-container">
+  <div id="gaming-timer">
+    <i class="bi bi-clock"></i>
+    <div class="timer-value">{{ GamingTimerSecondsLeft }} Sekunden Pause</div>
+  </div>
   <canvas #canvas width="400" height="600"></canvas>
 
   <!-- Scores unter dem Canvas -->
-  <div class="score-section" *ngIf="gameStarted && !gameOver">
+  <div class="score-section" ><!--*ngIf="gameStarted && !gameOver"-->
     <p>Score: {{ score }}</p>
     <p>Highscore: {{ highScore }}</p>
+  </div>
+  <div style="display: flex; justify-content: center; margin-top: 1rem">
+    <button (click)="this.backToWorkout()">Skip</button>
   </div>
 </div>

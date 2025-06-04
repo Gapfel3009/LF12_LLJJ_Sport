@@ -32,6 +32,7 @@ public class AppUserController {
                     existingUser.setEmail(updatedUser.getEmail());
                     existingUser.setPasswordHash(updatedUser.getPasswordHash());
                     existingUser.setUsername(updatedUser.getUsername());
+                    existingUser.setLastWorkout(updatedUser.getLastWorkout());
                     existingUser.setStreak(updatedUser.getStreak());
                     existingUser.setXpTotal(updatedUser.getXpTotal());
                     existingUser.setXpChest(updatedUser.getXpChest());
@@ -43,6 +44,7 @@ public class AppUserController {
                     existingUser.setXpBiceps(updatedUser.getXpBiceps());
                     existingUser.setXpFlexibility(updatedUser.getXpFlexibility());
                     existingUser.setAvatarID(updatedUser.getAvatarID());
+                    existingUser.setFlappyHighScore(updatedUser.getFlappyHighScore());
                    // existingUser.setAvatar(updatedUser.getAvatar());
                     AppUser saved = usersRepository.save(existingUser);
                     return ResponseEntity.ok(saved);

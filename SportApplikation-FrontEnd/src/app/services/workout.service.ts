@@ -32,6 +32,12 @@ export class WorkoutService {
     })
   }
 
+  deleteWorkoutById(id:number){
+    return this.http.delete<Workout>(`${this.ApiUrl}/api/workouts/${id}`,{
+      headers: this.setHeaderToken()
+    })
+  }
+
   getWorkoutById(workoutID:number):Observable<any>{
     return this.http.get<Workout>(`${this.ApiUrl}/api/workouts/${workoutID}`,{
       headers: this.setHeaderToken()
@@ -81,13 +87,10 @@ export class WorkoutService {
         headers: new HttpHeaders().set('Content-Type', 'application/json')
       }).subscribe({
         next: (response) => {
-          console.log('Übung erfolgreich hinzugefügt:', response);
         },
         error: (error) => {
-          console.error('Fehler beim Hinzufügen:', error);
         }
       });
-      console.log(JSON)
     }
   }
 }

@@ -1,48 +1,57 @@
 import {Component, OnInit} from '@angular/core';
-import {NgIf, NgOptimizedImage} from '@angular/common';
 import {UserService} from '../../services/user.service';
 import {AppUser} from '../../../models/AppUser';
+import {FormsModule} from '@angular/forms';
+import {NgClass, NgIf} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   imports: [
-    NgIf,
-    NgOptimizedImage
+    FormsModule,
+    NgClass
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
-  isfront: boolean =true;
   currentUser: AppUser | null = null;
-  hoveredMuscle: string | null = null;
-
-  muscleLines: Record<string, { x1: number; y1: number; x2: number; y2: number }> = {
-    xpTotal: { x1: 10, y1: 10, x2: 150, y2: 10 },
-    xpBack: { x1: 10, y1: 100, x2: 150, y2: 100 },
-    xpShoulders: { x1: 10, y1: 60, x2: 150, y2: 60 },
-    xpLegs: { x1: 10, y1: 250, x2: 150, y2: 250 },
-    xpTriceps: { x1: 10, y1: 80, x2: 150, y2: 80 },
-    xpAbs: { x1: 10, y1: 140, x2: 150, y2: 140 },
-    xpGlutes: { x1: 10, y1: 300, x2: 150, y2: 300 },
-    xpBiceps: { x1: 10, y1: 50, x2: 150, y2: 50 }
-  };
-
+  AvaId: number = 1;
+  newUsername: string = '';
+  FirstLogin: boolean = false;
   ngOnInit() {
+this.userService.firstLogin$.subscribe(isFirstLogin => {
+  if (isFirstLogin) {
+    this.FirstLogin = isFirstLogin;
+  }
+})
     this.getUser()
+    this.AvaId = this.currentUser?.avatarID!
   }
 
-  FlipThePage(){
-    if(this.isfront){
-      this.isfront = false;
-    }
-    else{
-      this.isfront = true;
-    }
-  }
   getUser(){
     this.currentUser = this.userService.getCurrentUser();
+  }
+  setAvatarId(avatarID:number){
+    this.currentUser!.avatarID = avatarID;
+    this.AvaId = avatarID;
+    this.userService.updateUser(this.currentUser!).subscribe();
+  }
+  UpdateUser(username: string){
+    if (!username || username.trim().length === 0) {
+      alert('Ungültiger Benutzername.')
+      return;
+    }
+    this.newUsername = username;
+    this.currentUser!.username = this.newUsername;
+    this.userService.updateUser(this.currentUser!).subscribe();
+    this.userService.setFirstLogin(false);
+    this.FirstLogin = false;
+    this.MainRedirect();
+  }
+  MainRedirect(){
+    this.router.navigate(['/Mainsite']);
   }
 }

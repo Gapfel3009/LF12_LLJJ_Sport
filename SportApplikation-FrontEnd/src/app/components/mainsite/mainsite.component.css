@@ -111,14 +111,18 @@ td strong {
   justify-content: center;
   align-items: center;
 }
-
+.stats-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .confirmation-box{
   background: white;
   padding: 16px;
   border-radius: 25px;
   text-align: center;
-  width: 25%;
-  height: 30%;
+  width: 30%;
+  height: 40%;
 }
 
 .bi-x-circle{

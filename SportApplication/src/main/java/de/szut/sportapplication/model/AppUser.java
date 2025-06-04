@@ -26,10 +26,12 @@ public class AppUser {
 
     @Column(name = "password_hash",nullable = false)
     private String passwordHash;
+
     @Column(name = "last_workout")
     private Date lastWorkout;
+
     private String username;
-    private Integer streak;
+    private Integer streak = 0;
 
     @Column(name = "xp_total")
     private Integer xpTotal = 0;
@@ -64,6 +66,14 @@ public class AppUser {
     @Column(name = "avatar_id")
     private Integer avatarID;
 
+    public Date getLastWorkout() {
+        return lastWorkout;
+    }
+
+    public void setLastWorkout(Date lastWorkout) {
+        this.lastWorkout = lastWorkout;
+    }
+
     //nur zum lesen - für alles andere wird die avatarid genommen
     //NICHT aus json einlesen
     @ManyToOne(fetch = FetchType.LAZY)
@@ -72,6 +82,17 @@ public class AppUser {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     //@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Avatar avatar;
+
+    @Column(name = "flappyhighscore")
+    private Integer flappyHighScore = 0;
+
+    public Integer getFlappyHighScore() {
+        return flappyHighScore;
+    }
+
+    public void setFlappyHighScore(Integer flappyHighScore) {
+        this.flappyHighScore = flappyHighScore;
+    }
 
     public Integer getUserID() {
         return userID;

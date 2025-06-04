@@ -1,6 +1,7 @@
 package de.szut.sportapplication.controller;
 
 import de.szut.sportapplication.model.Workout;
+import de.szut.sportapplication.repository.WorkoutExerciseRepository;
 import de.szut.sportapplication.repository.WorkoutRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class WorkoutController{
 
     @Autowired
     private WorkoutRepository workoutRepository;
+
 
 //Todo: findall brauchen wir nicht gehen über userid und standard
 // getestet: post, getAllWorkouts, put, delete, getWorkoutById, getStandardWorkouts,getWorkoutsByUser
@@ -59,10 +61,13 @@ public class WorkoutController{
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteWorkout(@PathVariable Integer id) {
+
         if (workoutRepository.existsById(id)) {
-            workoutRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } else {
+
+               workoutRepository.deleteById(id);
+               return ResponseEntity.ok().build();
+
+    } else {
             return ResponseEntity.notFound().build();
         }
     }

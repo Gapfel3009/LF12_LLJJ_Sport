@@ -60,9 +60,14 @@ export class WorkoutErstellenComponent implements OnInit {
     if(this.wasdragged){
       return;
     }
-    //Legt eine Kopie des Opbjektes in selectedExercise, damit das Originalobjekt nicht verändert wird
+    //Legt eine Kopie des Objektes in selectedExercise, damit das Originalobjekt nicht verändert wird
     this.selectedExercise = {...selectedExercise};
     this.addToWorkout = addToWorkout;
+    if(this.addToWorkout){
+      this.selectedExercise.numSets = 1;
+      this.selectedExercise.numReps = 1;
+      this.selectedExercise.weightAmount = 1;
+    }
     if(index != null){
       this.selectedExerciseID = index;
     }
@@ -107,6 +112,19 @@ export class WorkoutErstellenComponent implements OnInit {
     workout.workoutId = await this.workoutService.createWorkout(workout);
     this.workoutService.AddExerciseToWorkout(this.workout, workout.workoutId)
     this.router.navigateByUrl(this.returnTo);
+  }
+
+  allowOnlyNumbers(event: KeyboardEvent) {
+    const charCode = event.key.charCodeAt(0);
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
+  }
+
+  ensureMinimumValue(field: 'numReps' | 'numSets' | 'weightAmount') {
+    if (this.selectedExercise[field] < 1 || !this.selectedExercise[field]) {
+      this.selectedExercise[field] = 1;
+    }
   }
 }
 

@@ -29,15 +29,6 @@
   align-items: center;
   justify-content: center;
 }
-#gaming-timer{
-  flex: 1;
-  display: flex;
-  margin: 10px;
-  gap: 1rem;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
 
 .timer-value {
   font-size: 40px;
@@ -74,6 +65,9 @@ button:hover {
   color: white;
 }
 
+#workout-box{
+  max-width: 732px;
+}
 
 .set-row {
   display: flex;
