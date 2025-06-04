@@ -45,18 +45,20 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AppUser user) {
-
-        if (user.getLastWorkout() != null){
-            Date lastWOrkoutDate = user.getLastWorkout();
+        Optional<AppUser> optionalUser = userRepository.findByEmail(user.getEmail());
+        AppUser timeUser = new AppUser();
+        timeUser = optionalUser.get();
+        if (timeUser.getLastWorkout() != null){
+            Date lastWOrkoutDate = timeUser.getLastWorkout();
             LocalDate today = LocalDate.now().minusDays(2);
             LocalDate localDateTime = lastWOrkoutDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
 
             if (localDateTime.atStartOfDay().isBefore(today.atStartOfDay())){
-                user.setStreak(0);
-                userRepository.save(user);
+                timeUser.setStreak(0);
+                userRepository.save(timeUser);
             }}
-        Optional<AppUser> optionalUser = userRepository.findByEmail(user.getEmail());
+
         if (optionalUser.isPresent() && passwordEncoder.matches(user.getPasswordHash(), optionalUser.get().getPasswordHash())) {
             String jwt = jwtAuthService.generateToken(optionalUser.get().getEmail());
             return ResponseEntity.ok(new LoginResponse(jwt,optionalUser.get()));
