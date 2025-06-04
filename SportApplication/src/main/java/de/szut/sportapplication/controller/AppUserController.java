@@ -7,6 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/appUser")
 public class AppUserController {
@@ -16,6 +22,19 @@ public class AppUserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<AppUser> getUser(@PathVariable int id) {
+
+        AppUser user = new AppUser();
+        user = usersRepository.findById(id).orElse(null);
+        if (user.getLastWorkout() != null){
+        Date lastWOrkoutDate = user.getLastWorkout();
+        LocalDate today = LocalDate.now().minusDays(2);
+        LocalDate localDateTime = lastWOrkoutDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+
+        if (localDateTime.atStartOfDay().isBefore(today.atStartOfDay())){
+            user.setStreak(0);
+            usersRepository.save(user);
+        }}
         return usersRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

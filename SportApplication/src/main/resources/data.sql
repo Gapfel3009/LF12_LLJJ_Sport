@@ -79,8 +79,8 @@ SELECT 'avatar3.png', 'C:\Ordern\avatar3.png'
 WHERE NOT EXISTS (
     SELECT 1 FROM avatar WHERE filename = 'avatar3.png');
 --User--
-INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total,xp_abs,xp_back,xp_biceps,xp_chest,xp_glutes,xp_shoulders,flappyHighScore)
-SELECT 'admin', '$2a$10$.7Ba75jVqGzLJlTbuX0/nOkcdIakm6G5uYhOhSzlNfoUKFTyAew8a', 'admin', 1, 1, 250,99999,99999,99999,99999,99999,99999,99999
+INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, last_workout,xp_total,xp_abs,xp_back,xp_biceps,xp_chest,xp_glutes,xp_shoulders,flappyHighScore)
+SELECT 'admin', '$2a$10$.7Ba75jVqGzLJlTbuX0/nOkcdIakm6G5uYhOhSzlNfoUKFTyAew8a', 'admin',1, 1,CURRENT_TIMESTAMP, 250,99999,99999,99999,99999,99999,99999,99999
 WHERE NOT EXISTS (SELECT 1 FROM app_user);
 
 INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total, flappyHighScore)
