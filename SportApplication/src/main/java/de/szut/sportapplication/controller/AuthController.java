@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -42,6 +45,17 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AppUser user) {
+
+        if (user.getLastWorkout() != null){
+            Date lastWOrkoutDate = user.getLastWorkout();
+            LocalDate today = LocalDate.now().minusDays(2);
+            LocalDate localDateTime = lastWOrkoutDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+
+            if (localDateTime.atStartOfDay().isBefore(today.atStartOfDay())){
+                user.setStreak(0);
+                userRepository.save(user);
+            }}
         Optional<AppUser> optionalUser = userRepository.findByEmail(user.getEmail());
         if (optionalUser.isPresent() && passwordEncoder.matches(user.getPasswordHash(), optionalUser.get().getPasswordHash())) {
             String jwt = jwtAuthService.generateToken(optionalUser.get().getEmail());
