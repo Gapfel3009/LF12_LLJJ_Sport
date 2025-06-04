@@ -1,16 +1,16 @@
-CREATE TABLE if not exists avatar
-(
-    avatar_id SERIAL PRIMARY KEY,
-    filename  VARCHAR(255),
-    full_path TEXT
-);
+-- CREATE TABLE if not exists avatar
+-- (
+--     avatar_id SERIAL PRIMARY KEY,
+--     filename  VARCHAR(255),
+--     full_path TEXT
+-- );
 CREATE TABLE if not exists app_user
 (
     user_id        SERIAL PRIMARY KEY,
     email_address  VARCHAR(255) NOT NULL,
     password_hash  VARCHAR(255) NOT NULL,
     username       VARCHAR(100),
-    avatar_id      INTEGER REFERENCES avatar (avatar_id),
+    avatar_id      INTEGER,
     last_workout   TIMESTAMP,
     streak         INTEGER,
     xp_total       INTEGER,

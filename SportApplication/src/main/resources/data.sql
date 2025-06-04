@@ -1,16 +1,16 @@
-CREATE TABLE if not exists avatar
-(
-    avatar_id SERIAL PRIMARY KEY,
-    filename  VARCHAR(255),
-    full_path VARCHAR(255)
-);
+-- CREATE TABLE if not exists avatar
+-- (
+--     avatar_id SERIAL PRIMARY KEY,
+--     filename  VARCHAR(255),
+--     full_path VARCHAR(255)
+-- );
 CREATE TABLE if not exists app_user
 (
     user_id        SERIAL PRIMARY KEY,
     email_address  VARCHAR(255) NOT NULL,
     password_hash  VARCHAR(255) NOT NULL,
     username       VARCHAR(100),
-    avatar_id      INTEGER REFERENCES avatar (avatar_id),
+    avatar_id      INTEGER,
     last_workout   TIMESTAMP,
     streak         INTEGER,
     xp_total       INTEGER,
@@ -68,15 +68,15 @@ CREATE TABLE if not exists workout_exercise
 
 
 
---Avatar--
-INSERT INTO avatar (filename, full_path)
-SELECT 'avatar2.png', 'C:\Ordern\avatar2.png'
-WHERE NOT EXISTS (SELECT 1 FROM avatar);
-
-INSERT INTO avatar (filename, full_path)
-SELECT 'avatar3.png', 'C:\Ordern\avatar3.png'
-WHERE NOT EXISTS (
-    SELECT 1 FROM avatar WHERE filename = 'avatar3.png');
+-- --Avatar--
+-- INSERT INTO avatar (filename, full_path)
+-- SELECT 'avatar2.png', 'C:\Ordern\avatar2.png'
+-- WHERE NOT EXISTS (SELECT 1 FROM avatar);
+--
+-- INSERT INTO avatar (filename, full_path)
+-- SELECT 'avatar3.png', 'C:\Ordern\avatar3.png'
+-- WHERE NOT EXISTS (
+--     SELECT 1 FROM avatar WHERE filename = 'avatar3.png');
 --User--
 INSERT INTO app_user (email_address, password_hash, username, avatar_id, streak, xp_total)
 SELECT 'admin', '$2a$10$VCeM7thQ7fOf.yxUOEtDsOL5U6F9Yy5jCE0FJ4VpZoF4NjCr0p5Qm', 'admin', 1, 1, 250
