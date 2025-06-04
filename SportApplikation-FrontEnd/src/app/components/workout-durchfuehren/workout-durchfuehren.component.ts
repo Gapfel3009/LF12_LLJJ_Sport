@@ -67,7 +67,6 @@ export class WorkoutDurchfuehrenComponent {
 
   get currentExercise(){
     // @ts-ignore
-    //TODO:Bessere Lösung als ignore
     return this.workout.exercises[this.currentIndex];
   }
 

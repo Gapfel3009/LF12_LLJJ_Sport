@@ -32,7 +32,6 @@ export class WorkoutsComponent implements OnInit {
         this.standardWorkouts = data
       }
     });
-    console.log(this.userService.getCurrentUser())
     this.workoutService.getAllUserWorkouts(this.userService.getUserId()).subscribe({
       next: (data)=>{
         this.userWorkouts = data
@@ -53,7 +52,6 @@ export class WorkoutsComponent implements OnInit {
   }
 
   ShowWorkout(workout:Workout, deletePossible:boolean){
-    //TODO: Wieder reinpacken, sobald get Exercise da ist
     if(workout.workoutId)
     this.workoutService.getExercisesByWorkoutId(workout.workoutId).subscribe({
       next: (data)=>{

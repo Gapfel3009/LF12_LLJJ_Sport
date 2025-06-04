@@ -25,7 +25,6 @@ export class LoginComponent {
   constructor(private router: Router, private userService: UserService) { }
 
   Register(event:Event){
-    // Todo: password pre-hashen -- nicht lesbar übergeben!
     event.preventDefault();
     this.regPassword = CryptoJS.SHA256(this.regPassword).toString();
     this.regPassword2 = CryptoJS.SHA256(this.regPassword2).toString();
@@ -56,8 +55,6 @@ export class LoginComponent {
     event.preventDefault();
     this.userService.authenticateUser(this.loginMail, CryptoJS.SHA256(this.loginPassword).toString()).subscribe({
       next: (response) => {
-        // todo:loggt hier den token und user und password also rausnehmen nach der entwicklung
-     //  console.log("Login erfolgreich", response);
         this.LoginRedirect();
       },
       error: (error) => {
